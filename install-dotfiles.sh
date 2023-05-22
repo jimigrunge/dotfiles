@@ -8,7 +8,7 @@
 #
 # ############################################################
 # TODO: NerdFont install "DejaVuSansMono Nerd Font Book"
-#       https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/DejaVuSansMono.zip
+#       https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.1/DejaVuSansMono.zip
 # TODO: Move Intelephense key file into place
 # ############################################################
 
