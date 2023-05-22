@@ -1,0 +1,84 @@
+[user]
+	name = James Grundner
+	email = james@jgrundner.com
+
+[branch]
+  autosetupmerge = always
+
+[commit]
+  template = ~/.gitmessage
+
+[core]
+  editor = nvim
+  excludesfile = ~/.gitignore
+	pager = diff-so-fancy | less --tabs=4 -RFX
+
+[init]
+  defaultBranch = main
+  ; templatedir = ~/git_template
+
+[push]
+  default = current
+
+[pull]
+  rebase = 1
+
+[rerere]
+  enabled = 1
+
+[branch "master"]
+  rebase = 1
+  mergeoptions = --no-ff
+
+[color]
+	ui = true
+  interactive=auto
+[color "branch"]
+	current = yellow bold
+	local = green bold
+	remote = cyan bold
+[color "diff"]
+	meta = 11
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+	func = 146 bold
+	commit = yellow bold
+[color "status"]
+	added = green bold
+	changed = yellow bold
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+
+[icdiff]
+	options = --highlight --line-numbers
+	untracked = red bold
+[difftool "nvim"]
+#  cmd = "lvim -d \"$LOCAL\" \"$REMOTE\""
+  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c '$wincmd w' -c 'wincmd J'"
+[diff]
+#  tool = meld
+  tool = nvim
+[difftool]
+  prompt = false
+
+# set "nvim" as tool for merging
+[merge]
+  tool = nvim
+# define command which will be used when "nvim" is set as a merge tool
+[mergetool "nvim"]
+  cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
+# automatically launch merge tool without displaying a prompt
+[mergetool]
+  prompt = false
+
+[interactive]
+	diffFilter = diff-so-fancy --patch
+[add "interactive"]
+	useBuiltin = false
+
+

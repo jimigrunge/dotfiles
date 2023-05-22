@@ -1,0 +1,9 @@
+# Compiled Lua sources
+luac.out
+
+# luarocks build files
+*.src.rock
+
+.DS_Store
+config/nvim/pack/**/*
+config/nvim/plugin/packer_compiled.lua

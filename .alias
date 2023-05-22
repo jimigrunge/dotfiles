@@ -1,0 +1,81 @@
+# The most important aliases
+alias fucking='sudo'
+alias edit=$EDITOR
+alias cl='clear'
+alias path='echo -e ${PATH//:/\\n}'
+alias mkdir='mkdir -pv'
+alias grep='grep --color=auto'
+
+# Symfony
+alias sf='app/console'
+alias sfdev='app/console --env=dev'
+alias sfprod='app/console --env=prod'
+
+# weather app
+alias weather='curl wttr.in/Lockport'
+
+# list commands
+if [[ -f $(which exa) ]]; then
+  alias l='exa -lga'
+  alias ls='exa'
+  alias lsa='exa -a'
+  alias ll='exa -lg --icons --git --header'
+  alias lla='exa -alg --icons --git --header'
+  alias lstree='exa -lg --icons --tree --level=3 --git --header'
+  alias l.='exa -lg --icons --git --header .*'
+else
+  alias l='ls -lah'
+  alias lsa='ls -la'
+  alias ll='ls -la'
+  alias lla='ls -lha'
+  alias l.=' ls -dl .* --color=auto'
+fi
+alias vf='vim $(fzf --height 40% --reverse)'
+
+if [[ "$CONSOLE_COLORLS" = true && -f $(which exa) ]]; then
+    alias ls='exa --colors=auto'
+    alias lsa='exa -a --colors=auto'
+    alias ll='exa -lg --icons --color=auto --git --header'
+    alias lla='exa -alg --icons --color=auto --git --header'
+    alias lstree='exa -lg --icons --tree --level=3 --color=auto --git --header'
+    alias l.='exa -lg --icons --color=auto --git --header .*'
+elif [[ "$CONSOLE_COLORLS" = true && -f $(gem which colorls) ]]; then
+    alias ls='colorls'
+    alias lsa='colorls -lA --sd'
+    alias ll='colorls -lA --sort-dirs'
+    alias lla='colorls -la --sort-dirs'
+    alias lstree='colorls --tree --light'
+    alias lc='colorls -lA --sd'
+    alias l.=' ls -dl .*'
+fi
+alias tree='tree -I ".git|node_modules"'
+
+# navigation
+alias ..='cd ..'
+alias .2='cd ../..'
+alias .3='cd ../../..'
+alias .4='cd ../../../..'
+alias .5='cd ../../../../..'
+alias .6='cd ../../../../../..'
+alias .7='cd ../../../../../../..'
+alias .8='cd ../../../../../../../..'
+alias .9='cd ../../../../../../../../..'
+
+# editors
+alias vi=/usr/bin/vim
+alias vim=nvim
+alias subl=sublime
+
+# git
+if [[ -f $(which tig) ]]; then
+  alias t='tig'
+fi
+alias st="git status"
+alias co="git checkout"
+alias pull="git pull"
+alias push="git push"
+alias force="git push --force"
+alias lease="git push --force-with-lease"
+
+alias zshconfig="$EDITOR ~/.zshrc"
+alias ohmyzsh="$EDITOR ~/.oh-my-zsh"
