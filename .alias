@@ -16,13 +16,14 @@ alias weather='curl wttr.in/Lockport'
 
 # list commands
 if [[ -f $(which exa) ]]; then
-  alias l='exa -lga'
+  alias l='exa -a1'
   alias ls='exa'
   alias lsa='exa -a'
   alias ll='exa -lg --icons --git --header'
   alias lla='exa -alg --icons --git --header'
   alias lstree='exa -lg --icons --tree --level=3 --git --header'
-  alias l.='exa -lg --icons --git --header .*'
+  alias lstree.='exa -lg --icons --tree --level=3 --git --header .*'
+  alias l.='exa -lgd --icons --git --header .*'
 else
   alias l='ls -lah'
   alias lsa='ls -la'
@@ -33,11 +34,13 @@ fi
 alias vf='vim $(fzf --height 40% --reverse)'
 
 if [[ "$CONSOLE_COLORLS" = true && -f $(which exa) ]]; then
+    alias l='exa -a1 --colors=auto'
     alias ls='exa --colors=auto'
     alias lsa='exa -a --colors=auto'
     alias ll='exa -lg --icons --color=auto --git --header'
     alias lla='exa -alg --icons --color=auto --git --header'
     alias lstree='exa -lg --icons --tree --level=3 --color=auto --git --header'
+    alias lstree.='exa -lg --icons --tree --level=3 --color=auto --git --header .*'
     alias l.='exa -lg --icons --color=auto --git --header .*'
 elif [[ "$CONSOLE_COLORLS" = true && -f $(gem which colorls) ]]; then
     alias ls='colorls'

@@ -132,6 +132,7 @@ export CPPFLAGS="-I/usr/local/opt/curl/include"
 eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
 
 export N_PREFIX=$HOME/.local/bin
+export EXA_COLORS="da=1;36"
 
 eval "$(mcfly init zsh)"
 
