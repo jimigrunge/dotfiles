@@ -12,29 +12,24 @@
 # TODO: Move Intelephense key file into place
 # ############################################################
 
+PWD=$(pwd)
 TIMESTAMP=$(date +"%Y%m%d-%H%M%S")
 CONST_LINUX="Linux"
 CONST_MAC="Darwin"
-
-# INSTALLED_NVIM="$(nvim --version | grep NVIM | awk -F"NVIM |,OU" '{print $2}')"
-# INSTALLED_TMUX="$(tmux -V | awk -F"tmux |,OU" '{print $2}')"
-# echo $INSTALLED_NVIM
-# echo $INSTALLED_TMUX
-# exit 0
 
 NVIM_SRC_DIR=$PWD/config/nvim
 ALACRITY_SRC_DIR=$PWD/config/alacritty
 NVIM_INSTALL_DIR=$HOME/.config/nvim
 ALACRITTY_CONFIG_DIR=$HOME/.config/alacritty
-OHMYZSH_CONFIG_SRC=.oh-my-zsh/custom/themes/jimigrunge.zsh-theme
+OHMYZSH_DIR="$HOME/.oh-my-zsh"
+OHMYZSH_CONFIG_SRC="$PWD/.oh-my-zsh/custom/themes/jimigrunge.zsh-theme"
 OHMYZSH_CONFIG_DEST=$HOME/.oh-my-zsh/custom/themes/jimigrunge.zsh-theme
 LOCAL_BIN_DIR=$HOME/bin
 VIM_LOG_DIR=$HOME/.log/vim
 CONFIG_DIR=$HOME/.config
 DBG_ADAPTER_DIR=$HOME/.local/share/debug-adapters
 GLOBAL_NPM_DIR=$HOME/.npm
-# BASH_PROFILE=$HOME/.profile
-# ZSH_PROFILE=$HOME/.zshrc
+ZSH_VERSION=$(zsh --version)
 
 # Get os type
 unameOut="$(uname -s)"
@@ -68,9 +63,6 @@ install_linux_deps()
         sudo apt install curl build-essential -y
         sudo apt-get install nodejs -y
     fi
-    if ! [ -x "$(command -v nvm)" ]; then
-        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-    fi
     if ! [ -x "$(command -v go)" ]; then
         echo 'Error: go not found, attampting to install.' >&2
         sudo add-apt-repository ppa:longsleep/golang-backports
@@ -87,8 +79,8 @@ install_linux_deps()
     fi
     if ! [ -x "$(command -v fzf)" ]; then
         echo 'Error: fzf not found, attampting to install.' >&2
-        git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-        ~/.fzf/install
+        git clone --depth 1 https://github.com/junegunn/fzf.git "$HOME/.fzf"
+        "$HOME/.fzf/install"
     fi
     if ! [ -x "$(command -v exa)" ]; then
         echo 'Error: exa not found, attampting to install.' >&2
@@ -102,9 +94,15 @@ install_linux_deps()
           sudo apt install exa
         fi
     fi
-    if ! [ -x "$(command -v omz)" ]; then
+    if ! [[ -d "$OHMYZSH_DIR" ]]; then
         echo 'Error: oh-my-zsh not found, attampting to install.' >&2
         sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    fi
+    if ! [[ -d "$OHMYZSH_DIR/custom/plugins/zsh-autosuggestions" ]]; then
+        git clone "https://github.com/zsh-users/zsh-autosuggestions" "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+    fi
+    if ! [[ -d "$OHMYZSH_DIR/custom/plugins/zsh-syntax-highlighting" ]]; then
+        git clone "https://github.com/zsh-users/zsh-syntax-highlighting" "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
     fi
     if ! [ -x "$(command -v mcfly)" ]; then
         echo 'Error: mcfly not found, attampting to install.' >&2
@@ -170,9 +168,6 @@ install_mac_deps()
         echo 'Error: nodejs is not installed, attempting to install.' >&2
         brew install node
     fi
-    if ! [ -x "$(command -v nvm)" ]; then
-        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-    fi
     if ! [ -x "$(command -v fzf)" ]; then
         echo 'Error: fzf not found, attampting to install.' >&2
         brew install fzf
@@ -182,9 +177,15 @@ install_mac_deps()
         echo 'Error: exa not found, attampting to install.' >&2
         brew install exa
     fi
-    if ! [ -x "$(command -v omz)" ]; then
+    if ! [[ -d "$OHMYZSH_DIR" ]]; then
         echo 'Error: oh-my-zsh not found, attampting to install.' >&2
         sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    fi
+    if ! [[ -d "$OHMYZSH_DIR/custom/plugins/zsh-autosuggestions" ]]; then
+        git clone "https://github.com/zsh-users/zsh-autosuggestions" "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+    fi
+    if ! [[ -d "$OHMYZSH_DIR/custom/plugins/zsh-syntax-highlighting" ]]; then
+        git clone "https://github.com/zsh-users/zsh-syntax-highlighting" "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
     fi
     if ! [ -x "$(command -v mcfly)" ]; then
         echo 'Error: mcfly not found, attampting to install.' >&2
@@ -241,18 +242,6 @@ fix_npm_global_perms()
     mkdir -pv "$GLOBAL_NPM_DIR"
     npm config set prefix "$GLOBAL_NPM_DIR"
     export PATH=$GLOBAL_NPM_DIR/bin:$PATH
-
-    # echo "Bash version: $BASH_VERSION"
-    # if [[ -f $BASH_PROFILE ]]; then
-    #     echo "Sourcing bash profile"
-    #     source $BASH_PROFILE
-    # fi
-
-    # echo "Zsh version: $ZSH_VERSION"
-    # if [[ -f $ZSH_PROFILE ]]; then
-    #     echo "Sourcing zsh profile"
-    #     source $ZSH_PROFILE
-    # fi
 }
 
 # Language server installs
@@ -288,24 +277,24 @@ install_libraries()
 
     echo "Insure we have PHP Linting and Formatting"
     echo "* Checking for php code sniffer"
-    if ! [ -x "$(command -v phpcs)" ]; then
+    if ! [ -e "$LOCAL_BIN_DIR"/phpcs ]; then
         wget https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
-        mv phpcs.phar "$LOCAL_BIN_DIR"./phpcs
+        mv phpcs.phar "$LOCAL_BIN_DIR"/phpcs
 
         wget https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar
-        mv phpcbf.phar "$LOCAL_BIN_DIR"./phpcbf
+        mv phpcbf.phar "$LOCAL_BIN_DIR"/phpcbf
     fi
 
     echo "* Checking for php-cs-fixer"
-    if ! [ -x "$(command -v php-cs-fixer)" ]; then
+    if ! [ -e "$LOCAL_BIN_DIR"/php-cs-fixer ]; then
         wget https://cs.symfony.com/download/php-cs-fixer-v3.phar -O php-cs-fixer
-        mv php-cs-fixer "$LOCAL_BIN_DIR"./php-cs-fixer
+        mv php-cs-fixer "$LOCAL_BIN_DIR"/php-cs-fixer
     fi
 
     echo "* Checking for php mess detector"
-    if ! [ -x "$(command -v phpmd)" ]; then
+    if ! [ -e "$LOCAL_BIN_DIR"/phpmd ]; then
         wget -c https://phpmd.org/static/latest/phpmd.phar
-        mv phpmd.phar "$LOCAL_BIN_DIR"./phpmd
+        mv phpmd.phar "$LOCAL_BIN_DIR"/phpmd
     fi
 
     echo "Library installs complete"
@@ -329,16 +318,17 @@ install_composer()
     php composer-setup.php --install-dir="$LOCAL_BIN_DIR" --filename=composer
     php -r "unlink('composer-setup.php');"
 
-    export PATH=~/.composer/vendor/bin:~/.config/composer/vendor/bin:$PATH
+    export PATH=$HOME/.composer/vendor/bin:$HOME/.config/composer/vendor/bin:$PATH
     echo "Composer install complete"
 }
 
-symlink() {
-    if [ -e ~/"$1" ]; then
-      echo "Found existing file, created backup: ~/${1}.bak"
-      mv ~/"$1" ~/"$1".bak
+symlink()
+{
+    if [ -e "$HOME"/"$1" ]; then
+      echo "Found existing file, created backup: $HOME/${1}.bak"
+      mv "$HOME/$1" "$HOME/$1.bak"
     fi
-    ln -sf ./"$1" ~/"$1";
+    ln -sf "$PWD/$1" "$HOME/$1";
 }
 
 install_shell_configs()
@@ -351,9 +341,23 @@ install_shell_configs()
     cp "$OHMYZSH_CONFIG_SRC" "$OHMYZSH_CONFIG_DEST"
 
     symlink .alias
+    symlink .CodeSniffer.conf
     symlink .gitconfig
     symlink .tmux.conf
     symlink .zshrc
+}
+
+intitialize_zsh()
+{
+   echo "Changing shell to ZSH"
+    SHELL=$(which zsh)
+    [ -z "$ZSH_VERSION" ] && exec "$SHELL" -l
+
+    echo "Zsh version: $ZSH_VERSION"
+    if [[ -f $HOME/.zshrc ]]; then
+        echo "Sourcing zsh profile"
+        source "$HOME/.zshrc"
+    fi
 }
 
 # Begin installation process
@@ -366,8 +370,6 @@ case "$unameOut" in
         echo "$CONST_MAC"
         install_mac_deps
         ;;
-#    CYGWIN*)    MACHINE=${CONST_CYGWIN};;
-#    MINGW*)     MACHINE=${CONST_MINGW};;
     *)          MACHINE="UNKNOWN:${unameOut}"
         echo "OS ${MACHINE} Is Not Supported"
         exit 1
@@ -378,6 +380,7 @@ install_shell_configs
 fix_npm_global_perms
 install_libraries
 install_nvim_files
+intitialize_zsh
 
 # See: https://www.reddit.com/r/neovim/comments/mohogr/neovim_lua_config_cant_install_plugins_when/
 # echo "Install nvim plugins"
