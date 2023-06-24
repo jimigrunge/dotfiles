@@ -112,6 +112,7 @@ cmp.setup({
 			vim_item.menu = ({
 				nvim_lsp = "[LSP]",
 				-- buffer = "[Buffer]",
+        codeium = "[Codeium]",
 				path = "[Path]",
 				luasnip = "[Snippet]",
 				nvim_lua = "[LUA]",
@@ -132,10 +133,11 @@ cmp.setup({
 				return true
 			end,
 		},
-		{ name = "buffer", group_index = 2 },
-		{ name = "path", group_index = 3 },
-		{ name = "luasnip", group_index = 4 },
-		{ name = "nvim_lua", group_index = 5 },
+    { name = "codeium", group_index = 2 },
+		{ name = "buffer", group_index = 3 },
+		{ name = "path", group_index = 4 },
+		{ name = "luasnip", group_index = 5 },
+		{ name = "nvim_lua", group_index = 6 },
 	},
 	confirm_opts = {
 		-- behavior = cmp.ConfirmBehavior.Replace,

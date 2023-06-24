@@ -69,6 +69,27 @@ return packer.startup(function(use)
     ,commit = "cdd66d6a37d991bba7997d593586fc51a5b37aa8"
   }
 
+  use({
+    "roobert/search-replace.nvim",
+    config = function()
+      require("search-replace").setup()
+    end,
+  })
+
+  use({
+    "utilyre/barbecue.nvim",
+    commit = "cd7e7da622d68136e13721865b4d919efd6325ed",
+    tag = "*",
+    requires = {
+      "SmiteshP/nvim-navic",
+      "nvim-tree/nvim-web-devicons", -- optional dependency
+    },
+    after = "nvim-web-devicons", -- keep this if you're using NvChad
+    config = function()
+      require("barbecue").setup()
+    end,
+  })
+
   use {
     "chrishrb/gx.nvim",
     commit = "e5b76942ea67affe791d0fb5a65e2139b5544ae3",
@@ -129,8 +150,9 @@ return packer.startup(function(use)
   }
 
   -- File icons
-  use { "kyazdani42/nvim-web-devicons"
-    ,commit = "4ec26d67d419c12a4abaea02f1b6c57b40c08d7e"
+  use { "nvim-tree/nvim-web-devicons"
+    --[[ ,commit = "4ec26d67d419c12a4abaea02f1b6c57b40c08d7e" ]]
+    ,commit = "2a125024a137677930efcfdf720f205504c97268"
   }
   use { "ryanoasis/vim-devicons"
     ,commit = "71f239af28b7214eebb60d4ea5bd040291fb7e33"
@@ -141,7 +163,7 @@ return packer.startup(function(use)
     "kyazdani42/nvim-tree.lua",
     commit = "48d53a5934fbd51b655d03db7dad35551838f2c9",
     requires = {
-      "kyazdani42/nvim-web-devicons",
+      "nvim-tree/nvim-web-devicons",
     },
     --[[ tag = "nightly", ]]
   }
@@ -162,7 +184,7 @@ return packer.startup(function(use)
   use {
     "nvim-lualine/lualine.nvim",
     commit = "84ffb80e452d95e2c46fa29a98ea11a240f7843e",
-    requires = { "kyazdani42/nvim-web-devicons", opt = true },
+    requires = { "nvim-tree/nvim-web-devicons", opt = true },
   }
 
   -- Symbol view of document structure
@@ -267,6 +289,22 @@ return packer.startup(function(use)
   use { "Pocco81/AbbrevMan.nvim",
     commit = "97b40b51b373d0d1c22f71dd8fce7f61f6bf46a5"
   }
+  use {
+    "jcdickinson/http.nvim",
+    run = "cargo build --workspace --release"
+  }
+  use {
+    "jcdickinson/codeium.nvim",
+    requires = {
+      "jcdickinson/http.nvim",
+      "nvim-lua/plenary.nvim",
+      "hrsh7th/nvim-cmp",
+    },
+    config = function()
+      require("codeium").setup({
+      })
+    end
+  }
 
   -- LSP
   use { "neovim/nvim-lspconfig",
@@ -306,8 +344,13 @@ return packer.startup(function(use)
   }
   use {
     "SmiteshP/nvim-navic",
-    commit = "27124a773d362628b114cd12016e743dab4ccf3e",
-    requires = "neovim/nvim-lspconfig"
+    --[[ commit = "27124a773d362628b114cd12016e743dab4ccf3e", ]]
+    commit = "15704c607569d6c5cfeab486d3ef9459645a70ce",
+    requires = "neovim/nvim-lspconfig",
+    config = function()
+      require("nvim-navic").setup()
+    end,
+
   }
   use { "RRethy/vim-illuminate",
     commit = "a2907275a6899c570d16e95b9db5fd921c167502"
@@ -319,6 +362,9 @@ return packer.startup(function(use)
     "CosmicNvim/cosmic-ui",
     commit = "c0b14531999f2bfef3d927c4dcd57a1a8fed5ee9",
     requires = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+  }
+  use {
+    "gennaro-tedesco/nvim-jqx"
   }
 
   -- Diagnostics
@@ -437,6 +483,7 @@ return packer.startup(function(use)
     commit = "a3f24fdaa71d2c25a2b88026032b34f5b6a6e215",
     branch = "main",
   }
+
   -- Popup notifications
   use { "rcarriga/nvim-notify"
     ,commit = "50d037041ada0895aeba4c0215cde6d11b7729c4"

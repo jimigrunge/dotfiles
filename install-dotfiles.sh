@@ -15,8 +15,12 @@
 TIMESTAMP=$(date +"%Y%m%d-%H%M%S")
 CONST_LINUX="Linux"
 CONST_MAC="Darwin"
-# CONST_CYGWIN="Cygwin"
-# CONST_MINGW="MinGw"
+
+# INSTALLED_NVIM="$(nvim --version | grep NVIM | awk -F"NVIM |,OU" '{print $2}')"
+# INSTALLED_TMUX="$(tmux -V | awk -F"tmux |,OU" '{print $2}')"
+# echo $INSTALLED_NVIM
+# echo $INSTALLED_TMUX
+# exit 0
 
 NVIM_SRC_DIR=$PWD/config/nvim
 ALACRITY_SRC_DIR=$PWD/config/alacritty
@@ -126,6 +130,15 @@ install_linux_deps()
         echo 'Error: jq not found, attampting to install.' >&2
         sudo apt install jq -y
     fi
+    if ! [ -x "$(command -v nvim)" ]; then
+        echo 'Error: NeoVim not found, attampting to install.' >&2
+        sudo apt install neovim -y
+        sudo apt install python3-neovim -y
+    fi
+    if ! [ -x "$(command -v tmux)" ]; then
+        echo 'Error: Tmux not found, attampting to install.' >&2
+        sudo apt-get install tmux -y
+    fi
 
     echo "OS setup complete"
 }
@@ -193,6 +206,14 @@ install_mac_deps()
     if ! [ -x "$(command -v jq)" ]; then
         echo 'Error: jq not found, attampting to install.' >&2
         brew install jq
+    fi
+    if ! [ -x "$(command -v nvim)" ]; then
+        echo 'Error: NeoVim not found, attampting to install.' >&2
+        brew install neovim
+    fi
+    if ! [ -x "$(command -v tmux)" ]; then
+        echo 'Error: Tmux not found, attampting to install.' >&2
+        brew install tmux
     fi
 
     echo "OS setup complete"

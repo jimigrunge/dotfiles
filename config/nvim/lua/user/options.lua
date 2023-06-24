@@ -53,6 +53,10 @@ vim.cmd [[set statusline+=%f]]
 --vim.cmd [[set guicursor+=i:hor20]]
 vim.cmd [[set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20]]
 
+vim.g.codeium_disable_bindings = 1
+vim.g.codeium_no_map_tab = 0
+
+
 vim.cmd [[
   highlight WinSeparator guibg=None
   hi LspDiagnosticsDefaultHint  guifg=#00ff00 gui=nocombine

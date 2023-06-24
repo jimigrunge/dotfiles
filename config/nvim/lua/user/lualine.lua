@@ -75,6 +75,10 @@ local spaces = function()
 	return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
 end
 
+local codeium = function ()
+  return vim.fn["codeium#GetStatusString()"]()
+end
+
 local navic = require("nvim-navic")
 
 lualine.setup({
@@ -89,7 +93,7 @@ lualine.setup({
 	},
 	sections = {
 		lualine_a = { mode },
-		lualine_b = { branch, diff, diagnostics },
+		lualine_b = { branch, diff, diagnostics, codeium },
     lualine_c = {
       filename,
       { navic.get_location, cond = navic.is_available },
