@@ -92,7 +92,7 @@ install_linux_deps()
         if (( $(echo "$OS_VER < 20.10" | bc -l) )); then
           EXA_TAG=$(curl -I https://github.com/ogham/exa/releases/latest | awk -F '/' '/^location/ {print  substr($NF, 1, length($NF)-1)}' )
           curl -Lo exa.zip "https://github.com/ogham/exa/releases/download/v0.10.1/exa-linux-x86_64-${EXA_TAG}.zip"
-          unzip -q exa.zip bin/exa -d ${HOME}
+          unzip -q exa.zip bin/exa -d "${HOME}"
           rm -rf exa.zip
         else
           sudo apt install exa
@@ -104,7 +104,7 @@ install_linux_deps()
     fi
     if ! [ -x "$(command -v mcfly)" ]; then
         echo 'Error: mcfly not found, attampting to install.' >&2
-        curl -LSfs https://raw.githubusercontent.com/cantino/mcfly/master/ci/install.sh | sh -s -- --git cantino/mcfly --to ${LOCAL_BIN_DIR}
+        curl -LSfs https://raw.githubusercontent.com/cantino/mcfly/master/ci/install.sh | sh -s -- --git cantino/mcfly --to "${LOCAL_BIN_DIR}"
     fi
     if ! [ -x "$(command -v php)" ]; then
         echo 'Error: php not found, attampting to install.' >&2
@@ -121,6 +121,10 @@ install_linux_deps()
         else
           sudo apt install -y rustc
         fi
+    fi
+    if ! [ -x "$(command -v jq)" ]; then
+        echo 'Error: jq not found, attampting to install.' >&2
+        sudo apt install jq -y
     fi
 
     echo "OS setup complete"
@@ -185,6 +189,10 @@ install_mac_deps()
     if ! [ -x "$(command -v composer)" ]; then
         echo 'Error: composer not found, attampting to install.' >&2
         install_composer
+    fi
+    if ! [ -x "$(command -v jq)" ]; then
+        echo 'Error: jq not found, attampting to install.' >&2
+        brew install jq
     fi
 
     echo "OS setup complete"
@@ -305,11 +313,11 @@ install_composer()
 }
 
 symlink() {
-    if [ -e ~/$1 ]; then
+    if [ -e ~/"$1" ]; then
       echo "Found existing file, created backup: ~/${1}.bak"
-      mv ~/$1 ~/$1.bak
+      mv ~/"$1" ~/"$1".bak
     fi
-    ln -sf ./$1 ~/$1;
+    ln -sf ./"$1" ~/"$1";
 }
 
 install_shell_configs()
