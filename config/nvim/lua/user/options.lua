@@ -30,7 +30,7 @@ local options = {
   number = true,                           -- set numbered lines
   numberwidth = 4,                         -- set number column width to 2 {default 4}
   signcolumn = "yes",                      -- always show the sign column, otherwise it would shift the text each time
-  relativenumber = false,                  -- set relative numbered lines
+  relativenumber = true,                  -- set relative numbered lines
   wrap = false,                            -- display lines as one long line
   scrolloff = 8,                           -- is one of my fav
   sidescrolloff = 8,
@@ -56,6 +56,7 @@ vim.cmd [[set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20]]
 vim.g.codeium_disable_bindings = 1
 vim.g.codeium_no_map_tab = 0
 
+vim.g.loaded_perl_provider = 0
 
 vim.cmd [[
   highlight WinSeparator guibg=None

@@ -4,7 +4,7 @@
 
 ### requirements
 
-* `Neovim 0.7 release` version
+* `Neovim 0.9 release` version
 * Ubuntu or Macos Operating system
   * Other operating systems will need manual install
 * A version of bat that is compatible with OS
@@ -44,3 +44,9 @@ Open `nvim` and enter the following:
 ```
 :checkhealth
 ```
+
+## TODO
+
+- convert package manager from packer to lazy
+  - Packer has been archived and will no longer be updated
+- Cleanup old plugins commit versions

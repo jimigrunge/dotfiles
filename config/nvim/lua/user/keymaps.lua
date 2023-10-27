@@ -31,6 +31,10 @@ vim.g.maplocalleader = " "
 --[[ keymap("n", "<C-j>", "<C-w>j", opts) ]]
 --[[ keymap("n", "<C-k>", "<C-w>k", opts) ]]
 --[[ keymap("n", "<C-l>", "<C-w>l", opts) ]]
+keymap("n", "<C-k>", ":TmuxNavigateUp<cr>", opts)
+keymap("n", "<C-j>", ":TmuxNavigateDown<cr>", opts)
+keymap("n", "<C-h>", ":TmuxNavigateLeft<cr>", opts)
+keymap("n", "<C-l>", ":TmuxNavigateRight<cr>", opts)
 
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize -2<CR>", opts)

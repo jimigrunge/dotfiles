@@ -5,7 +5,9 @@ if not status_ok then
 end
 
 lightbulb.setup {
-  ignore = {"null-ls"},
+  ignore = {
+    clients = {"null-ls"},
+  },
   autocmd = {
     enabled = true,
   }
