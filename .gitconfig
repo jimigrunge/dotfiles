@@ -76,9 +76,7 @@
 [mergetool]
   prompt = false
 
-[interactive]
-	diffFilter = diff-so-fancy --patch
-[add "interactive"]
-	useBuiltin = false
-
-
+; [interactive]
+; 	diffFilter = diff-so-fancy --patch
+; [add "interactive"]
+; 	useBuiltin = false

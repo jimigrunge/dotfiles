@@ -119,13 +119,20 @@ local mappings = {
     ["c"] = { "<cmd>SymbolsOutlineClose<cr>", "[C]lose Outline" }
   },
   ["P"] = { "<cmd>Telescope projects<cr>", "[P]rojects" },
+  --[[ ["p"] = { ]]
+  --[[   name = "[P]acker", ]]
+  --[[   ["c"] = { "<cmd>PackerCompile<cr>", "[C]ompile" }, ]]
+  --[[   ["i"] = { "<cmd>PackerInstall<cr>", "[I]nstall" }, ]]
+  --[[   ["s"] = { "<cmd>PackerSync<cr>", "[S]ync" }, ]]
+  --[[   ["S"] = { "<cmd>PackerStatus<cr>", "[S]tatus" }, ]]
+  --[[   ["u"] = { "<cmd>PackerUpdate<cr>", "[U]pdate" }, ]]
+  --[[ }, ]]
   ["p"] = {
-    name = "[P]acker",
-    ["c"] = { "<cmd>PackerCompile<cr>", "[C]ompile" },
-    ["i"] = { "<cmd>PackerInstall<cr>", "[I]nstall" },
-    ["s"] = { "<cmd>PackerSync<cr>", "[S]ync" },
-    ["S"] = { "<cmd>PackerStatus<cr>", "[S]tatus" },
-    ["u"] = { "<cmd>PackerUpdate<cr>", "[U]pdate" },
+    name = "[P]lugins Lazy",
+    ["h"] = { "<cmd>Lazy home<cr>", "[H]ome" },
+    ["i"] = { "<cmd>Lazy install<cr>", "[I]nstall" },
+    ["s"] = { "<cmd>Lazy sync<cr>", "[S]ync" },
+    ["u"] = { "<cmd>Lazy update<cr>", "[U]pdate" },
   },
   ["q"] = { "<cmd>q!<cr>", "[Q]uit" },
   ["r"] = {
