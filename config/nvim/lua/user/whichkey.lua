@@ -76,6 +76,7 @@ local mappings = {
     -- ["s"] = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
     ["t"] = { "<cmd>Git status<cr>", "S[t]atus"},
     ["u"] = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "[U]ndo Stage Hunk"},
+    ["y"] = { "[Y]ank Git Remote Link" },
   },
   ["h"] = { "<cmd>nohlsearch<cr>", "[H]ighlight Off" },
   -- ["i"] = {},
