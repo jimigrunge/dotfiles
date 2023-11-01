@@ -1,12 +1,12 @@
-local null_ls_status_ok, null_ls = pcall(require, "null-ls")
-if not null_ls_status_ok then
+local none_ls_status_ok, none_ls = pcall(require, "none-ls")
+if not none_ls_status_ok then
 	return
 end
 
-local formatting = null_ls.builtins.formatting
-local diagnostics = null_ls.builtins.diagnostics
+local formatting = none_ls.builtins.formatting
+local diagnostics = none_ls.builtins.diagnostics
 
-null_ls.setup({
+none_ls.setup({
   debug = false,
   sources = {
     -- -----------------
@@ -51,11 +51,11 @@ null_ls.setup({
     -- -----------------
     -- Spelling
     -- -----------------
-    null_ls.builtins.hover.dictionary,
-    null_ls.builtins.completion.spell,
+    none_ls.builtins.hover.dictionary,
+    none_ls.builtins.completion.spell,
     -- -----------------
     -- Git actions
     -- -----------------
-    null_ls.builtins.code_actions.gitsigns,
+    none_ls.builtins.code_actions.gitsigns,
   },
 })

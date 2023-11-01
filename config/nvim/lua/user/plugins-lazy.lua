@@ -244,8 +244,11 @@ require("lazy").setup({
     { "tamago324/nlsp-settings.nvim",
       commit = "2a52e793d4f293c0e1d61ee5794e3ff62bfbbb5d"
     },
-    { "jose-elias-alvarez/null-ls.nvim",
-      commit = "0010ea927ab7c09ef0ce9bf28c2b573fc302f5a7"
+    --[[ { "jose-elias-alvarez/null-ls.nvim", ]]
+    --[[   commit = "0010ea927ab7c09ef0ce9bf28c2b573fc302f5a7" ]]
+    --[[ }, ]]
+    { "nvimtools/none-ls.nvim",
+      commit = "b8fd44ee1616e6a9c995ed5f94ad9f1721d303ef"
     },
     { "jayp0521/mason-null-ls.nvim"
       , commit = "ae0c5fa57468ac65617f1bf821ba0c3a1e251f0c"
