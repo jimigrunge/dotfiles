@@ -47,6 +47,7 @@ treesitter_configs.setup {
       enable = true,  -- you can also use a table with list of langs here (e.g. { "python", "javascript" })
       -- Automatically jump forward to textobj, similar to targets.vim
       lookahead = true,
+      include_surrounding_whitespace = false,
       keymaps = {
         -- You can use the capture groups defined in textobjects.scm:
         -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects/blob/master/queries/c/textobjects.scm
