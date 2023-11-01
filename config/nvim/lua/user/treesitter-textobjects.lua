@@ -50,14 +50,14 @@ treesitter_configs.setup {
       keymaps = {
         -- You can use the capture groups defined in textobjects.scm:
         -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects/blob/master/queries/c/textobjects.scm
-        ["af"] = "@function.outer",
-        ["if"] = "@function.inner",
-        ["ac"] = "@class.outer",
-        ["ic"] = "@class.inner",
-        ["ab"] = "@block.outer",
-        ["ib"] = "@block.inner",
-        ["as"] = "@statement.outer",
-        ["is"] = "@statement.inner",
+        ["af"] = {query = "@function.outer"},
+        ["if"] = {query = "@function.inner"},
+        ["ac"] = {query = "@class.outer"},
+        ["ic"] = {query = "@class.inner"},
+        ["ab"] = {query = "@block.outer"},
+        ["ib"] = {query = "@block.inner"},
+        ["as"] = {query = "@statement.outer"},
+        ["is"] = {query = "@statement.inner"},
       },
     },
   },
