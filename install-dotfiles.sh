@@ -168,6 +168,7 @@ install_mac_deps()
         echo 'Error: nodejs is not installed, attempting to install.' >&2
         brew install node
     fi
+    # TODO: install go and ripgrep
     if ! [ -x "$(command -v fzf)" ]; then
         echo 'Error: fzf not found, attampting to install.' >&2
         brew install fzf
@@ -262,6 +263,7 @@ install_libraries()
     if ! [ -x "$(command -v tsc)" ]; then
         npm install -g typescript
     fi
+# TODO: are these needed anymore now that we have MASON?
     echo "* Checking for prettier"
     if ! [ -x "$(command -v prettier)" ]; then
         npm install -g prettier
