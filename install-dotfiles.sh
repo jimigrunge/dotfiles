@@ -94,6 +94,16 @@ install_linux_deps()
           sudo apt install exa
         fi
     fi
+    if ! [ -x "$(command -v lsd)" ]; then
+        echo 'Error: lsd not found, attampting to install.' >&2
+        # Pre Ubuntu 23.04 exa needs to be compiled manually
+        if (( $(echo "$OS_VER < 23.04" | bc -l) )); then
+          echo "ERROR: lsd requires Ubuntu >= 23.04, you have version $OS_VER." >&2
+          echo '  skipping lsd install.'
+        else
+          sudo apt install lsd
+        fi
+    fi
     if ! [[ -d "$OHMYZSH_DIR" ]]; then
         echo 'Error: oh-my-zsh not found, attampting to install.' >&2
         sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -174,9 +184,13 @@ install_mac_deps()
         brew install fzf
         "$(brew --prefix)"/opt/fzf/install
     fi
-    if ! [ -x "$(command -v exa)" ]; then
-        echo 'Error: exa not found, attampting to install.' >&2
-        brew install exa
+    # if ! [ -x "$(command -v exa)" ]; then
+    #     echo 'Error: exa not found, attampting to install.' >&2
+    #     brew install exa
+    # fi
+    if ! [ -x "$(command -v lsd)" ]; then
+        echo 'Error: lsd not found, attampting to install.' >&2
+        brew install lsd
     fi
     if ! [[ -d "$OHMYZSH_DIR" ]]; then
         echo 'Error: oh-my-zsh not found, attampting to install.' >&2
