@@ -63,3 +63,4 @@ treesitter_configs.setup {
     },
   },
 }
+

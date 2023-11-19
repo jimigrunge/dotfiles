@@ -10,6 +10,20 @@ if not snip_status_ok then
 	return
 end
 require("luasnip/loaders/from_vscode").lazy_load()
+luasnip.filetype_extend("typescript", { "javascript", "tsdoc" })
+luasnip.filetype_extend("javascript", { "jsdoc" })
+luasnip.filetype_extend("lua", { "luadoc" })
+luasnip.filetype_extend("python", { "pydoc" })
+luasnip.filetype_extend("rust", { "rustdoc" })
+luasnip.filetype_extend("cs", { "csharpdoc" })
+luasnip.filetype_extend("java", { "javadoc" })
+luasnip.filetype_extend("c", { "cdoc" })
+luasnip.filetype_extend("cpp", { "cppdoc" })
+luasnip.filetype_extend("php", { "phpdoc" })
+luasnip.filetype_extend("kotlin", { "kdoc" })
+luasnip.filetype_extend("ruby", { "rdoc" })
+luasnip.filetype_extend("sh", { "shelldoc" })
+
 local has_words_before = function()
 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
@@ -110,20 +124,21 @@ cmp.setup({
 			-- This concatonates the icons with the name of the item kind
 			vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
 			vim_item.menu = ({
-				nvim_lsp = "[LSP]",
-				-- buffer = "[Buffer]",
-        codeium = "[Codeium]",
-				path = "[Path]",
 				luasnip = "[Snippet]",
+				nvim_lsp = "[LSP]",
+        codeium = "[Codeium]",
+				buffer = "[Buffer]",
+				path = "[Path]",
 				nvim_lua = "[LUA]",
 			})[entry.source.name]
 			return vim_item
 		end,
 	},
 	sources = {
+		{ name = "luasnip", group_index = 1 },
 		{
 			name = "nvim_lsp",
-			group_index = 1,
+			group_index = 2,
 			priority = 8,
 			entry_filter = function(entry, ctx)
 				local kind = require("cmp.types").lsp.CompletionItemKind[entry:get_kind()]
@@ -133,10 +148,9 @@ cmp.setup({
 				return true
 			end,
 		},
-    { name = "codeium", group_index = 2 },
-		{ name = "buffer", group_index = 3 },
-		{ name = "path", group_index = 4 },
-		{ name = "luasnip", group_index = 5 },
+    { name = "codeium", group_index = 3 },
+		{ name = "buffer", group_index = 4 },
+		{ name = "path", group_index = 5 },
 		{ name = "nvim_lua", group_index = 6 },
 	},
 	confirm_opts = {
