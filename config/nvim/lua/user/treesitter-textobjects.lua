@@ -51,14 +51,14 @@ treesitter_configs.setup {
       keymaps = {
         -- You can use the capture groups defined in textobjects.scm:
         -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects/blob/master/queries/c/textobjects.scm
-        ["af"] = {query = "@function.outer"},
-        ["if"] = {query = "@function.inner"},
-        ["ac"] = {query = "@class.outer"},
-        ["ic"] = {query = "@class.inner"},
-        ["ab"] = {query = "@block.outer"},
-        ["ib"] = {query = "@block.inner"},
-        ["as"] = {query = "@statement.outer"},
-        ["is"] = {query = "@statement.inner"},
+        ["af"] = { query = "@function.outer", desc = "Select outer part of a method/function definition" },
+        ["if"] = { query = "@function.inner", desc = "Select inner part of a method/function definition" },
+        ["ac"] = { query = "@class.outer", desc = "Select outer part of a class" },
+        ["ic"] = { query = "@class.inner", desc = "Select inner part of a class" },
+        ["ab"] = { query = "@block.outer", desc = "Select outer part of a block"  },
+        ["ib"] = { query = "@block.inner", desc = "Select inner part of a block"  },
+        ["as"] = { query = "@statement.outer", desc = "Select outer part of a statement" },
+        ["is"] = { query = "@statement.inner", desc = "Select inner part of a statement" },
       },
     },
   },
