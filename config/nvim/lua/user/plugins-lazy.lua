@@ -214,7 +214,9 @@ require("lazy").setup({
     },
     -- Snippets
     { "L3MON4D3/LuaSnip",
-      commit = "80a8528f084a97b624ae443a6f50ff8074ba486b"
+      --[[ commit = "80a8528f084a97b624ae443a6f50ff8074ba486b", ]]
+      commit = "1f4ad8bb72bdeb60975e98652636b991a9b7475d",
+      build = "make install_jsregexp"
     },
     { "rafamadriz/friendly-snippets",
       commit = "43727c2ff84240e55d4069ec3e6158d74cb534b6"
