@@ -4,4 +4,7 @@ if not status_ok then
   return
 end
 
-gitlinker.setup()
+gitlinker.setup({
+  message = false,
+  console_log = false
+})

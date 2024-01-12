@@ -1,7 +1,7 @@
 return {
-    cmd = { "intelephense", "--stdio" },
-    filetypes = { "php" },
-    settings = {
-        rootMarkers = {".git/", "composer.json"},
-    }
+  cmd = { "intelephense", "--stdio" },
+  filetypes = { "php" },
+  settings = {
+    rootMarkers = { ".git/", "composer.json" },
+  }
 }

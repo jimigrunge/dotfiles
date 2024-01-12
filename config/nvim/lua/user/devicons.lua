@@ -4,64 +4,66 @@ if not status_ok then
   return
 end
 
+local icons = require "user.icons"
+
 devicons.setup {
   -- Overrides for icons causing display issues in nvim-tree sue to ltr display of fonts.
   -- There is a posible PR in the works from "jdrouhard" to fix this
   override = {
     [".babelrc"] = {
-      icon = "", -- actual utf-8 encoded codepoints instead, this is for demonstration
+      icon = icons.ui.Comment, -- "", -- actual utf-8 encoded codepoints instead, this is for demonstration
       color = "#FFFFFF",
       cterm_color = "185",
       name = "Bablerc"
     },
     ["R"] = {
-      icon = "",
+      icon = icons.ui.List,
       color = "#358a5b",
       cterm_color = "65",
       name = "R",
     },
     ["r"] = {
-      icon = "",
+      icon = icons.ui.List,
       color = "#358a5b",
       cterm_color = "65",
       name = "R",
     },
     ["svg"] = {
-      icon = "", -- actual utf-8 encoded codepoints instead, this is for demonstration
+      icon = "",
       color = "#FFFFFF",
       cterm_color = "215",
       name = "Svg"
     },
     ["tbc"] = {
-      icon = "",
+      icon = icons.ui.List,
       color = "#1e5cb3",
       cterm_color = "67",
       name = "Tcl",
     },
     ["tcl"] = {
-      icon = "",
+      icon = icons.ui.List,
       color = "#1e5cb3",
       cterm_color = "67",
       name = "Tcl",
     },
     tex = {
-      icon = "", -- actual utf-8 encoded codepoints instead, this is for demonstration
+      icon = icons.ui.List,
       color = "#FFFFFF",
       cterm_color = "58",
       name = "Tex"
     },
     ["webpack"] = {
-      icon = "",
+      icon = icons.ui.Package,
       color = "#519aba",
       cterm_color = "67",
       name = "Webpack",
     },
     ["sol"] = {
-      icon = "",
+      icon = icons.ui.List,
       color = "#519aba",
       cterm_color = "67",
       name = "Solidity",
     },
-  };
-  default = true;
+  },
+  default = true,
 };

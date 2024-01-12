@@ -25,7 +25,8 @@ git clone git@github.com:jimigrunge/dotfiles.git
     - pynvim
 - nodejs : Language executable
 - fzf : Fuzzy search
-- exa : Pretty terminal listings
+- exa : Pretty terminal listings(deprecated)
+- lsd : LSDeluxe terminal listings (lsd-rs/lsd)
 - golang-go : Language executable
 - ripgrep : Grep enhanced
 - oh-my-zsh : Command line theming

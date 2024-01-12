@@ -43,7 +43,7 @@ dlsconfig.init {
 
 return {
   cmd = { "diagnostic-languageserver", "--stdio" },
-  filetypes = {"php", 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'lua'},
+  filetypes = { "php", 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'lua' },
   initializationOptions = {
     linters = {
       phpcs = phpcs_linter,

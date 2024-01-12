@@ -4,11 +4,13 @@ if not status_ok then
   return
 end
 
+local icons = require "user.icons"
+
 lsp_signature.setup({
   bind = true, -- This is mandatory, otherwise border config won't get registered.
   handler_opts = {
     border = "rounded"
   },
-  hint_prefix = "  ",
+  hint_prefix = " " .. icons.ui.DividerRight .. icons.ui.DividerRight .. " ", --  "  ",
   toggle_key = "<C-o>"
 })

@@ -5,9 +5,9 @@ if not status_ok then
 end
 
 colorizer.setup({
-  'css';
-  'javascript';
+  'css',
+  'javascript',
   html = {
-    mode = 'background';
+    mode = 'background',
   }
 })

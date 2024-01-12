@@ -2,76 +2,78 @@
 -- [[ https://github.com/LunarVim/LunarVim/blob/rolling/lua/lvim/core/dap.lua ]]
 local dap_status_ok, dap = pcall(require, "dap")
 if not dap_status_ok then
-	print("Dap not loaded")
-	return
+  print("Dap not loaded")
+  return
 end
 
 local dap_ui_status_ok, dapui = pcall(require, "dapui")
 if not dap_ui_status_ok then
-	print("DapUI not loaded")
-	return
+  print("DapUI not loaded")
+  return
 end
 
 local dap_vsc_status_ok, dapvscjs = pcall(require, "dap-vscode-js")
 if not dap_vsc_status_ok then
-	print("DapVscodeJs not loaded")
-	return
+  print("DapVscodeJs not loaded")
+  return
 end
 
 local mason_path = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/")
+local icons = require "user.icons"
 
-vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticSignError", linehl = "", numhl = "" })
+vim.fn.sign_define("DapBreakpoint",
+  { text = icons.diagnostics.Debug, texthl = "DiagnosticSignError", linehl = "", numhl = "" })
 
 dapui.setup({
-	layouts = {
-		{
-			elements = {
-				"scopes",
-				"breakpoints",
-				"stacks",
-				"watches",
-			},
-			size = 40,
-			position = "left",
-		},
-		{
-			elements = {
-				"repl",
-				"console",
-			},
-			size = 10,
-			position = "bottom",
-		},
-	},
+  layouts = {
+    {
+      elements = {
+        "scopes",
+        "breakpoints",
+        "stacks",
+        "watches",
+      },
+      size = 40,
+      position = "left",
+    },
+    {
+      elements = {
+        "repl",
+        "console",
+      },
+      size = 10,
+      position = "bottom",
+    },
+  },
 })
 
 dap.adapters.php = {
-	type = "executable",
-	command = "node",
-	args = { mason_path .. "packages/php-debug-adapter/extension/out/phpDebug.js" },
+  type = "executable",
+  command = "node",
+  args = { mason_path .. "packages/php-debug-adapter/extension/out/phpDebug.js" },
 }
 dap.configurations.php = {
-	{
-		name = "Listen for Xdebug",
-		type = "php",
-		request = "launch",
-		port = 9003,
-	},
-	{
-		name = "Debug currently open script",
-		type = "php",
-		request = "launch",
-		port = 9003,
-		cwd = "${fileDirname}",
-		program = "${file}",
-		runtimeExecutable = "php",
-	},
+  {
+    name = "Listen for Xdebug",
+    type = "php",
+    request = "launch",
+    port = 9003,
+  },
+  {
+    name = "Debug currently open script",
+    type = "php",
+    request = "launch",
+    port = 9003,
+    cwd = "${fileDirname}",
+    program = "${file}",
+    runtimeExecutable = "php",
+  },
 }
 
 dapvscjs.setup({
-	debugger_path = "mason_path .. 'packages/js-debug-adapter'", -- Path to vscode-js-debug installation.
-	debugger_cmd = { "js-debug-adapter" }, -- Command to use to launch the debug server. Takes precedence over `node_path` and `debugger_path`.
-	adapters = { "pwa-node", "pwa-chrome" }, -- which adapters to register in nvim-dap
+  debugger_path = "mason_path .. 'packages/js-debug-adapter'", -- Path to vscode-js-debug installation.
+  debugger_cmd = { "js-debug-adapter" },                      -- Command to use to launch the debug server. Takes precedence over `node_path` and `debugger_path`.
+  adapters = { "pwa-node", "pwa-chrome" },                    -- which adapters to register in nvim-dap
 })
 dap.configurations.javascript = {
   {
@@ -85,7 +87,7 @@ dap.configurations.javascript = {
     type = "pwa-node",
     request = "attach",
     name = "Attach",
-    processId = require'dap.utils'.pick_process,
+    processId = require 'dap.utils'.pick_process,
     cwd = "${workspaceFolder}",
   }
 }
@@ -101,7 +103,7 @@ dap.configurations.typescript = {
     type = "pwa-node",
     request = "attach",
     name = "Attach",
-    processId = require'dap.utils'.pick_process,
+    processId = require 'dap.utils'.pick_process,
     cwd = "${workspaceFolder}",
   }
 }
@@ -117,7 +119,7 @@ dap.configurations.typescriptreact = {
     type = "pwa-node",
     request = "attach",
     name = "Attach",
-    processId = require'dap.utils'.pick_process,
+    processId = require 'dap.utils'.pick_process,
     cwd = "${workspaceFolder}",
   }
 }

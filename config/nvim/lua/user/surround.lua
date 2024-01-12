@@ -1,7 +1,7 @@
 local status_ok, surround = pcall(require, 'surround')
 if not status_ok then
   print 'Surround not loaded'
-	return
+  return
 end
 
 surround.setup {

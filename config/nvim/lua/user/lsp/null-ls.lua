@@ -1,6 +1,6 @@
 local none_ls_status_ok, none_ls = pcall(require, "none-ls")
 if not none_ls_status_ok then
-	return
+  return
 end
 
 local formatting = none_ls.builtins.formatting
@@ -12,41 +12,34 @@ none_ls.setup({
     -- -----------------
     -- Formatting
     -- -----------------
-    -- js/jsx/ts/tsx/json
+    --- js/jsx/ts/tsx/json
     formatting.prettier,
-    -- python
+    --- python
     formatting.black.with({ extra_args = { "--fast" } }),
-    -- lua
+    --- lua
     formatting.stylua,
-    -- cpp
+    --- cpp
     formatting.clang_format,
-    -- php
-    --[[ formatting.phpcbf.with({ extra_args = { "--standard=PSR12", "-"}}), ]]
-    --bash
+    --- bash
     formatting.shellharden,
-    -- java
+    --- java
     formatting.google_java_format,
     -- -----------------
     -- Linting
     -- -----------------
-    -- js/jsx/ts/tsx/json
+    --- js/jsx/ts/tsx/json
     diagnostics.eslint_d.with({
       condition = function(utils)
         return utils.root_has_file(".eslintrc.js")
       end,
     }),
-    -- python
-    -- diagnostics.flake8,
-    -- lua - This is disabled in favor of the LSP linter
-    --       due to unrecognized global variable bug
-    -- diagnostics.luacheck,
-    -- php
-    --[[ diagnostics.phpcs.with({extra_args = { "--standard=PSR12", "-"}}), ]]
-    -- cpp
+    --- python
+    --[[ diagnostics.flake8, ]]
+    --- cpp
     diagnostics.cpplint,
-    -- css
+    --- css
     diagnostics.stylelint,
-    -- bash
+    --- bash
     diagnostics.shellcheck,
     -- -----------------
     -- Spelling

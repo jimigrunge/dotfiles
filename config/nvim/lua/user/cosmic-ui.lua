@@ -1,7 +1,7 @@
 local status_ok, cosmic_ui = pcall(require, "cosmic-ui")
 if not status_ok then
   print 'Cosmic UI not loaded'
-	return
+  return
 end
 
 cosmic_ui.setup {

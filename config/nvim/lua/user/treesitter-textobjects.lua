@@ -1,7 +1,7 @@
 local status_ok, treesitter_configs = pcall(require, "nvim-treesitter.configs")
 if not status_ok then
   print 'Treesitter Configs textobjects not loaded'
-	return
+  return
 end
 
 treesitter_configs.setup {
@@ -44,7 +44,7 @@ treesitter_configs.setup {
       },
     },
     select = {
-      enable = true,  -- you can also use a table with list of langs here (e.g. { "python", "javascript" })
+      enable = true, -- you can also use a table with list of langs here (e.g. { "python", "javascript" })
       -- Automatically jump forward to textobj, similar to targets.vim
       lookahead = true,
       include_surrounding_whitespace = false,
@@ -55,12 +55,11 @@ treesitter_configs.setup {
         ["if"] = { query = "@function.inner", desc = "Select inner part of a method/function definition" },
         ["ac"] = { query = "@class.outer", desc = "Select outer part of a class" },
         ["ic"] = { query = "@class.inner", desc = "Select inner part of a class" },
-        ["ab"] = { query = "@block.outer", desc = "Select outer part of a block"  },
-        ["ib"] = { query = "@block.inner", desc = "Select inner part of a block"  },
+        ["ab"] = { query = "@block.outer", desc = "Select outer part of a block" },
+        ["ib"] = { query = "@block.inner", desc = "Select inner part of a block" },
         ["as"] = { query = "@statement.outer", desc = "Select outer part of a statement" },
         ["is"] = { query = "@statement.inner", desc = "Select inner part of a statement" },
       },
     },
   },
 }
-

@@ -1,7 +1,7 @@
 local status_ok, neogen = pcall(require, "neogen")
 if not status_ok then
   print 'Neogen not loaded'
-	return
+  return
 end
 
 neogen.setup {

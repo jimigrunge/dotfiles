@@ -1,12 +1,12 @@
 local status_ok, lightbulb = pcall(require, 'nvim-lightbulb')
 if not status_ok then
   print 'Lightbulb not loaded'
-	return
+  return
 end
 
 lightbulb.setup {
   ignore = {
-    clients = {"null-ls"},
+    clients = { "none-ls" },
   },
   autocmd = {
     enabled = true,

@@ -26,11 +26,6 @@ vim.g.maplocalleader = " "
 -- Normal --
 -- -----------------------------------
 -- Better window navigation
---   This is now handled by vim-tmux-navigator plugin
---[[ keymap("n", "<C-h>", "<C-w>h", opts) ]]
---[[ keymap("n", "<C-j>", "<C-w>j", opts) ]]
---[[ keymap("n", "<C-k>", "<C-w>k", opts) ]]
---[[ keymap("n", "<C-l>", "<C-w>l", opts) ]]
 keymap("n", "<C-k>", ":TmuxNavigateUp<cr>", opts)
 keymap("n", "<C-j>", ":TmuxNavigateDown<cr>", opts)
 keymap("n", "<C-h>", ":TmuxNavigateLeft<cr>", opts)
@@ -69,9 +64,7 @@ keymap("n", "n", "nzzzv", opts)
 keymap("n", "N", "Nzzzv", opts)
 
 -- Custom grepping
---[[ keymap("n", ",/",  "<cmd>lua require 'telescope.builtin'.live_grep()<CR>", opts) ]]
---[[ keymap("n", ",,/", "<cmd>lua require 'telescope.builtin'.grep_string({find_command = { 'rg', vim.fn.expand('<cword>'), '--ignore', '--hidden', '--smart-case' }})<CR>", opts) ]]
-keymap("n", "ff",  "<cmd>lua require('telescope.builtin').find_files()<cr>", opts)
+keymap("n", "ff", "<cmd>lua require('telescope.builtin').find_files()<cr>", opts)
 
 -- DAP
 keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)
@@ -86,8 +79,6 @@ keymap("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", opts)
 keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
 
 keymap("n", "<C-c><C-p>", "<cmd>PickColor<cr>", opts)
-
---[[ keymap("n", "<C-Bslash>", "<cmd>ToggleTerm<cr>", opts) ]]
 
 -- -----------------------------------
 -- Insert --

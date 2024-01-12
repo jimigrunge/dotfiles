@@ -33,20 +33,6 @@ local mappings = {
     ["r"] = { "<cmd>lua require'dap'.repl.open()<cr>", "[R]EPL" },
     ["t"] = { "<cmd>lua require'dap'.terminate()<cr>", "[T]erminate" },
     ["u"] = { "<cmd>lua require'dapui'.toggle()<cr>", "Dap[U]i Toggle" },
-    --[[ b = { "<cmd>lua require'dap'.step_back()<cr>", "Step Back" }, ]]
-    --[[X c = { "<cmd>lua require'dap'.continue()<cr>", "Continue" }, ]]
-    --[[ C = { "<cmd>lua require'dap'.run_to_cursor()<cr>", "Run To Cursor" }, ]]
-    --[[ d = { "<cmd>lua require'dap'.disconnect()<cr>", "Disconnect" }, ]]
-    --[[ g = { "<cmd>lua require'dap'.session()<cr>", "Get Session" }, ]]
-    --[[X i = { "<cmd>lua require'dap'.step_into()<cr>", "Step Into" }, ]]
-    --[[X o = { "<cmd>lua require'dap'.step_over()<cr>", "Step Over" }, ]]
-    --[[ p = { "<cmd>lua require'dap'.pause()<cr>", "Pause" }, ]]
-    --[[ r = { "<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle Repl" }, ]]
-    --[[X s = { "<cmd>lua require'dap'.continue()<cr>", "Start" }, ]]
-    --[[X t = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle Breakpoint" }, ]]
-    --[[ q = { "<cmd>lua require'dap'.close()<cr>", "Quit" }, ]]
-    --[[X u = { "<cmd>lua require'dap'.step_out()<cr>", "Step Out" }, ]]
-    --[[X U = { "<cmd>lua require'dapui'.toggle()<cr>", "Toggle UI" }, ]]
   },
   ["e"] = { "<cmd>NvimTreeToggle<cr>", "[E]xplorer" },
   ["f"] = { "<cmd>Telescope live_grep<cr>", "[F]ind Text" },
@@ -68,14 +54,15 @@ local mappings = {
     ["j"] = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
     ["k"] = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
     ["l"] = { "<cmd>lua require'gitsigns'.blame_line{full=true}<cr>", "B[l]ame" },
+    ["n"] = { "<cmd>GitLink!<cr>", "GitLi[n]k! in browser" },
     ["o"] = { "<cmd>Telescope git_status<cr>", "[O]pen changed file" },
     ["p"] = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "[P]review Hunk" },
     -- This works I just don't want it on for the moment
     -- ["r"] = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
     -- ["R"] = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
     -- ["s"] = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
-    ["t"] = { "<cmd>Git status<cr>", "S[t]atus"},
-    ["u"] = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "[U]ndo Stage Hunk"},
+    ["t"] = { "<cmd>Git status<cr>", "S[t]atus" },
+    ["u"] = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "[U]ndo Stage Hunk" },
     ["y"] = { "[Y]ank Git Remote Link" },
   },
   ["h"] = { "<cmd>nohlsearch<cr>", "[H]ighlight Off" },
@@ -85,7 +72,7 @@ local mappings = {
   ["l"] = {
     name = "[L]SP",
     ["a"] = { "<cmd>CodeActionMenu<cr>", "Code [A]ction" },
-    ["c"] = { "<cmd>lua require('neogen').generate()<cr>", "[C]reate DocBlock"},
+    ["c"] = { "<cmd>lua require('neogen').generate()<cr>", "[C]reate DocBlock" },
     ["d"] = { "<cmd>Telescope diagnostics bufnr=0<cr>", "[D]ocument Diagnostics" },
     ["D"] = { "<cmd>lua require('neogen').generate()<cr>", "[D]ocBloc Annotations" },
     ["e"] = { "<cmd>lua vim.diagnostic.open_float()<cr>", "Line diagnostic [e]rror hover" },
@@ -120,14 +107,6 @@ local mappings = {
     ["c"] = { "<cmd>SymbolsOutlineClose<cr>", "[C]lose Outline" }
   },
   ["P"] = { "<cmd>Telescope projects<cr>", "[P]rojects" },
-  --[[ ["p"] = { ]]
-  --[[   name = "[P]acker", ]]
-  --[[   ["c"] = { "<cmd>PackerCompile<cr>", "[C]ompile" }, ]]
-  --[[   ["i"] = { "<cmd>PackerInstall<cr>", "[I]nstall" }, ]]
-  --[[   ["s"] = { "<cmd>PackerSync<cr>", "[S]ync" }, ]]
-  --[[   ["S"] = { "<cmd>PackerStatus<cr>", "[S]tatus" }, ]]
-  --[[   ["u"] = { "<cmd>PackerUpdate<cr>", "[U]pdate" }, ]]
-  --[[ }, ]]
   ["p"] = {
     name = "[P]lugins Lazy",
     ["h"] = { "<cmd>Lazy home<cr>", "[H]ome" },
@@ -178,10 +157,7 @@ local mappings = {
     ["h"] = { "<cmd>lua _HTOP_TOGGLE()<cr>", "[H]top" },
     ["p"] = { "<cmd>lua _PYTHON_TOGGLE()<cr>", "[P]ython" },
     ["t"] = { "<cmd>ToggleTerm size=30<cr>", "[T]oggle Term" },
-    --[[ ["f"] = { "<cmd>ToggleTerm direction=float<cr>", "[F]loat" }, ]]
-    --[[ ["t"] = { "<cmd>ToggleTerm size=60<cr>", "[T]oggle" }, ]]
-    --[[ ["h"] = { "<cmd>ToggleTerm size=80 direction=horizontal<cr>", "[H]orizontal" }, ]]
-    --[[ ["v"] = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "[V]ertical" }, ]]
+    ["f"] = { "<cmd>ToggleTerm direction=float<cr>", "[F]loat" },
   },
   -- ["u"] = {},
   -- ["v"] = {},
@@ -201,7 +177,8 @@ local mappings = {
     R = { "<cmd>TroubleToggle lsp_references<cr>", "[R]eferences" },
     w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "[W]orkspace" },
     x = { "<cmd>TroubleToggle<cr>", "Trouble" },
-    t = { name = "[T]odo",
+    t = {
+      name = "[T]odo",
       l = { "<cmd>TodoLocList<cr>", "[L]ocal List" },
       q = { "<cmd>TodoQuickFix<cr>", "[Q]uickFix" },
       t = { "<cmd>TodoTelescope<cr>", "[T]elescope" },
@@ -215,16 +192,16 @@ local mappings = {
 local n_mappings = {
   ["g"] = {
     name = "LSP",
-    ["b"] = { name="+Comment blockwise" },
-    ["c"] = { name="+Comment linewise" },
+    ["b"] = { name = "+Comment blockwise" },
+    ["c"] = { name = "+Comment linewise" },
     ["d"] = { "<cmd>Telescope lsp_definitions<cr>", "Definition" },
     ["D"] = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Declaration" },
     ["i"] = { "<cmd>Telescope lsp_implementations<cr>", "Implementation" },
-    ["l"] = { "<cmd>lua vim.diagnostic.open_float()<cr>", "Open Float"},
+    ["l"] = { "<cmd>lua vim.diagnostic.open_float()<cr>", "Open Float" },
     ["o"] = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "Type Definition" },
     ["r"] = { "<cmd>Telescope lsp_references<cr>", "References" },
     ["R"] = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-    ["v"] = { name="Reselect" }
+    ["v"] = { name = "Reselect" }
   },
   ["K"] = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover" },
   ["<C-k>"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature" }
@@ -245,22 +222,22 @@ local i_mappings = {
 
 local setup = {
   plugins = {
-    marks = true, -- shows a list of your marks on ' and `
-    registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+    marks = true,       -- shows a list of your marks on ' and `
+    registers = true,   -- shows your registers on " in NORMAL or <C-r> in INSERT mode
     spelling = {
-      enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
+      enabled = true,   -- enabling this will show WhichKey when pressing z= to select spelling suggestions
       suggestions = 20, -- how many suggestions should be shown in the list?
     },
     -- the presets plugin, adds help for a bunch of default keybindings in Neovim
     -- No actual key bindings are created
     presets = {
-      operators = true, -- adds help for operators like d, y, ... and registers them for motion / text object completion
-      motions = false, -- adds help for motions
+      operators = true,     -- adds help for operators like d, y, ... and registers them for motion / text object completion
+      motions = false,      -- adds help for motions
       text_objects = false, -- help for text objects triggered after entering an operator
-      windows = true, -- default bindings on <c-w>
-      nav = true, -- misc bindings to work with windows
-      z = true, -- bindings for folds, spelling and others prefixed with z
-      g = true, -- bindings for prefixed with g
+      windows = true,       -- default bindings on <c-w>
+      nav = true,           -- misc bindings to work with windows
+      z = true,             -- bindings for folds, spelling and others prefixed with z
+      g = true,             -- bindings for prefixed with g
     },
   },
   -- add operators that will trigger motion and text object completion
@@ -281,26 +258,26 @@ local setup = {
   },
   popup_mappings = {
     scroll_down = "<c-d>", -- binding to scroll down inside the popup
-    scroll_up = "<c-u>", -- binding to scroll up inside the popup
+    scroll_up = "<c-u>",   -- binding to scroll up inside the popup
   },
   window = {
-    border = "rounded", -- none, single, double, shadow
-    position = "bottom", -- bottom, top
-    margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
+    border = "rounded",       -- none, single, double, shadow
+    position = "bottom",      -- bottom, top
+    margin = { 1, 0, 1, 0 },  -- extra window margin [top, right, bottom, left]
     padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
     winblend = 0,
   },
   layout = {
-    height = { min = 4, max = 25 }, -- min and max height of the columns
-    width = { min = 20, max = 50 }, -- min and max width of the columns
-    spacing = 3, -- spacing between columns
-    align = "left", -- align columns left, center or right
+    height = { min = 4, max = 25 },                                             -- min and max height of the columns
+    width = { min = 20, max = 50 },                                             -- min and max width of the columns
+    spacing = 3,                                                                -- spacing between columns
+    align = "left",                                                             -- align columns left, center or right
   },
-  ignore_missing = false, -- enable this to hide mappings for which you didn't specify a label
+  ignore_missing = false,                                                       -- enable this to hide mappings for which you didn't specify a label
   hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
-  show_help = true, -- show help message on the command line when the popup is visible
-  show_keys = true, -- show the currently pressed key and its label as a message in the command line
-  triggers = "auto", -- automatically setup triggers
+  show_help = true,                                                             -- show help message on the command line when the popup is visible
+  show_keys = true,                                                             -- show the currently pressed key and its label as a message in the command line
+  triggers = "auto",                                                            -- automatically setup triggers
   -- triggers = {"<leader>"} -- or specify a list manually
   triggers_blacklist = {
     -- list of mode / prefixes that should never be hooked by WhichKey
@@ -318,28 +295,28 @@ local setup = {
 }
 
 local opts = {
-  mode = "n", -- NORMAL mode
+  mode = "n",     -- NORMAL mode
   prefix = "<leader>",
-  buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-  silent = true, -- use `silent` when creating keymaps
+  buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
+  silent = true,  -- use `silent` when creating keymaps
   noremap = true, -- use `noremap` when creating keymaps
-  nowait = true, -- use `nowait` when creating keymaps
+  nowait = true,  -- use `nowait` when creating keymaps
 }
 local vopts = {
-  mode = "v", -- VISUAL mode
+  mode = "v",     -- VISUAL mode
   prefix = "<leader>",
-  buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-  silent = true, -- use `silent` when creating keymaps
+  buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
+  silent = true,  -- use `silent` when creating keymaps
   noremap = true, -- use `noremap` when creating keymaps
-  nowait = true, -- use `nowait` when creating keymaps
+  nowait = true,  -- use `nowait` when creating keymaps
 }
 local iopts = {
-  mode = "i", -- VISUAL mode
+  mode = "i",     -- VISUAL mode
   prefix = "<C-i>",
-  buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-  silent = true, -- use `silent` when creating keymaps
+  buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
+  silent = true,  -- use `silent` when creating keymaps
   noremap = true, -- use `noremap` when creating keymaps
-  nowait = true, -- use `nowait` when creating keymaps
+  nowait = true,  -- use `nowait` when creating keymaps
 }
 
 which_key.setup(setup)
