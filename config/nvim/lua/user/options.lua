@@ -37,6 +37,10 @@ local options = {
   guifont = "monospace:h17",               -- the font used in graphical neovim applications
   laststatus = 3,                          -- use a single status line
   confirm = true,
+  foldcolumn = '1',
+  foldlevel = 99,
+  foldlevelstart = 99,
+  foldenable = true,
 }
 
 vim.opt.shortmess:append "c"

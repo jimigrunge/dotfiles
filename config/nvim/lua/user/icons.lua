@@ -62,6 +62,7 @@ return {
     BoldArrowLeft = "",
     BoldArrowRight = "",
     BoldArrowUp = "",
+    BoldCheck = "✔",
     BoldClose = "",
     BoldDividerLeft = "",
     BoldDividerRight = "",
@@ -76,7 +77,7 @@ return {
     Watches = "󰂥",
     DebugConsole = "",
     Calendar = "",
-    Check = "", -- "✔"
+    Check = "",
     ChevronRight = "",
     ChevronShortDown = "",
     ChevronShortLeft = "",

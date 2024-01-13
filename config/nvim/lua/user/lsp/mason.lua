@@ -11,12 +11,13 @@ local servers = {
   "lemminx",      -- XML/XSLT
   "pyright",      -- python
   "solang",       -- solona
-  --[[ "sumneko_lua",  -- lua ]]
+--[[ "sumneko_lua",  -- lua ]]
   "lua_ls",       -- lua
   "tsserver",     -- typescript
   "vimls",        -- vim
   "yamlls",       -- yaml
 }
+--[[ local servers = require("lspconfig").util.available_servers() ]]
 
 -- -----------------------------------
 -- List of formatters & linters for mason to install
@@ -81,7 +82,7 @@ end
 
 local opts = {}
 
-for _, server in pairs(servers) do
+for _, server in ipairs(servers) do
   opts = {
     on_attach = require("user.lsp.handlers").on_attach,
     capabilities = require("user.lsp.handlers").capabilities,
