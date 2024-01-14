@@ -24,6 +24,8 @@ none_ls.setup({
     formatting.shellharden,
     --- java
     formatting.google_java_format,
+    --- markdown
+    formatting.textlint,
     -- -----------------
     -- Linting
     -- -----------------
@@ -41,6 +43,8 @@ none_ls.setup({
     diagnostics.stylelint,
     --- bash
     diagnostics.shellcheck,
+    --- markdown
+    diagnostics.markdownlint_cli2,
     -- -----------------
     -- Spelling
     -- -----------------

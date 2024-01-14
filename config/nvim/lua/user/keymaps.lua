@@ -6,11 +6,15 @@ local term_opts = { silent = true }
 -- Shorten function name
 local keymap = vim.api.nvim_set_keymap
 
+-- keymap("n", "", "", opts)
+
 -- -----------------------------------
 --Remap space as leader key
 keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+
+keymap("n", "<C-i>", "<C-i>", opts)
 
 -- -----------------------------------
 -- Modes
@@ -30,6 +34,12 @@ keymap("n", "<C-k>", ":TmuxNavigateUp<cr>", opts)
 keymap("n", "<C-j>", ":TmuxNavigateDown<cr>", opts)
 keymap("n", "<C-h>", ":TmuxNavigateLeft<cr>", opts)
 keymap("n", "<C-l>", ":TmuxNavigateRight<cr>", opts)
+
+-- Center under cursor search
+keymap("n", "n", "nzz", opts)
+keymap("n", "N", "Nzz", opts)
+keymap("n", "*", "*zz", opts)
+keymap("n", "#", "#zz", opts)
 
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize -2<CR>", opts)
@@ -116,6 +126,9 @@ keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
+
+-- Paste without copy
+keymap("x", "p", '"_dP', opts)
 
 -- -----------------------------------
 -- Terminal --

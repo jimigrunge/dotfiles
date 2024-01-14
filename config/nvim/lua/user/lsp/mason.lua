@@ -11,11 +11,13 @@ local servers = {
   "lemminx",      -- XML/XSLT
   "pyright",      -- python
   "solang",       -- solona
---[[ "sumneko_lua",  -- lua ]]
   "lua_ls",       -- lua
   "tsserver",     -- typescript
   "vimls",        -- vim
   "yamlls",       -- yaml
+  "marksman",     -- Markdown
+  "prosemd_lsp",  -- Markdown
+  "taplo"         -- TOML
 }
 --[[ local servers = require("lspconfig").util.available_servers() ]]
 
@@ -35,6 +37,9 @@ local linter_formatters = {
   "phpcs",              -- php linting
   "stylelint",          -- css linting
   "shellcheck",         -- bash linting
+  "markdownlint",       -- markdown linting
+  "markdownlint_cli2",  -- markdown linting
+  "textlint",           -- maekdown linting
 }
 
 local settings = {

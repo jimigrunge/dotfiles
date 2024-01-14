@@ -178,16 +178,19 @@ install_mac_deps()
         echo 'Error: nodejs is not installed, attempting to install.' >&2
         brew install node
     fi
-    # TODO: install go and ripgrep
+    if ! [ -x "$(command -v go)" ]; then
+        echo 'Error: go is not installed, attempting to install.' >&2
+        brew install go
+    fi
+    if ! [ -x "$(command -v rg)" ]; then
+        echo 'Error: ripgrep is not installed, attempting to install.' >&2
+        brew install ripgrep
+    fi
     if ! [ -x "$(command -v fzf)" ]; then
         echo 'Error: fzf not found, attampting to install.' >&2
         brew install fzf
         "$(brew --prefix)"/opt/fzf/install
     fi
-    # if ! [ -x "$(command -v exa)" ]; then
-    #     echo 'Error: exa not found, attampting to install.' >&2
-    #     brew install exa
-    # fi
     if ! [ -x "$(command -v lsd)" ]; then
         echo 'Error: lsd not found, attampting to install.' >&2
         brew install lsd
@@ -277,19 +280,19 @@ install_libraries()
     if ! [ -x "$(command -v tsc)" ]; then
         npm install -g typescript
     fi
-# TODO: are these needed anymore now that we have MASON?
-    echo "* Checking for prettier"
-    if ! [ -x "$(command -v prettier)" ]; then
-        npm install -g prettier
-    fi
-    echo "* Checking for eslint"
-    if ! [ -x "$(command -v eslint)" ]; then
-        npm install -g eslint
-    fi
-    echo "* Checking for eslint-d"
-    if ! [ -x "$(command -v eslint_d)" ]; then
-        npm install -g eslint_d
-    fi
+    # TODO: are these needed anymore now that we have MASON?
+    # echo "* Checking for prettier"
+    # if ! [ -x "$(command -v prettier)" ]; then
+    #     npm install -g prettier
+    # fi
+    # echo "* Checking for eslint"
+    # if ! [ -x "$(command -v eslint)" ]; then
+    #     npm install -g eslint
+    # fi
+    # echo "* Checking for eslint-d"
+    # if ! [ -x "$(command -v eslint_d)" ]; then
+    #     npm install -g eslint_d
+    # fi
 
     echo "Insure we have PHP Linting and Formatting"
     echo "* Checking for php code sniffer"
@@ -398,18 +401,5 @@ install_libraries
 install_nvim_files
 intitialize_zsh
 
-# See: https://www.reddit.com/r/neovim/comments/mohogr/neovim_lua_config_cant_install_plugins_when/
-# echo "Install nvim plugins"
-# nvim --headless +PackerInstall +qall
-
-echo $"
-
-If you require XML language support:
-Download the latest binary for your system here: https://download.jboss.org/jbosstools/vscode/stable/lemminx-binary/
-Set 'jvim.config.xml' to true in 'lua/init.lua'
-
-Please run ':PackerSync' to complete plugin installation.
-"
-
-echo "NeoVim Install Complete"
+echo "Development Environment Install Complete"
 exit 0

@@ -64,6 +64,12 @@ devicons.setup {
       cterm_color = "67",
       name = "Solidity",
     },
+    ["toml"] = {
+      icon = icons.misc.Toml,
+      color = "#ffffff",
+      cterm_color = "231",
+      name = "Toml",
+    },
   },
   default = true,
 };

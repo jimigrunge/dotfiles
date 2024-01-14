@@ -1,3 +1,7 @@
+-- Global variables
+JAVA_DAP_ACTIVE = false
+
+-- Vim/NeoVim options
 local options = {
   backup = false,                          -- creates a backup file
   clipboard = "unnamedplus",               -- allows neovim to access the system clipboard
@@ -34,7 +38,7 @@ local options = {
   wrap = false,                            -- display lines as one long line
   scrolloff = 8,                           -- is one of my fav
   sidescrolloff = 8,
-  guifont = "monospace:h17",               -- the font used in graphical neovim applications
+  guifont = "DejaVuSansM Nerd Font:h16",   -- the font used in graphical neovim applications
   laststatus = 3,                          -- use a single status line
   confirm = true,
   foldcolumn = '1',
