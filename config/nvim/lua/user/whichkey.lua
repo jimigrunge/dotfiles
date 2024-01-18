@@ -67,7 +67,7 @@ local mappings = {
   },
   ["h"] = { "<cmd>nohlsearch<cr>", "[H]ighlight Off" },
   -- ["i"] = {},
-  ["j"] = { "<cmd>lua require('trevj').format_at_cursor()<cr>", "Format Structures" },
+  ["j"] = { "<cmd>lua require('treesj').toggle()<cr>", "Format Structures" },
   -- ["k"] = {},
   ["l"] = {
     name = "[L]SP",

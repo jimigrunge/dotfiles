@@ -111,14 +111,12 @@ require("lazy").setup({
       commit = "a7d8b424abe0eedf50116c460fbe6dfd5783b1d5",
     },
     {
-      "AckslD/nvim-trevJ.lua",
-      config = 'require("trevj").setup()',
-      init = function()
-        vim.keymap.set('n', '<leader>j', function()
-          require('trevj').format_at_cursor()
-        end, { noremap = true, silent = true })
+      'Wansmer/treesj',
+      dependencies = { 'nvim-treesitter/nvim-treesitter' },
+      config = function()
+        require('treesj').setup()
       end,
-      commit = "7f401543b5cd5496b6120dddcab394c29983a55c",
+      commit = "14808da3cddd62fc86ede53a5ea1fd1635897e75"
     },
     {
       "EmranMR/tree-sitter-blade",

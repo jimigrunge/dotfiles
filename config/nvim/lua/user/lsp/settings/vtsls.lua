@@ -1,5 +1,5 @@
 return {
-  cmd = { "typescript-language-server", "--stdio" },
+  cmd = { "vtsls", "--stdio" },
   filetypes = {
     "javascript",
     "javascriptreact",
@@ -8,9 +8,7 @@ return {
     "typescriptreact",
     "typescript.tsx",
   },
-  init_options = {
-    hostInfo = "neovim",
-  },
   root_dir = require("lspconfig").util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
   single_file_support = true,
 }
+

@@ -13,6 +13,7 @@ local servers = {
   "solang",       -- solona
   "lua_ls",       -- lua
   "tsserver",     -- typescript
+  -- "vtsls",        -- typescript
   "vimls",        -- vim
   "yamlls",       -- yaml
   "marksman",     -- Markdown
