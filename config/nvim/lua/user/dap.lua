@@ -12,6 +12,8 @@ if not dap_ui_status_ok then
   return
 end
 
+local icons = require "user.icons"
+
 local dap_vsc_status_ok, dapvscjs = pcall(require, "dap-vscode-js")
 if not dap_vsc_status_ok then
   print("DapVscodeJs not loaded")
@@ -19,12 +21,56 @@ if not dap_vsc_status_ok then
 end
 
 local mason_path = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/")
-local icons = require "user.icons"
 
 vim.fn.sign_define("DapBreakpoint",
   { text = icons.diagnostics.Debug, texthl = "DiagnosticSignError", linehl = "", numhl = "" })
 
 dapui.setup({
+  icons = {
+    expanded = icons.ui.BoldDividerDown,
+    collapsed = icons.ui.BoldDividerRight,
+    current_frame = icons.ui.BoldDividerRight,
+  },
+  mappings = {
+    -- Use a table to apply multiple mappings
+    -- expand = { "<CR>", "<2-LeftMouse>" },
+    open = "o",
+    remove = "d",
+    edit = "e",
+    repl = "r",
+    toggle = "t",
+  },
+  element_mappings = {},
+  expand_lines = true,
+  force_buffers = true,
+  floating = {
+    max_height = nil,
+    max_width = nil,
+    border = "single",
+    mappings = {
+      ["close"] = { "q", "<Esc>" },
+    },
+  },
+  controls = {
+    enabled = vim.fn.exists("+winbar") == 1,
+    element = "repl",
+    icons = {
+      pause = icons.ui.Pause,
+      play = icons.ui.Play,
+      step_into = icons.ui.StepInto,
+      step_over = icons.ui.StepOver,
+      step_out = icons.ui.StepOut,
+      step_back = icons.ui.StepBack,
+      run_last = icons.ui.RunLast,
+      terminate = icons.ui.Terminate,
+      disconnect = icons.ui.Disconnect,
+    },
+  },
+  render = {
+    max_type_length = nil, -- Can be integer or nil.
+    max_value_lines = 100, -- Can be integer or nil.
+    indent = 1,
+  },
   layouts = {
     {
       elements = {
@@ -71,9 +117,13 @@ dap.configurations.php = {
 }
 
 dapvscjs.setup({
+  node_path = "node",
+  log_file_path = vim.fn.stdpath('cache') .. "/dap_vscode_js.log",
+  log_file_level = vim.log.levels.ERROR,
+  log_console_level = vim.log.levels.ERROR,
   debugger_path = "mason_path .. 'packages/js-debug-adapter'", -- Path to vscode-js-debug installation.
-  debugger_cmd = { "js-debug-adapter" },                      -- Command to use to launch the debug server. Takes precedence over `node_path` and `debugger_path`.
-  adapters = { "pwa-node", "pwa-chrome" },                    -- which adapters to register in nvim-dap
+  debugger_cmd = { "js-debug-adapter" },                       -- Command to use to launch the debug server. Takes precedence over `node_path` and `debugger_path`.
+  adapters = { "pwa-node", "pwa-chrome" },                     -- which adapters to register in nvim-dap
 })
 dap.configurations.javascript = {
   {

@@ -5,11 +5,13 @@ if not status_ok then
 end
 ibl.setup()
 
+local icons = require "user.icons"
+
 local config = require "ibl.config"
 config.update_config({
   enabled = true,
   indent = {
-    char = "┊",
+    char = icons.ui.LineDashedMiddle,
     tab_char = nil,
     highlight = "IblIndent",
     smart_indent_cap = true,
@@ -38,4 +40,3 @@ config.update_config({
     }
   },
 })
-

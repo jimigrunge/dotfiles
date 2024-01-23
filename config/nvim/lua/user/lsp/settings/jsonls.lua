@@ -3,20 +3,11 @@ if not status_ok then
   return {}
 end
 
-local opts = {
+return {
   settings = {
     json = {
       schemas = schemastore.json.schemas(),
-    },
-    yaml = {
-      schemaStore = {
-        -- You must disable built-in schemaStore support if you want to use
-        -- this plugin and its advanced options like `ignore`.
-        enable = false,
-        -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
-        url = "",
-      },
-      schemas = schemastore.yaml.schemas(),
+      validate = { enable = true },
     },
   },
   setup = {
@@ -28,6 +19,11 @@ local opts = {
       },
     },
   },
+  cmd = { "vscode-json-language-server", "--stdio" },
+  filetypes = { "json", "jsonc" },
+  root_dir = require("lspconfig").util.root_pattern(".git"),
+  single_file_support = true,
+  init_options = {
+    provideFormatter = true
+  }
 }
-
-return opts

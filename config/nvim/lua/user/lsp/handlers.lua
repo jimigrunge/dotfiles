@@ -91,6 +91,13 @@ M.on_attach = function(client, bufnr)
   lsp_keymaps(bufnr)
   lsp_highlight_document(client)
 
+  if client.name == "eslint" then
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = bufnr,
+      command = "EslintFixAll",
+    })
+  end
+
   if client.name == "jdt.ls" then
     vim.lsp.codelens.refresh()
     if JAVA_DAP_ACTIVE then

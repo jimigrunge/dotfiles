@@ -4,9 +4,11 @@ if not status_ok then
   return
 end
 
+local icons = require "user.icons"
+
 prettyfold.setup {
   keep_indentation = true,
-  fill_char = '•',
+  fill_char = icons.ui.Dot,
   sections = {
     left = {
       '+', function() return string.rep('-', vim.v.foldlevel) end,

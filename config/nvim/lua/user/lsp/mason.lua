@@ -2,44 +2,47 @@
 -- LSP servers
 local servers = {
   "bashls",       -- bash
-  "cssls",        -- css
   "clangd",       -- cpp
+  "cssls",        -- css
   "eslint",       -- js/ts
   "html",         -- html
   "intelephense", -- PHP
   "jsonls",       -- json
   "lemminx",      -- XML/XSLT
-  "pyright",      -- python
-  "solang",       -- solona
   "lua_ls",       -- lua
-  "tsserver",     -- typescript
-  -- "vtsls",        -- typescript
-  "vimls",        -- vim
-  "yamlls",       -- yaml
   "marksman",     -- Markdown
   "prosemd_lsp",  -- Markdown
-  "taplo"         -- TOML
+  "pyright",      -- python
+  "solang",       -- solona
+  "sqlls",        -- SQL
+  "stimulus_ls",  -- blade
+  -- "sumneko_lua",   -- Lua
+  "taplo",        -- TOML
+  "tsserver",     -- typescript
+  "vimls",        -- vim
+  -- "vtsls",        -- typescript
+  "yamlls",       -- yaml
 }
 --[[ local servers = require("lspconfig").util.available_servers() ]]
 
 -- -----------------------------------
 -- List of formatters & linters for mason to install
 local linter_formatters = {
-  "prettier",           -- ts/js formatter
   "black",              -- python formatter
   "clang-format",       -- cpp formatter
-  "stylua",             -- lua formatter
-  "phpcbf",             -- php formatting
-  "shellharden",        -- bash formatting
-  "google_java_format", -- java formatting
   "cpplint",            -- cpp linting
   "eslint_d",           -- ts/js linting
+  "google_java_format", -- java formatting
   "luacheck",           -- lua linting
-  "phpcs",              -- php linting
-  "stylelint",          -- css linting
-  "shellcheck",         -- bash linting
   "markdownlint",       -- markdown linting
   "markdownlint_cli2",  -- markdown linting
+  "phpcbf",             -- php formatting
+  "phpcs",              -- php linting
+  "prettier",           -- ts/js formatter
+  "shellcheck",         -- bash linting
+  "shellharden",        -- bash formatting
+  "stylelint",          -- css linting
+  "stylua",             -- lua formatter
   "textlint",           -- maekdown linting
 }
 

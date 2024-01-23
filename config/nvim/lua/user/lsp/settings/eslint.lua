@@ -26,6 +26,7 @@ return {
   end,
   --[[ root_dir = vim.lsp.util.find_git_ancestor, ]]
   root_dir = require("lspconfig").util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
+  single_file_support = true,
   settings = {
     codeAction = {
       disableRuleComment = {

@@ -5,5 +5,10 @@ return {
   },
   filetypes = { "sh" },
   root_dir = vim.lsp.util.find_git_ancestor,
-  single_file_support = true
+  single_file_support = true,
+  settings =   {
+    bashIde = {
+      globPattern = "*@(.sh|.inc|.bash|.command)"
+    }
+  }
 }

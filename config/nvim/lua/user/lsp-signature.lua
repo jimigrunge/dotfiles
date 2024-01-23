@@ -11,6 +11,6 @@ lsp_signature.setup({
   handler_opts = {
     border = "rounded"
   },
-  hint_prefix = " " .. icons.ui.DividerRight .. icons.ui.DividerRight .. " ", --  "  ",
+  hint_prefix = " " .. icons.ui.BoldDoubleChevronRight .. " ",
   toggle_key = "<C-o>"
 })

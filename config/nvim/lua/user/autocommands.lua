@@ -38,12 +38,6 @@ vim.cmd [[
     autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
   augroup end
 
-  " This will auto update all your plugins when saving the Packer plugin file"
-  " augroup packer_user_config
-  "   autocmd!
-  "   autocmd BufWritePost plugins.lua source <afile> | PackerSync
-  " augroup end
-
   " Uncomment this to format on save
   " augroup _lsp_format
   "   autocmd!
