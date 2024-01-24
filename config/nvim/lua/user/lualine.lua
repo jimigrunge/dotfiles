@@ -74,9 +74,9 @@ local filename = {
   -- 3: Absolute path, with tilde as the home directory
   shorting_target = 40,
   symbols = {
-    modified = icons.git.LineAdded, -- Text to show when the file is modified.
+    modified = icons.git.LineAdded,   -- Text to show when the file is modified.
     readonly = icons.git.FileIgnored, -- Text to show when the file is non-modifiable or readonly.
-    unnamed = '[No Name]', -- Text to show for unnamed buffers.
+    unnamed = '[No Name]',            -- Text to show for unnamed buffers.
   }
 }
 

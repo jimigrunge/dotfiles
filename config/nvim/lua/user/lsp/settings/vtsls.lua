@@ -11,4 +11,3 @@ return {
   root_dir = require("lspconfig").util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
   single_file_support = true,
 }
-

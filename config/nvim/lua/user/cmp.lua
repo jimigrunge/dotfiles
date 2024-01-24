@@ -10,20 +10,20 @@ if not snip_status_ok then
   return
 end
 require("luasnip/loaders/from_vscode").lazy_load()
-luasnip.filetype_extend("typescript", { "javascript", "tsdoc" })
-luasnip.filetype_extend("javascript", { "jsdoc" })
-luasnip.filetype_extend("lua", { "luadoc" })
-luasnip.filetype_extend("python", { "pydoc" })
-luasnip.filetype_extend("rust", { "rustdoc" })
-luasnip.filetype_extend("cs", { "csharpdoc" })
-luasnip.filetype_extend("java", { "javadoc" })
 luasnip.filetype_extend("c", { "cdoc" })
 luasnip.filetype_extend("cpp", { "cppdoc" })
-luasnip.filetype_extend("php", { "phpdoc", "blade" })
-luasnip.filetype_extend("kotlin", { "kdoc" })
-luasnip.filetype_extend("ruby", { "rdoc" })
-luasnip.filetype_extend("sh", { "shelldoc" })
+luasnip.filetype_extend("cs", { "csharpdoc" })
 luasnip.filetype_extend("html", { "blade" })
+luasnip.filetype_extend("java", { "javadoc" })
+luasnip.filetype_extend("javascript", { "jsdoc" })
+luasnip.filetype_extend("kotlin", { "kdoc" })
+luasnip.filetype_extend("lua", { "luadoc" })
+luasnip.filetype_extend("php", { "phpdoc", "blade" })
+luasnip.filetype_extend("python", { "pydoc" })
+luasnip.filetype_extend("ruby", { "rdoc" })
+luasnip.filetype_extend("rust", { "rustdoc" })
+luasnip.filetype_extend("sh", { "shelldoc" })
+luasnip.filetype_extend("typescript", { "javascript", "tsdoc" })
 
 local icons = require "user.icons"
 
@@ -117,7 +117,7 @@ cmp.setup({
       name = "nvim_lsp",
       group_index = 2,
       priority = 8,
-      entry_filter = function(entry, ctx)
+      entry_filter = function(entry, _)
         local kind = require("cmp.types").lsp.CompletionItemKind[entry:get_kind()]
         if kind == "Text" then
           return false

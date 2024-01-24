@@ -29,7 +29,7 @@ devicons.setup {
       name = "R",
     },
     ["svg"] = {
-      icon = "",
+      icon = icons.kind.Svg,
       color = "#FFFFFF",
       cterm_color = "215",
       name = "Svg"

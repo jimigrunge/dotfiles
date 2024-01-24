@@ -9,21 +9,21 @@ comment.setup {
   sticky = true,
   ignore = nil,
   toggler = {
-      line = 'gcc',
-      block = 'gbc',
+    line = 'gcc',
+    block = 'gbc',
   },
   opleader = {
-      line = 'gc',
-      block = 'gb',
+    line = 'gc',
+    block = 'gb',
   },
   extra = {
-      above = 'gcO',
-      below = 'gco',
-      eol = 'gcA',
+    above = 'gcO',
+    below = 'gco',
+    eol = 'gcA',
   },
   mappings = {
-      basic = true,
-      extra = true,
+    basic = true,
+    extra = true,
   },
   post_hook = nil,
   -- Custom config
