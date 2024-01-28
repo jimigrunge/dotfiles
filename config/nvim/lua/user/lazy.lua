@@ -265,6 +265,12 @@ require("lazy").setup({
       'AndreM222/copilot-lualine',
       commit = "f7f0b3b3e7b0183d65fb5416c1d3e210e8a67ba6",
     },
+    {
+      "David-Kunz/cmp-npm",
+      dependencies = { 'nvim-lua/plenary.nvim' },
+      ft = "json",
+      commit = "2337f109f51a09297596dd6b538b70ccba92b4e4",
+    },
     -- LSP
     {
       "folke/neodev.nvim",

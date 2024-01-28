@@ -111,11 +111,12 @@ cmp.setup({
       vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
       vim_item.menu = ({
         luasnip = "[Snippet]",
+        npm = "[Npm]",
+        nvim_lua = "[Lua]",
         copilot = "[Copilot]",
-        nvim_lsp = "[LSP]",
+        nvim_lsp = "[Lsp]",
         buffer = "[Buffer]",
         path = "[Path]",
-        nvim_lua = "[LUA]",
       })[entry.source.name]
       return vim_item
     end,
@@ -123,14 +124,16 @@ cmp.setup({
   },
   sources = {
     { name = "luasnip", group_index = 1 },
+    { name = 'npm',     keyword_length = 1 },
+    { name = "nvim_lua", group_index = 1 },
     {
       name = "copilot",
-      group_index = 2,
-      priority = 9,
+      group_index = 1,
+      priority = 7,
     },
     {
       name = "nvim_lsp",
-      group_index = 2,
+      group_index = 1,
       priority = 8,
       entry_filter = function(entry, _)
         local kind = require("cmp.types").lsp.CompletionItemKind[entry:get_kind()]
@@ -140,9 +143,8 @@ cmp.setup({
         return true
       end,
     },
-    { name = "buffer",   group_index = 3 },
-    { name = "path",     group_index = 3 },
-    { name = "nvim_lua", group_index = 4 },
+    { name = "buffer",   group_index = 1 },
+    { name = "path",     group_index = 1 },
   },
   confirm_opts = {
     -- behavior = cmp.ConfirmBehavior.Replace,
