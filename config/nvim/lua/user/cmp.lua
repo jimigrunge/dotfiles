@@ -4,6 +4,12 @@ if not cmp_status_ok then
   return
 end
 
+local cc_comparators_status_ok, copilot_cmp_comparators = pcall(require, "copilot_cmp.comparators")
+if not cc_comparators_status_ok then
+  print("copilot_cmp_comparators not loaded")
+  return
+end
+
 local snip_status_ok, luasnip = pcall(require, "luasnip")
 if not snip_status_ok then
   print("LuaSnip not loaded")
@@ -26,6 +32,8 @@ luasnip.filetype_extend("sh", { "shelldoc" })
 luasnip.filetype_extend("typescript", { "javascript", "tsdoc" })
 
 local icons = require "user.icons"
+local kind_icons = icons.kind
+vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
 
 local has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -37,8 +45,6 @@ local check_backspace = function()
   return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
 end
 
---   פּ ﯟ   some other good icons
-local kind_icons = icons.kind
 
 cmp.setup({
   snippet = {
@@ -63,7 +69,11 @@ cmp.setup({
     ["<CR>"] = cmp.mapping.confirm({ select = false }),
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
-        cmp.select_next_item()
+        if has_words_before() then
+          cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+        else
+          cmp.select_next_item()
+        end
       elseif luasnip.expandable() then
         luasnip.expand()
       elseif luasnip.expand_or_jumpable() then
@@ -101,8 +111,8 @@ cmp.setup({
       vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
       vim_item.menu = ({
         luasnip = "[Snippet]",
+        copilot = "[Copilot]",
         nvim_lsp = "[LSP]",
-        -- codeium = "[Codeium]",
         buffer = "[Buffer]",
         path = "[Path]",
         nvim_lua = "[LUA]",
@@ -112,7 +122,12 @@ cmp.setup({
     expandable_indicator = true,
   },
   sources = {
-    { name = "luasnip",  group_index = 1 },
+    { name = "luasnip", group_index = 1 },
+    {
+      name = "copilot",
+      group_index = 2,
+      priority = 9,
+    },
     {
       name = "nvim_lsp",
       group_index = 2,
@@ -125,10 +140,9 @@ cmp.setup({
         return true
       end,
     },
-    -- { name = "",  group_index = 3 },
-    { name = "buffer",   group_index = 4 },
-    { name = "path",     group_index = 5 },
-    { name = "nvim_lua", group_index = 6 },
+    { name = "buffer",   group_index = 3 },
+    { name = "path",     group_index = 3 },
+    { name = "nvim_lua", group_index = 4 },
   },
   confirm_opts = {
     -- behavior = cmp.ConfirmBehavior.Replace,
@@ -142,6 +156,23 @@ cmp.setup({
   experimental = {
     ghost_text = true,
     native_menu = false,
+  },
+  sorting = {
+    priority_weight = 2,
+    comparators = {
+      copilot_cmp_comparators.prioritize,
+      -- Below is the default comparitor list and order for nvim-cmp
+      cmp.config.compare.offset,
+      -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
+      cmp.config.compare.exact,
+      cmp.config.compare.score,
+      cmp.config.compare.recently_used,
+      cmp.config.compare.locality,
+      cmp.config.compare.kind,
+      cmp.config.compare.sort_text,
+      cmp.config.compare.length,
+      cmp.config.compare.order,
+    },
   },
 })
 

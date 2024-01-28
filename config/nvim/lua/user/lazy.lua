@@ -71,12 +71,12 @@ require("lazy").setup({
       dependencies = { "nvim-lua/plenary.nvim" },
       config = function()
         require("gx").setup {
-          open_browser_app = "open", -- specify your browser app; default for macOS is "open" and for Linux "xdg-open"
+          open_browser_app = "open",              -- specify your browser app; default for macOS is "open" and for Linux "xdg-open"
           open_browser_args = { "--background" }, -- specify any arguments, such as --background for macOS' "open".
           handlers = {
-            plugin = true, -- open plugin links in lua (e.g. packer, lazy, ..)
-            github = true, -- open github issues
-            package_json = true, -- open dependencies from package.json
+            plugin = true,                        -- open plugin links in lua (e.g. packer, lazy, ..)
+            github = true,                        -- open github issues
+            package_json = true,                  -- open dependencies from package.json
           },
         }
       end,
@@ -247,6 +247,23 @@ require("lazy").setup({
     {
       "rafamadriz/friendly-snippets",
       commit = "69a2c1675b66e002799f5eef803b87a12f593049",
+    },
+    {
+      "zbirenbaum/copilot.lua",
+      cmd = "Copilot",
+      event = "InsertEnter",
+      commit = "b03617a6dc4bc88b65ab5deac1631da9a9c2dcaf"
+    },
+    {
+      "zbirenbaum/copilot-cmp",
+      commit = "72fbaa03695779f8349be3ac54fa8bd77eed3ee3",
+      config = function()
+        require("copilot_cmp").setup()
+      end
+    },
+    {
+      'AndreM222/copilot-lualine',
+      commit = "f7f0b3b3e7b0183d65fb5416c1d3e210e8a67ba6",
     },
     -- LSP
     {
@@ -479,7 +496,7 @@ require("lazy").setup({
     },
     {
       "mxsdev/nvim-dap-vscode-js",
-      dependencies = {"mfussenegger/nvim-dap"},
+      dependencies = { "mfussenegger/nvim-dap" },
       commit = "03bd29672d7fab5e515fc8469b7d07cc5994bbf6",
     },
   }

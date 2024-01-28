@@ -111,7 +111,11 @@ lualine.setup({
       -- 'buffers',
     },
 
-    lualine_x = { spaces, "encoding", filetype },
+    lualine_x = {
+      {
+        'copilot',
+        show_colors = true,
+      }, spaces, "encoding", filetype },
     lualine_y = { location },
     lualine_z = { "filesize", "progress" },
   },
