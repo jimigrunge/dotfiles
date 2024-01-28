@@ -7,6 +7,7 @@ return {
     Constant = " ",
     Constructor = " ", -- "",
     Copilot = "",
+    DotEnv = "•",
     Enum = " ",
     EnumMember = " ",
     Event = " ",

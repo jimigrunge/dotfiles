@@ -271,6 +271,10 @@ require("lazy").setup({
       ft = "json",
       commit = "2337f109f51a09297596dd6b538b70ccba92b4e4",
     },
+    {
+      "SergioRibera/cmp-dotenv",
+      commit = "fd78929551010bc20602e7e663e42a5e14d76c96",
+    },
     -- LSP
     {
       "folke/neodev.nvim",

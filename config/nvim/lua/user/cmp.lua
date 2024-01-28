@@ -117,15 +117,21 @@ cmp.setup({
         nvim_lsp = "[Lsp]",
         buffer = "[Buffer]",
         path = "[Path]",
+        dotenv = "[DotEnv]",
       })[entry.source.name]
       return vim_item
     end,
     expandable_indicator = true,
   },
   sources = {
-    { name = "luasnip", group_index = 1 },
-    { name = 'npm',     keyword_length = 1 },
+    { name = "luasnip",  group_index = 1 },
+    {
+      name = 'npm',
+      group_index = 1,
+      keyword_length = 3,
+    },
     { name = "nvim_lua", group_index = 1 },
+    { name = "dotenv",   group_index = 1 },
     {
       name = "copilot",
       group_index = 1,
