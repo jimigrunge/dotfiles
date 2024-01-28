@@ -62,9 +62,6 @@ vim.cmd [[set statusline+=%f]]
 --vim.cmd [[set guicursor+=i:hor20]]
 vim.cmd [[set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20]]
 
-vim.g.codeium_disable_bindings = 1
-vim.g.codeium_no_map_tab = 0
-
 vim.g.loaded_perl_provider = 0
 
 vim.cmd [[

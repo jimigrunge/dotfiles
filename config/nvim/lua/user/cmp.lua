@@ -102,7 +102,7 @@ cmp.setup({
       vim_item.menu = ({
         luasnip = "[Snippet]",
         nvim_lsp = "[LSP]",
-        codeium = "[Codeium]",
+        -- codeium = "[Codeium]",
         buffer = "[Buffer]",
         path = "[Path]",
         nvim_lua = "[LUA]",
@@ -125,7 +125,7 @@ cmp.setup({
         return true
       end,
     },
-    { name = "codeium",  group_index = 3 },
+    -- { name = "",  group_index = 3 },
     { name = "buffer",   group_index = 4 },
     { name = "path",     group_index = 5 },
     { name = "nvim_lua", group_index = 6 },

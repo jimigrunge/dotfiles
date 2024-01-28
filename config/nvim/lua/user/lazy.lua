@@ -248,18 +248,6 @@ require("lazy").setup({
       "rafamadriz/friendly-snippets",
       commit = "69a2c1675b66e002799f5eef803b87a12f593049",
     },
-    {
-      "Exafunction/codeium.nvim",
-      dependencies = {
-        "nvim-lua/plenary.nvim",
-        "hrsh7th/nvim-cmp",
-      },
-      config = function()
-        require("codeium").setup({
-        })
-      end,
-      commit = "f871000e91faa9ed334da2bfa4eadbf54d0e1047",
-    },
     -- LSP
     {
       "folke/neodev.nvim",
