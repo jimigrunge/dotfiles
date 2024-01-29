@@ -40,6 +40,12 @@ local has_words_before = function()
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
+local has_words_before_copilot = function()
+  if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
+end
+
 local check_backspace = function()
   local col = vim.fn.col(".") - 1
   return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
@@ -68,12 +74,10 @@ cmp.setup({
     -- Set `select` to `false` to only confirm explicitly selected items.
     ["<CR>"] = cmp.mapping.confirm({ select = false }),
     ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        if has_words_before() then
-          cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-        else
-          cmp.select_next_item()
-        end
+      if cmp.visible() and has_words_before_copilot() then
+        cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+      elseif cmp.visible() then
+        cmp.select_next_item()
       elseif luasnip.expandable() then
         luasnip.expand()
       elseif luasnip.expand_or_jumpable() then
@@ -110,37 +114,26 @@ cmp.setup({
       -- This concatonates the icons with the name of the item kind
       vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
       vim_item.menu = ({
+        buffer = "[Buffer]",
+        copilot = "[Copilot]",
+        dotenv = "[DotEnv]",
         luasnip = "[Snippet]",
         npm = "[Npm]",
-        nvim_lua = "[Lua]",
-        copilot = "[Copilot]",
         nvim_lsp = "[Lsp]",
-        buffer = "[Buffer]",
+        nvim_lua = "[Lua]",
         path = "[Path]",
-        dotenv = "[DotEnv]",
       })[entry.source.name]
       return vim_item
     end,
     expandable_indicator = true,
   },
   sources = {
-    { name = "luasnip",  group_index = 1 },
-    {
-      name = 'npm',
-      group_index = 1,
-      keyword_length = 3,
-    },
-    { name = "nvim_lua", group_index = 1 },
-    { name = "dotenv",   group_index = 1 },
-    {
-      name = "copilot",
-      group_index = 1,
-      priority = 7,
-    },
+    { name = "luasnip", group_index = 1, priority = 1000 },
+    { name = "copilot", group_index = 1, priority = 900 },
     {
       name = "nvim_lsp",
       group_index = 1,
-      priority = 8,
+      priority = 800,
       entry_filter = function(entry, _)
         local kind = require("cmp.types").lsp.CompletionItemKind[entry:get_kind()]
         if kind == "Text" then
@@ -149,8 +142,15 @@ cmp.setup({
         return true
       end,
     },
-    { name = "buffer",   group_index = 1 },
-    { name = "path",     group_index = 1 },
+    { name = "buffer",   group_index = 1, priority = 700 },
+    { name = "path",     group_index = 1, priority = 500 },
+    { name = "dotenv",   group_index = 1, priority = 400 },
+    { name = "nvim_lua", group_index = 1, priority = 300 },
+    {
+      name = 'npm',
+      group_index = 1,
+      priority = 200,
+    },
   },
   confirm_opts = {
     -- behavior = cmp.ConfirmBehavior.Replace,
@@ -168,11 +168,11 @@ cmp.setup({
   sorting = {
     priority_weight = 2,
     comparators = {
+      cmp.config.compare.exact,
       copilot_cmp_comparators.prioritize,
       -- Below is the default comparitor list and order for nvim-cmp
       cmp.config.compare.offset,
       -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
-      cmp.config.compare.exact,
       cmp.config.compare.score,
       cmp.config.compare.recently_used,
       cmp.config.compare.locality,

@@ -96,12 +96,12 @@ keymap("n", "<C-c><C-p>", "<cmd>PickColor<cr>", opts)
 -- Press jk fast to enter
 keymap("i", "jk", "<ESC>", opts)
 keymap("i", "jj", "<ESC>", opts)
-keymap("i", "<C-c><C-p>", "<cmd>PickColorInsert<cr>", opts)
 
 keymap("i", "<C-c><C-a>", "<cmd>IconPickerInsert alt_font<cr>", opts)
 keymap("i", "<C-c><C-e>", "<cmd>IconPickerInsert emoji<cr>", opts)
 keymap("i", "<C-c><C-E>", "<cmd>PickEverything alt_font nerd_font symbols emoji<cr>", opts)
 keymap("i", "<C-c><C-f>", "<cmd>IconPickerInsert nerd_font<cr>", opts)
+keymap("i", "<C-c><C-p>", "<cmd>PickColorInsert<cr>", opts)
 keymap("i", "<C-c><C-s>", "<cmd>IconPickerInsert symbols<cr>", opts)
 
 -- -----------------------------------
