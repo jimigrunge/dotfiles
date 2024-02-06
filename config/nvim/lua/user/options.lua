@@ -1,5 +1,10 @@
 -- Global variables
 JAVA_DAP_ACTIVE = false
+-- for debugging
+P = function (v)
+  print(vim.inspect(v))
+  return v
+end
 
 -- Vim/NeoVim options
 local options = {

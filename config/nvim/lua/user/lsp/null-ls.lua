@@ -1,5 +1,6 @@
-local none_ls_status_ok, none_ls = pcall(require, "none-ls")
+local none_ls_status_ok, none_ls = pcall(require, "null-ls")
 if not none_ls_status_ok then
+  print('none_ls not loaded')
   return
 end
 
@@ -17,7 +18,12 @@ none_ls.setup({
     --- python
     formatting.black.with({ extra_args = { "--fast" } }),
     --- lua
-    formatting.stylua,
+    formatting.stylua.with({
+      extra_args = {
+        "--config-path",
+        vim.fn.expand(vim.fn.stdpath("config") .. "/.stylua.toml"),
+      }
+    }),
     --- cpp
     formatting.clang_format,
     --- bash

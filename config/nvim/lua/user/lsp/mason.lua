@@ -1,4 +1,27 @@
 -- -----------------------------------
+-- Load plugins
+local mason_status, mason = pcall(require, "mason")
+if not mason_status then
+  print 'mason not loaded'
+  return
+end
+local mason_lspconfig_status, mason_lspconfig = pcall(require, "mason-lspconfig")
+if not mason_lspconfig_status then
+  print 'mason_lspconfig_status not loaded'
+  return
+end
+local mason_null_ls_status, mason_null_ls = pcall(require, "mason-null-ls")
+if not mason_null_ls_status then
+  print 'mason_null_ls not loaded'
+  return
+end
+local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
+if not lspconfig_status_ok then
+  print 'lspconfig not loaded'
+  return
+end
+
+-- -----------------------------------
 -- LSP servers
 local servers = {
   "bashls",       -- bash
@@ -23,7 +46,6 @@ local servers = {
   -- "vtsls",        -- typescript
   "yamlls",       -- yaml
 }
---[[ local servers = require("lspconfig").util.available_servers() ]]
 
 -- -----------------------------------
 -- List of formatters & linters for mason to install
@@ -61,22 +83,17 @@ local settings = {
 
 -- -----------------------------------
 -- Setup installer
-require("mason").setup(settings)
+mason.setup(settings)
 
 -- -----------------------------------
 -- Language plugin server installation
-require("mason-lspconfig").setup({
+mason_lspconfig.setup({
   ensure_installed = servers,
   automatic_installation = true,
 })
 
 -- -----------------------------------
 -- null-ls format/lint installation configuration
-local mason_null_ls_status, mason_null_ls = pcall(require, "mason-null-ls")
-if not mason_null_ls_status then
-  return
-end
-
 mason_null_ls.setup({
   ensure_installed = linter_formatters,
   automatic_installation = true,
@@ -84,11 +101,6 @@ mason_null_ls.setup({
 
 -- -----------------------------------
 -- Configure LSP
-local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
-if not lspconfig_status_ok then
-  return
-end
-
 local opts = {}
 
 for _, server in ipairs(servers) do
@@ -103,6 +115,8 @@ for _, server in ipairs(servers) do
   local require_ok, conf_opts = pcall(require, "user.lsp.settings." .. server)
   if require_ok then
     opts = vim.tbl_deep_extend("force", conf_opts, opts)
+  else
+    print('no custom settings for: ' .. server)
   end
 
   if server == "lua_ls" then

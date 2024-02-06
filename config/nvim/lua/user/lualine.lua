@@ -115,7 +115,8 @@ lualine.setup({
       {
         'copilot',
         show_colors = true,
-      }, spaces, "encoding", filetype },
+      }, spaces, "encoding", filetype,
+    },
     lualine_y = { location },
     lualine_z = { "filesize", "progress" },
   },

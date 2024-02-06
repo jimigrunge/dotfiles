@@ -249,6 +249,17 @@ require("lazy").setup({
       commit = "69a2c1675b66e002799f5eef803b87a12f593049",
     },
     {
+      "jackMort/ChatGPT.nvim",
+      event = "VeryLazy",
+      commit = "16eddf50d92fd089726f78d039982f8561bf90e6",
+      dependencies = {
+        "MunifTanjim/nui.nvim",
+        "nvim-lua/plenary.nvim",
+        "folke/trouble.nvim",
+        "nvim-telescope/telescope.nvim"
+      }
+    },
+    {
       "zbirenbaum/copilot.lua",
       cmd = "Copilot",
       event = "InsertEnter",
@@ -299,6 +310,7 @@ require("lazy").setup({
     },
     {
       "nvimtools/none-ls.nvim",
+      dependencies = { "mason.nvim" },
       commit = "7e146f3a188853843bb4ca1bff24c912bb9b7177",
     },
     {
@@ -391,6 +403,20 @@ require("lazy").setup({
     {
       "nvim-telescope/telescope-media-files.nvim",
       commit = "0826c7a730bc4d36068f7c85cf4c5b3fd9fb570a",
+    },
+    {
+      "folke/noice.nvim",
+      event = "VeryLazy",
+      dependencies = {
+        "MunifTanjim/nui.nvim",
+        {
+          "rcarriga/nvim-notify",
+          config = function()
+            require("notify").setup({ render = "minimal" })
+          end,
+        },
+      },
+      commit = "bf67d70bd7265d075191e7812d8eb42b9791f737",
     },
     {
       "folke/todo-comments.nvim",
@@ -498,16 +524,19 @@ require("lazy").setup({
     -- DAP debug adapter
     {
       "mfussenegger/nvim-dap",
-      commit = "aad46274f09ba29933e4cef2257cdda5ec19cf7a",
+      commit = "9adbfdca13afbe646d09a8d7a86d5d031fb9c5a5",
+      -- commit = "aad46274f09ba29933e4cef2257cdda5ec19cf7a",
     },
     {
       "rcarriga/nvim-dap-ui",
-      commit = "7e5e16427aaf814dc2d58e1b219def9ef2fa2435",
+      commit = "d845ebd798ad1cf30aa4abd4c4eff795cdcfdd4f",
+      -- commit = "7e5e16427aaf814dc2d58e1b219def9ef2fa2435",
     },
     {
       "mxsdev/nvim-dap-vscode-js",
       dependencies = { "mfussenegger/nvim-dap" },
       commit = "03bd29672d7fab5e515fc8469b7d07cc5994bbf6",
+      -- commit = "03bd29672d7fab5e515fc8469b7d07cc5994bbf6",
     },
   }
 })

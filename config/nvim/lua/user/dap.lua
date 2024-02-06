@@ -1,25 +1,21 @@
 -- [[ Consider lookig at LunarVim configuration for DAP ]]
 -- [[ https://github.com/LunarVim/LunarVim/blob/rolling/lua/lvim/core/dap.lua ]]
+local icons = require "user.icons"
 local dap_status_ok, dap = pcall(require, "dap")
 if not dap_status_ok then
   print("Dap not loaded")
   return
 end
-
 local dap_ui_status_ok, dapui = pcall(require, "dapui")
 if not dap_ui_status_ok then
   print("DapUI not loaded")
   return
 end
-
-local icons = require "user.icons"
-
 local dap_vsc_status_ok, dapvscjs = pcall(require, "dap-vscode-js")
 if not dap_vsc_status_ok then
   print("DapVscodeJs not loaded")
   return
 end
-
 local mason_path = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/")
 
 vim.fn.sign_define("DapBreakpoint",
@@ -93,87 +89,84 @@ dapui.setup({
   },
 })
 
-dap.adapters.php = {
-  type = "executable",
-  command = "node",
-  args = { mason_path .. "packages/php-debug-adapter/extension/out/phpDebug.js" },
-}
-dap.configurations.php = {
-  {
-    name = "Listen for Xdebug",
-    type = "php",
-    request = "launch",
-    port = 9003,
-  },
-  {
-    name = "Debug currently open script",
-    type = "php",
-    request = "launch",
-    port = 9003,
-    cwd = "${fileDirname}",
-    program = "${file}",
-    runtimeExecutable = "php",
-  },
-}
-
 dapvscjs.setup({
-  node_path = "node",
+  node_path = os.getenv("NODE_PATH") or "node",
+  debugger_path = mason_path .. "packages/js-debug-adapter", -- Path to vscode-js-debug installation.
+  debugger_cmd = { "js-debug-adapter" },                     -- Command to use to launch the debug server. Takes precedence over `node_path` and `debugger_path`.
   log_file_path = vim.fn.stdpath('cache') .. "/dap_vscode_js.log",
   log_file_level = vim.log.levels.ERROR,
   log_console_level = vim.log.levels.ERROR,
-  debugger_path = "mason_path .. 'packages/js-debug-adapter'", -- Path to vscode-js-debug installation.
-  debugger_cmd = { "js-debug-adapter" },                       -- Command to use to launch the debug server. Takes precedence over `node_path` and `debugger_path`.
-  adapters = { "pwa-node", "pwa-chrome" },                     -- which adapters to register in nvim-dap
+  adapters = { "pwa-node", "pwa-chrome" }, -- which adapters to register in nvim-dap
 })
+
+-- JavaScript Debug Adapter
+-- ---------------------------------------
 dap.configurations.javascript = {
   {
-    type = "pwa-node",
-    request = "launch",
-    name = "Launch file",
-    program = "${file}",
-    cwd = "${workspaceFolder}",
+    name = 'Launch',
+    type = 'pwa-node',
+    request = 'launch',
+    program = '${file}',
+    rootPath = '${workspaceFolder}',
+    cwd = '${workspaceFolder}',
+    sourceMaps = true,
+    skipFiles = { '<node_internals>/**', 'node_modules/**' },
+    protocol = 'inspector',
+    console = 'integratedTerminal',
   },
   {
-    type = "pwa-node",
-    request = "attach",
-    name = "Attach",
-    processId = require 'dap.utils'.pick_process,
-    cwd = "${workspaceFolder}",
+    name = 'Attach to node process',
+    type = 'pwa-node',
+    request = 'attach',
+    rootPath = '${workspaceFolder}',
+    processId = require('dap.utils').pick_process,
   }
 }
 dap.configurations.typescript = {
   {
-    type = "pwa-node",
-    request = "launch",
-    name = "Launch file",
-    program = "${file}",
-    cwd = "${workspaceFolder}",
+    name = 'Launch',
+    type = 'pwa-node',
+    request = 'launch',
+    program = '${file}',
+    rootPath = '${workspaceFolder}',
+    cwd = '${workspaceFolder}',
+    sourceMaps = true,
+    skipFiles = { '<node_internals>/**', 'node_modules/**' },
+    protocol = 'inspector',
+    console = 'integratedTerminal',
   },
   {
-    type = "pwa-node",
-    request = "attach",
-    name = "Attach",
-    processId = require 'dap.utils'.pick_process,
-    cwd = "${workspaceFolder}",
+    name = 'Attach to node process',
+    type = 'pwa-node',
+    request = 'attach',
+    rootPath = '${workspaceFolder}',
+    processId = require('dap.utils').pick_process,
   }
 }
 dap.configurations.typescriptreact = {
   {
-    type = "pwa-node",
-    request = "launch",
-    name = "Launch file",
-    program = "${file}",
-    cwd = "${workspaceFolder}",
+    name = 'Launch',
+    type = 'pwa-node',
+    request = 'launch',
+    program = '${file}',
+    rootPath = '${workspaceFolder}',
+    cwd = '${workspaceFolder}',
+    sourceMaps = true,
+    skipFiles = { '<node_internals>/**', 'node_modules/**' },
+    protocol = 'inspector',
+    console = 'integratedTerminal',
   },
   {
-    type = "pwa-node",
-    request = "attach",
-    name = "Attach",
-    processId = require 'dap.utils'.pick_process,
-    cwd = "${workspaceFolder}",
+    name = 'Attach to node process',
+    type = 'pwa-node',
+    request = 'attach',
+    rootPath = '${workspaceFolder}',
+    processId = require('dap.utils').pick_process,
   }
 }
 
+-- Node Debug Adapter
+-- ---------------------------------------
 --[[ dap.adapters.node2 = { ]]
 --[[   type = 'executable', ]]
 --[[   command = 'node', ]]
@@ -205,6 +198,8 @@ dap.configurations.typescriptreact = {
 --[[     args = {mason_path .. 'packages/js-debug-adapter/out/src/debugServer.js'} ]]
 --[[ } ]]
 
+-- Chrome Debug Adapter
+-- ---------------------------------------
 --[[ dap.configurations.javascriptreact = { -- change this to javascript if needed ]]
 --[[     { ]]
 --[[         type = "chrome", ]]
@@ -231,14 +226,43 @@ dap.configurations.typescriptreact = {
 --[[     } ]]
 --[[ } ]]
 
-dap.listeners.after.event_initialized["dapui_config"] = function()
+-- PHP Debug Adapter
+-- ---------------------------------------
+-- dap.adapters.php = {
+--   type = "executable",
+--   command = "node",
+--   args = { mason_path .. "packages/php-debug-adapter/extension/out/phpDebug.js" },
+-- }
+-- dap.configurations.php = {
+--   {
+--     name = "Listen for Xdebug",
+--     type = "php",
+--     request = "launch",
+--     port = 9003,
+--   },
+--   {
+--     name = "Debug currently open script",
+--     type = "php",
+--     request = "launch",
+--     port = 9003,
+--     cwd = "${fileDirname}",
+--     program = "${file}",
+--     runtimeExecutable = "php",
+--   },
+-- }
+
+dap.listeners.after.event_initialized.dapui_config = function()
   dapui.open()
 end
-
-dap.listeners.before.event_terminated["dapui_config"] = function()
+dap.listeners.before.attach.dapui_config = function()
+  dapui.open()
+end
+dap.listeners.before.launch.dapui_config = function()
+  dapui.open()
+end
+dap.listeners.before.event_terminated.dapui_config = function()
   dapui.close()
 end
-
-dap.listeners.before.event_exited["dapui_config"] = function()
+dap.listeners.before.event_exited.dapui_config = function()
   dapui.close()
 end

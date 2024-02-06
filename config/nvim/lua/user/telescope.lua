@@ -6,6 +6,7 @@ if not status_ok then
 end
 
 telescope.load_extension('media_files')
+telescope.load_extension("noice")
 
 local actions = require "telescope.actions"
 local icons = require "user.icons"
