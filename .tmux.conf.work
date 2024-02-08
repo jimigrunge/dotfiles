@@ -1,0 +1,235 @@
+# -- user customizations -------------------------------------------------------
+# this is the place to override or undo settings
+
+# increase history size
+#set -g history-limit 10000
+
+# Plugins
+########################
+# set -g @plugin 'tmux-plugins/tpm'
+# set -g @plugin 'tmux-plugins/tmux-resurrect'
+# set -g @plugin 'tmux-plugins/tmux-continuum'
+
+# # Set auto restore
+# set -g @continuum-restore 'on'
+# set -g @resurrect-strategy-vim 'session'
+# set -g @resurrect-capture-pane-contents 'on'
+# -------------------------------------------
+
+# -------------------------------------------
+# General Settings
+# -------------------------------------------
+
+setw -g mode-keys vi
+set -g base-index 1           # start windows numbering at 1
+setw -g pane-base-index 1     # make pane numbering consistent with windows
+# setw -g automatic-rename on   # rename window to reflect current program
+set -g renumber-windows on    # renumber windows when a window is closed
+set -g set-titles on          # set terminal title
+
+# move status line to top
+set -g status-position top
+
+set -g display-panes-time 2000
+set -g display-time 2000
+
+set-option -g focus-event on
+
+# set pane-border-status on
+# set -g pane-border-status top
+
+# force Vi mode
+#   really you should export VISUAL or EDITOR environment variable, see manual
+#set -g status-keys vi
+#set -g mode-keys vi
+
+# quick pane cycling
+# unbind ^A
+# bind ^A select-pane -t :.+
+
+# -------------------------------------------
+# Key Bindings
+# -------------------------------------------
+
+set -g prefix C-b
+bind C-b send-prefix
+
+# split panes using | and -
+bind '|' split-window -h
+bind - split-window -v
+unbind '"'
+unbind %
+
+# reload config. Useful for debugging changes to this file.
+bind r source-file ~/.tmux.conf \; display-message "Config reloaded..."
+
+# Switch panes using Alt-arraow without prefix
+bind -n M-Left select-pane -L
+bind -n M-Right select-pane -R
+bind -n M-Up select-pane -U
+bind -n M-Down select-pane -D
+
+# bind -n M-n next-window
+# bind -n M-p previous-window
+# bind m next-window
+# bind n previous-window
+bind -n S-Left  previous-window
+bind -n S-Right next-window
+
+bind-key -n C-S-Left swap-window -t -1
+bind-key -n C-S-Right swap-window -t +1
+
+# Use this because TMUX &lt; 1.9
+# bind -n M-] select-window -t :+
+# bind -n M-[ select-window -t :-
+# bind -n M-] next-window
+# bind -n M-[ previous-window
+
+# Resize panes easier
+bind h resize-pane -L 5
+bind l resize-pane -R 5
+bind k resize-pane -U 5
+bind j resize-pane -D 5
+
+# -------------------------------------------
+# start with mouse mode enabled
+# -------------------------------------------
+set -g mouse on
+# set -g mouse-select-window on
+# set -g mouse-select-pane on
+# set -g mouse-resize-pane on
+
+# -------------------------------------------
+# loud or quiet?
+# -------------------------------------------
+set-option -g visual-activity off
+set-option -g visual-bell off
+set-option -g visual-silence off
+set-window-option -g monitor-activity off
+set-option -g bell-action none
+
+# -------------------------------------------
+# color
+# -------------------------------------------
+# set -g default-terminal "screen-256color"  # Broken
+# set -g default-terminal "xterm-256color"
+set -g default-terminal "tmux-256color"
+set-option -sa terminal-overrides ',tmux-256color:RGB'
+set-option -g status-bg colour15        #white
+set-option -g status-fg colour0         #black
+
+#  modes
+setw -g clock-mode-colour colour5
+setw -g mode-attr bold
+setw -g mode-fg colour1
+setw -g mode-bg colour18
+# panes
+set -g pane-border-bg colour0
+set -g pane-border-fg colour19
+set -g pane-active-border-bg colour0
+set -g pane-active-border-fg colour9
+# status bar
+# set-option -g status-utf8 on
+set -g status-position top
+set -g status-interval 1
+set -g status-justify left
+set -g status-left '#[fg=black,bg=colour141]#H #[fg=black,bg=colour141]• #[default]'
+set -g status-right ' #[default] #[fg=colour255,dim,bg=colour88] Uptime: #(uptime | cut -f 4-5 -d " " | cut -f 1 -d ",") #[default] #[fg=black]%Y-%m-%d#[default] #[fg=black,bg=colour231] %a%l:%M:%S %p '
+set -g status-left-length 150
+set -g status-right-length 150
+set -g status-bg colour250
+set -g status-attr dim
+
+setw -g window-status-current-fg colour0
+setw -g window-status-current-bg colour34
+setw -g window-status-current-attr bold
+setw -g window-status-current-format ' #[fg=colour255,bg=colour40] #I#[fg=colour0,bg=colour40]:#[fg=colour0,bg=colour40]#W#[fg=colour249,bg=colour40]#F '
+
+setw -g window-status-fg colour9
+setw -g window-status-bg colour25
+setw -g window-status-attr none
+setw -g window-status-format ' #[fg=colour250,bg=colour27] #I#[fg=colour237,bg=colour27]:#[fg=colour0,bg=colour27]#W#[fg=colour244,bg=colour27]#F '
+
+# setw -g window-status-bell-attr bold
+# setw -g window-status-bell-fg colour255
+# setw -g window-status-bell-bg colour1
+
+# messages
+set -g message-attr bold
+set -g message-fg black
+set -g message-bg colour231
+
+
+# -------------------------------------------
+# Buffers
+# -------------------------------------------
+bind b list-buffers  # list paste buffers
+bind p paste-buffer  # paste from the top paste buffer
+bind P choose-buffer # choose which buffer to paste from
+
+# -- windows & pane creation ---------------------------------------------------
+# new window retains current path, possible values are:
+tmux_conf_new_window_retain_current_path=true
+# new pane retains current path, possible values are:
+tmux_conf_new_pane_retain_current_path=true
+# new pane tries to reconnect ssh sessions (experimental), possible values are:
+tmux_conf_new_pane_reconnect_ssh=false
+# prompt for session name when creating a new session, possible values are:
+tmux_conf_new_session_prompt=false
+
+# -------------------------------------------
+# Smart pane switching with awareness of Vim splits.
+# See: https://github.com/christoomey/vim-tmux-navigator
+# -------------------------------------------
+is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
+    | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
+bind-key -n 'C-h' if-shell "$is_vim" 'send-keys C-h'  'select-pane -L'
+bind-key -n 'C-j' if-shell "$is_vim" 'send-keys C-j'  'select-pane -D'
+bind-key -n 'C-k' if-shell "$is_vim" 'send-keys C-k'  'select-pane -U'
+bind-key -n 'C-l' if-shell "$is_vim" 'send-keys C-l'  'select-pane -R'
+tmux_version='$(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")'
+if-shell -b '[ "$(echo "$tmux_version < 3.0" | bc)" = 1 ]' \
+    "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\'  'select-pane -l'"
+if-shell -b '[ "$(echo "$tmux_version >= 3.0" | bc)" = 1 ]' \
+    "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\\\'  'select-pane -l'"
+
+bind-key -T copy-mode-vi 'C-h' select-pane -L
+bind-key -T copy-mode-vi 'C-j' select-pane -D
+bind-key -T copy-mode-vi 'C-k' select-pane -U
+bind-key -T copy-mode-vi 'C-l' select-pane -R
+bind-key -T copy-mode-vi 'C-\' select-pane -l
+
+# -------------------------------------------
+# no delay for escape key
+# -------------------------------------------
+set -sg escape-time 0
+
+# set -g status-right "#(wemux status_users)"
+
+########################
+# Plugins
+########################
+# set -g @plugin 'tmux-plugins/tpm'
+# set -g @plugin 'christoomey/vim-tmux-navigator'
+# set -g @plugin 'tmux-plugins/tmux-resurrect'
+# set -g @plugin 'tmux-plugins/tmux-continuum'
+# set -g @plugin 'tmux-plugins/tmux-yank'
+
+# Theme
+# set -g @plugin 'jimeh/tmux-themepack'
+# set -goq @themepack-status-left-area-left-format "S: #S"
+# set -goq @themepack-status-left-area-middle-format "#(whoami)"
+# set -goq @themepack-status-left-area-right-format "#I:#P"
+# set -goq @themepack-status-right-area-left-format "Uptime: #(uptime | cut -f 4-5 -d ' ' | cut -f 1 -d ',')"
+# set -goq @themepack-status-right-area-middle-format "%d-%b-%y"
+# set -goq @themepack-status-right-area-right-format "%a%l:%M:%S %p"
+# set -g @themepack 'powerline/double/cyan'
+
+# Set auto restore
+# set -g @resurrect-capture-pane-contents 'on'
+# set -g @continuum-restore 'on'
+
+# if-shell "test ! -d ~/.tmux/plugins/tpm" {
+#    run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm'
+# }
+# run -b '~/.tmux/plugins/tpm/tpm'

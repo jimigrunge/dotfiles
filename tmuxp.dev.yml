@@ -1,0 +1,174 @@
+session_name: dev
+windows:
+- focus: 'true'
+  layout: 0a43,274x78,0,0{127x78,0,0[127x39,0,0,1,127x38,0,40,2],146x78,128,0[146x29,128,0,3,146x9,128,30,4,146x10,128,40,5,146x13,128,51,6,146x13,128,65,7]}
+  options:
+    automatic-rename: 'off'
+  panes:
+  - shell_command:
+    - cd /home/RSGCORP.LOCAL/james.grundner
+    - tmux set pane-border-status top
+    - tmux select-pane -T Alias
+    - source ~/.alias
+    - nvm use v16.19.0
+    - nvim .alias .tmux.conf .profile .tmuxp/dev.yml
+  - focus: 'true'
+    shell_command:
+    - cd /home/RSGCORP.LOCAL/james.grundner
+    - tmux set pane-border-status top
+    - tmux select-pane -T MessageBridge
+    - source ~/.alias
+    - clear
+  - shell_command:
+    - cd /home/RSGCORP.LOCAL/james.grundner/gitrepos/message-bridge
+    - tmux set pane-border-status top
+    - tmux select-pane -T DeltaProcessor
+    - source ~/.alias
+    - echo "Starting MESSAGE BRIDGE"
+    - make run
+  - shell_command:
+    - cd /home/RSGCORP.LOCAL/james.grundner/gitrepos/liza/bin
+    - tmux set pane-border-status top
+    - tmux select-pane -T BuckerTrans
+    - source ~/.alias
+    - echo "Starting DELTA PROSESSOR"
+    - ./delta-processor
+  - shell_command:
+    - cd /home/RSGCORP.LOCAL/james.grundner/gitrepos/giga/toolchain/bucket-transformation
+    - tmux set pane-border-status top
+    - tmux select-pane -T Dullahan
+    - source ~/.alias
+    - echo "BUCKET TRANSFORMATION"
+  - shell_command:
+    - cd /home/RSGCORP.LOCAL/james.grundner/gitrepos/liza
+    - tmux set pane-border-status top
+    - tmux select-pane -T Headless
+    - source ~/.alias
+    - echo "Starting DULLAHAN"
+    - ./bin/dullahan -c ../rating-fw/conf/local.json
+  - shell_command:
+    - cd /home/RSGCORP.LOCAL/james.grundner/gitrepos/giga/integration/headless
+    - source ~/.alias
+    - echo "Starting HEADLESS CONNECTOR"
+    - nvm use system
+    - make run
+  window_name: General
+- layout: f8f4,274x78,0,0{137x78,0,0,8,136x78,138,0,9}
+  options:
+    automatic-rename: 'off'
+  panes:
+  - focus: 'true'
+    shell_command:
+    - cd /home/RSGCORP.LOCAL/james.grundner/gitrepos/giga/program/mega
+    - source ~/.alias
+    - nvm use v16.19.0
+    - nvim README.md
+  - shell_command:
+    - cd /home/RSGCORP.LOCAL/james.grundner/gitrepos/giga/program/mega
+    - source ~/.alias
+    - clear
+  start_directory: /home/RSGCORP.LOCAL/james.grundner/gitrepos/giga/program/mega
+  window_name: Run-Tilt
+- layout: 9c8d,274x78,0,0{173x78,0,0,10,100x78,174,0,11}
+  options:
+    automatic-rename: 'off'
+  panes:
+  - focus: 'true'
+    shell_command:
+    - cd /home/RSGCORP.LOCAL/james.grundner/gitrepos/connector
+    - source ~/.alias
+    - nvm use v16.19.0
+    - nvim
+  - shell_command:
+    - cd /home/RSGCORP.LOCAL/james.grundner/gitrepos/connector
+    - source ~/.alias
+    - clear
+  start_directory: /home/RSGCORP.LOCAL/james.grundner/gitrepos/connector
+  window_name: Connector
+- layout: 5cd7,274x78,0,0{174x78,0,0,12,99x78,175,0[99x36,175,0,13,99x25,175,37,14,99x15,175,63,15]}
+  options:
+    automatic-rename: 'off'
+  panes:
+  - focus: 'true'
+    shell_command:
+    - cd /home/RSGCORP.LOCAL/james.grundner/gitrepos/giga/program/mega
+    - source ~/.alias
+    - nvm use v16.19.0
+    - nvim
+  - shell_command:
+    - cd /home/RSGCORP.LOCAL/james.grundner/gitrepos/giga/program/mega
+    - source ~/.alias
+    - clear
+  - shell_command:
+    - cd /home/RSGCORP.LOCAL/james.grundner/gitrepos/giga/program/mega
+    - source ~/.alias
+    - make-mega-watch
+  - shell_command:
+    - cd /home/RSGCORP.LOCAL/james.grundner/gitrepos/giga/program/mega
+    - source ~/.alias
+    # - ./node-start
+  start_directory: /home/RSGCORP.LOCAL/james.grundner/gitrepos/giga/program/mega
+  window_name: Mega
+- layout: 6a65,274x78,0,0,16
+  options:
+    automatic-rename: 'off'
+  panes:
+  - focus: 'true'
+    shell_command:
+    - cd /home/RSGCORP.LOCAL/james.grundner/gitrepos/giga/program/common
+    - source ~/.alias
+    - nvm use v16.19.0
+    - nvim
+  start_directory: /home/RSGCORP.LOCAL/james.grundner/gitrepos/giga/program/common
+  window_name: Common
+- layout: d852,274x78,0,0{187x78,0,0,17,86x78,188,0[86x39,188,0,18,86x38,188,40,19]}
+  options:
+    automatic-rename: 'off'
+  panes:
+  - focus: 'true'
+    shell_command:
+    - cd /home/RSGCORP.LOCAL/james.grundner/gitrepos/giga/program/truckers
+    - source ~/.alias
+    - nvm use v16.19.0
+    - nvim
+  - shell_command:
+    - cd /home/RSGCORP.LOCAL/james.grundner/gitrepos/giga/program/truckers
+    - source ~/.alias
+    - clear
+  - shell_command:
+    - cd /home/RSGCORP.LOCAL/james.grundner/gitrepos/giga/program/truckers
+    - source ~/.alias
+    # - ./node-start
+  window_name: ProgTruckers
+- layout: c77a,274x78,0,0{187x78,0,0,20,86x78,188,0,21}
+  options:
+    automatic-rename: 'off'
+  panes:
+  - focus: 'true'
+    shell_command:
+    - cd /home/RSGCORP.LOCAL/james.grundner/gitrepos/giga/integration/gl-property-supplier-api
+    - source ~/.alias
+    - nvm use v16.19.0
+    - nvim
+  - shell_command:
+    - cd /home/RSGCORP.LOCAL/james.grundner/gitrepos/giga/integration/gl-property-supplier-api
+    - source ~/.alias
+    - clear
+  start_directory: /home/RSGCORP.LOCAL/james.grundner/gitrepos/giga/integration/gl-property-supplier-api
+  window_name: GlPropSup-API
+- layout: c77d,274x78,0,0{187x78,0,0,22,86x78,188,0,23}
+  options:
+    automatic-rename: 'off'
+  panes:
+  - focus: 'true'
+    shell_command:
+    - cd /home/RSGCORP.LOCAL/james.grundner/gitrepos/giga/integration/truckers-map-data
+    - source ~/.alias
+    - nvm use v16.19.0
+    - nvim
+  - shell_command:
+    - cd /home/RSGCORP.LOCAL/james.grundner/gitrepos/giga/integration/truckers-map-data
+    - source ~/.alias
+    - clear
+  start_directory: /home/RSGCORP.LOCAL/james.grundner/gitrepos/giga/integration/truckers-map-data
+  window_name: TruckersDataMap
