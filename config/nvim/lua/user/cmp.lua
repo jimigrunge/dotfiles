@@ -128,12 +128,11 @@ cmp.setup({
     expandable_indicator = true,
   },
   sources = {
-    { name = "luasnip", group_index = 1, priority = 1000 },
-    { name = "copilot", group_index = 1, priority = 900 },
+    { name = "luasnip",  group_index = 1, priority = 1000 },
     {
       name = "nvim_lsp",
       group_index = 1,
-      priority = 800,
+      priority = 900,
       entry_filter = function(entry, _)
         local kind = require("cmp.types").lsp.CompletionItemKind[entry:get_kind()]
         if kind == "Text" then
@@ -142,7 +141,8 @@ cmp.setup({
         return true
       end,
     },
-    { name = "buffer",   group_index = 1, priority = 700 },
+    { name = "buffer",   group_index = 1, priority = 800 },
+    { name = "copilot",  group_index = 1, priority = 700 },
     { name = "path",     group_index = 1, priority = 500 },
     { name = "dotenv",   group_index = 1, priority = 400 },
     { name = "nvim_lua", group_index = 1, priority = 300 },

@@ -8,12 +8,12 @@ local icons = require "user.icons"
 
 notify.setup({
   level = vim.log.levels.INFO,
-  -- max_width = nil,
-  -- max_height = nil,
+  -- max_width = function() return nil end,
+  -- max_height = function() return nil end,
   stages = "fade_in_slide_out",
   background_colour = "NotifyBackground",
-  -- on_open = nil,
-  -- on_close = nil,
+  -- on_open = function() return nil end,
+  -- on_close = function() return nil end,
   minimum_width = 50,
   fps = 30,
   top_down = true,

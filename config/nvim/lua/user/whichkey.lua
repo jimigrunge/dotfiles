@@ -57,8 +57,12 @@ local mappings = {
     name = "[G]it",
     ["a"] = { "<cmd>Git blame<cr>", "Bl[a]me" },
     ["b"] = { "<cmd>Telescope git_branches<cr>", "Checkout [b]ranch" },
-    ["c"] = { "<cmd>Telescope git_commits<cr>", "Checkout [c]ommit" },
-    ["C"] = { "<cmd>Telescope git_bcommits<cr>", "Checkout commit(for [c]urrent file)" },
+    ["c"] = {
+      name = "[C]ommit",
+      ["a"] = { "<cmd>Git add -p<cr>", "Git [a]dd -p" },
+      ["A"] = { "<cmd>Git add .<cr>", "Git add . ([A]ll)" },
+      ["c"] = { "<cmd>Git commit<cr>", "Git [c]ommit" },
+    },
     ["d"] = {
       name = "[D]iffView",
       ["c"] = { "<cmd>DiffviewClose<cr>", "Diff View [C]lose" },

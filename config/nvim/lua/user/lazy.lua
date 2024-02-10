@@ -406,15 +406,10 @@ require("lazy").setup({
     },
     {
       "folke/noice.nvim",
-      event = "VeryLazy",
+      -- event = "VeryLazy",
       dependencies = {
         "MunifTanjim/nui.nvim",
-        {
-          "rcarriga/nvim-notify",
-          config = function()
-            require("notify").setup({ render = "minimal" })
-          end,
-        },
+        "rcarriga/nvim-notify",
       },
       commit = "bf67d70bd7265d075191e7812d8eb42b9791f737",
     },
