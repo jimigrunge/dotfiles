@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# This script requires `jq`
+#   MacOS: brew install jq
+#   Linux: apt-get install jq
+if [ $# -lt 1 ]
+then
+cat << HELP
+
+dockertags  --  list all tags for a Docker image on a remote registry.
+
+EXAMPLE:
+    - list all tags for ubuntu:
+       docker-tags ubuntu
+
+    - list all php tags containing apache:
+       docker-tags php apache
+
+HELP
+exit 0
+fi
+set -eu -o pipefail
+docker_tags() {
+    item="$1"
+    case "$item" in
+        */*) :;; # namespace/repository syntax, leave as is
+        *) item="library/$item";; # bare repository name (docker official image); must convert to namespace/repository syntax
+    esac
+    authUrl="https://auth.docker.io/token?service=registry.docker.io&scope=repository:$item:pull"
+    token="$(curl -fsSL "$authUrl" | jq --raw-output '.token')"
+    tagsUrl="https://registry-1.docker.io/v2/$item/tags/list"
+    curl -fsSL -H "Accept: application/json" -H "Authorization: Bearer $token" "$tagsUrl" | jq --raw-output '.tags[]'
+}
+docker_tags "$@"
