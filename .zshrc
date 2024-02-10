@@ -127,7 +127,9 @@ export PATH=$HOME/bin:$PATH
 export LDFLAGS="-L/usr/local/opt/curl/lib"
 export CPPFLAGS="-I/usr/local/opt/curl/include"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export OPENAI_API_KEY=""
+
+[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
 
 eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
 

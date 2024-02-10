@@ -280,19 +280,6 @@ install_libraries()
     if ! [ -x "$(command -v tsc)" ]; then
         npm install -g typescript
     fi
-    # TODO: are these needed anymore now that we have MASON?
-    # echo "* Checking for prettier"
-    # if ! [ -x "$(command -v prettier)" ]; then
-    #     npm install -g prettier
-    # fi
-    # echo "* Checking for eslint"
-    # if ! [ -x "$(command -v eslint)" ]; then
-    #     npm install -g eslint
-    # fi
-    # echo "* Checking for eslint-d"
-    # if ! [ -x "$(command -v eslint_d)" ]; then
-    #     npm install -g eslint_d
-    # fi
 
     echo "Insure we have PHP Linting and Formatting"
     echo "* Checking for php code sniffer"
@@ -363,7 +350,8 @@ install_shell_configs()
     symlink .CodeSniffer.conf
     symlink .gitconfig
     symlink .tmux.conf
-    symlink .zshrc
+    # symlink .zshrc
+    cp .zshrc "$HOME/.zshrc"
 }
 
 intitialize_zsh()
