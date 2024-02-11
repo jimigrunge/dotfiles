@@ -55,14 +55,11 @@ local mappings = {
   ["f"] = { "<cmd>Telescope live_grep<cr>", "[F]ind Text" },
   ["g"] = {
     name = "[G]it",
-    ["a"] = { "<cmd>Git blame<cr>", "Bl[a]me" },
+    ["a"] = { "<cmd>Git add -p<cr>", "Git [a]dd -p" },
+    ["A"] = { "<cmd>Git add .<cr>", "Git add . ([A]ll)" },
+    ["B"] = { "<cmd>lua require'gitsigns'.blame_line{full=true}<cr>", "[B]lame Line" },
     ["b"] = { "<cmd>Telescope git_branches<cr>", "Checkout [b]ranch" },
-    ["c"] = {
-      name = "[C]ommit",
-      ["a"] = { "<cmd>Git add -p<cr>", "Git [a]dd -p" },
-      ["A"] = { "<cmd>Git add .<cr>", "Git add . ([A]ll)" },
-      ["c"] = { "<cmd>Git commit<cr>", "Git [c]ommit" },
-    },
+    ["c"] = { "<cmd>Git commit<cr>", "Git [c]ommit" },
     ["d"] = {
       name = "[D]iffView",
       ["c"] = { "<cmd>DiffviewClose<cr>", "Diff View [C]lose" },
@@ -74,7 +71,7 @@ local mappings = {
     ["g"] = { "<cmd>lua _LAZYGIT_TOGGLE()<cr>", "Lazy[G]it" },
     ["j"] = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
     ["k"] = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
-    ["l"] = { "<cmd>lua require'gitsigns'.blame_line{full=true}<cr>", "B[l]ame" },
+    ["l"] = { "<cmd>Git blame<cr>", "B[l]ame" },
     ["n"] = { "<cmd>GitLink!<cr>", "GitLi[n]k! in browser" },
     ["o"] = { "<cmd>Telescope git_status<cr>", "[O]pen changed file" },
     ["p"] = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "[P]review Hunk" },
