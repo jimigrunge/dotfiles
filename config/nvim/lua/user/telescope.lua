@@ -5,11 +5,32 @@ if not status_ok then
   return
 end
 
-telescope.load_extension('media_files')
-telescope.load_extension("noice")
-
 local actions = require "telescope.actions"
 local icons = require "user.icons"
+
+-- -----------------------------------------------------------
+-- Reformat serch result to show filenames first
+-- https://github.com/nvim-telescope/telescope.nvim/issues/2014
+local function filenameFirst(_, path)
+  local tail = vim.fs.basename(path)
+  local parent = vim.fs.dirname(path)
+  if parent == "." then return tail end
+  return string.format("%s\t\t%s\t\t", tail, parent)
+end
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "TelescopeResults",
+  callback = function(ctx)
+    vim.api.nvim_buf_call(ctx.buf, function()
+      vim.fn.matchadd("TelescopeParent", "\t\t.*$")
+      vim.api.nvim_set_hl(0, "TelescopeParent", { link = "Comment" })
+    end)
+  end,
+})
+-- -----------------------------------------------------------
+
+telescope.load_extension('media_files')
+telescope.load_extension("noice")
 
 telescope.setup {
   defaults = {
@@ -89,13 +110,35 @@ telescope.setup {
     },
   },
   pickers = {
-    -- Default configuration for builtin pickers goes here:
-    -- picker_name = {
-    --   picker_config_key = value,
-    --   ...
-    -- }
-    -- Now the picker_config_key will be applied every time you call this
-    -- builtin picker
+    git_status = {
+      path_display = filenameFirst,
+      hidden = true,
+    },
+    find_files = {
+      path_display = filenameFirst,
+      hidden = true,
+    },
+    buffers = {
+      path_display = filenameFirst,
+      ignore_current_buffer = true,
+      sort_lastused = true,
+    },
+    fd = {
+      path_display = filenameFirst,
+      hidden = true,
+    },
+    oldfiles = {
+      path_display = filenameFirst,
+      hidden = true,
+    },
+    grep_string = {
+      path_display = filenameFirst,
+      hidden = true,
+    },
+    live_grep = {
+      path_display = filenameFirst,
+      hidden = true,
+    },
   },
   extensions = {
     -- Your extension configuration goes here:
@@ -113,7 +156,7 @@ telescope.setup {
     media_files = {
       -- filetypes whitelist
       -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
-      filetypes = { "png", "webp", "jpg", "jpeg", "pdf", "mp4" },
+      filetypes = { "png", "jpg", "mp4", "webm", "pdf", "webp", "jpeg" },
       find_cmd = "rg" -- find command (defaults to `fd`)
     }
   },
