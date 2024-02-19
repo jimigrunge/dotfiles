@@ -185,4 +185,14 @@ return {
     CircuitBoard = "",
     Toml = "τ",
   },
+  gpt = {
+    Active = "󰀘",
+    Answer = "ﮧ",
+    BorderLeftSign = "",
+    BorderRightSign = "",
+    Inactive = "󰅖",
+    Person = "",
+    Prompt = "",
+    SettingSign = "",
+  }
 }

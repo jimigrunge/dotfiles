@@ -86,8 +86,8 @@ local config = {
     workspace_dir,
   },
 
-  on_attach = require("user.lsp.handlers").on_attach,
-  capabilities = require("user.lsp.handlers").capabilities,
+  on_attach = require("user.nvim-lspconfig").on_attach,
+  capabilities = require("user.nvim-lspconfig").common_capabilities,
 
   -- 💀
   -- This is the default if not provided, you can remove it. Or adjust as needed.

@@ -1,11 +1,3 @@
--- Global variables
-JAVA_DAP_ACTIVE = false
--- for debugging
-P = function (v)
-  print(vim.inspect(v))
-  return v
-end
-
 -- Vim/NeoVim options
 local options = {
   backup = false,                          -- creates a backup file
@@ -62,12 +54,14 @@ end
 
 vim.cmd "set whichwrap+=<,>,[,]"
 vim.cmd [[set iskeyword+=-]]
-vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
+vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work as expected
 vim.cmd [[set statusline+=%f]]
 --vim.cmd [[set guicursor+=i:hor20]]
 vim.cmd [[set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20]]
 
 vim.g.loaded_perl_provider = 0
+-- impatient
+vim.loader.enable()
 
 vim.cmd [[
   highlight WinSeparator guibg=None

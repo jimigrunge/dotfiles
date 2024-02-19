@@ -19,10 +19,10 @@ vim.cmd [[
     autocmd FileType markdown setlocal spell
   augroup end
 
-  augroup _terminal
-    autocmd!
-    autocmd TermOpen * :DisableWhitespace
-  augroup end
+  " augroup _terminal
+  "   autocmd!
+  "   autocmd TermOpen * :DisableWhitespace
+  " augroup end
 
   augroup _auto_resize
     autocmd!

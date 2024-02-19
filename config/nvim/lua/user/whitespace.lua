@@ -1,15 +1,37 @@
-vim.g.strip_whitespace_on_save              = 1
-vim.g.strip_whitespace_confirm              = 1
-vim.g.strip_whitelines_at_eof               = 1
-vim.g.better_whitespace_filetypes_blacklist = {
-  'terminal',
-  'message',
-  'diff',
-  'git',
-  'gitcommit',
-  'unite',
-  'qf',
-  'help',
-  'markdown ',
-  'fugitive'
+local M = {
+  "mcauley-penney/tidy.nvim",
+  -- commit = "",
 }
+
+function M.config()
+  local status_ok, tidy = pcall(require, "tidy")
+  if not status_ok then
+    print 'Tidy not loaded'
+    return
+  end
+
+  local wk = require "which-key"
+  wk.register {
+    ["<leader>bs"] = { "<cmd>require('tidy').run<cr>", "[S]trip Whitespace" },
+  }
+
+  tidy.setup {
+    opts = {
+      enabled_on_save = false,
+      filetype_exclude = {
+        'terminal',
+        'message',
+        'diff',
+        'git',
+        'gitcommit',
+        'unite',
+        'qf',
+        'help',
+        'markdown ',
+        'fugitive'
+      }
+    },
+  }
+end
+
+return M

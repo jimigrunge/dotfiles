@@ -1,6 +1,6 @@
 return {
   cmd = { "vscode-html-language-server", "--stdio" },
-  filetypes = { "html", "blade" },
+  filetypes = { "html", "blade", "twig" },
   init_options = {
     configurationSection = { "html", "css", "javascript" },
     embeddedLanguages = {
