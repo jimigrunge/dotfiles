@@ -12,7 +12,7 @@ function M.config()
 
   local wk = require "which-key"
   wk.register {
-    ["<leader>bs"] = { "<cmd>require('tidy').run<cr>", "[S]trip Whitespace" },
+    ["<leader>bs"] = { "<cmd>lua require('tidy').run<cr>", "[S]trip Whitespace" },
   }
 
   tidy.setup {

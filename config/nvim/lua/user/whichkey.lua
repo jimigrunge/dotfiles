@@ -44,6 +44,7 @@ function M.config()
       name = "Diagnostic[x]",
       ["t"] = { name = "[T]odo" },
     },
+    ["zf"] = { "zf%", "Fold" },
   }
 
   local n_mappings = {

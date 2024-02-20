@@ -1,6 +1,6 @@
 [user]
-	name = James Grundner
-	email = james@jgrundner.com
+  name = James Grundner
+  email = james@jgrundner.com
 
 [branch]
   autosetupmerge = always
@@ -11,7 +11,35 @@
 [core]
   editor = nvim
   excludesfile = ~/.gitignore
-	pager = diff-so-fancy | less --tabs=4 -RFX
+  ; pager = diff-so-fancy | less --tabs=4 -RFX
+  pager = delta
+
+[interactive]
+  ; diffFilter = diff-so-fancy --patch
+  diffFilter = delta --color-only
+
+[delta]
+  navigate = true
+  light = false
+  ; line-numbers = true
+  ; side-by-side = true
+  syntax-theme = Dracula
+  features = side-by-side line-numbers decorations
+  plus-style = syntax "#003800"
+  minus-style = syntax "#3f0001"
+  hyperlinks = true
+
+[delta "decorations"]
+  commit-decoration-style = bold yellow box ul
+  file-style = bold yellow ul
+  file-decoration-style = none
+  hunk-header-decoration-style = cyan box ul
+
+[delta "line-numbers"]
+  line-numbers-left-style = cyan
+  line-numbers-right-style = cyan
+  line-numbers-minus-style = 124
+  line-numbers-plus-style = 28
 
 [init]
   defaultBranch = main
@@ -31,52 +59,49 @@
   mergeoptions = --no-ff
 
 [color]
-	ui = true
+  ui = true
   interactive=auto
 [color "branch"]
-	current = yellow bold
-	local = green bold
-	remote = cyan bold
+  current = yellow bold
+  local = green bold
+  remote = cyan bold
 [color "diff"]
-	meta = 11
-	frag = magenta bold
-	old = red bold
-	new = green bold
-	whitespace = red reverse
-	func = 146 bold
-	commit = yellow bold
+  meta = 11
+  frag = magenta bold
+  old = red bold
+  new = green bold
+  whitespace = red reverse
+  func = 146 bold
+  commit = yellow bold
 [color "status"]
-	added = green bold
-	changed = yellow bold
+  added = green bold
+  changed = yellow bold
 [color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22
+  oldNormal = red bold
+  oldHighlight = red bold 52
+  newNormal = green bold
+  newHighlight = green bold 22
 
 [icdiff]
-	options = --highlight --line-numbers
-	untracked = red bold
+  options = --highlight --line-numbers
+  untracked = red bold
 [difftool "nvim"]
-#  cmd = "lvim -d \"$LOCAL\" \"$REMOTE\""
   cmd = "nvim -d \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c '$wincmd w' -c 'wincmd J'"
 [diff]
-#  tool = meld
   tool = nvim
+  colorMoved = default
 [difftool]
   prompt = false
 
 # set "nvim" as tool for merging
 [merge]
   tool = nvim
-# define command which will be used when "nvim" is set as a merge tool
-[mergetool "nvim"]
-  cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
 # automatically launch merge tool without displaying a prompt
 [mergetool]
   prompt = false
+# define command which will be used when "nvim" is set as a merge tool
+[mergetool "nvim"]
+  cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
 
-; [interactive]
-; 	diffFilter = diff-so-fancy --patch
 ; [add "interactive"]
 ; 	useBuiltin = false

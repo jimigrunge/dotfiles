@@ -2,6 +2,9 @@ local M = {
   "neovim/nvim-lspconfig",
   commit = "d29be376e64c23d6465ef3fb71aaf4bf4e8e0e68",
   event = { "BufReadPre", "BufNewFile" },
+  opts = {
+    inlay_hints = { enabled = true }
+  },
   dependencies = {
     {
       "folke/neodev.nvim",
@@ -91,7 +94,7 @@ local function lsp_highlight_document(client)
   illuminate.on_attach(client)
 end
 
-M.on_attach = function(client, bufnr)
+local on_attach = function(client, bufnr)
   if client.server_capabilities.documentSymbolProvider then
     require("nvim-navic").attach(client, bufnr)
   end
@@ -114,12 +117,12 @@ M.on_attach = function(client, bufnr)
     client.server_capabilities.documentFormattingProvider = false
   end
 
-  if client.supports_method "textDocument/inlayHint" then
-    vim.lsp.inlay_hint.enable(bufnr, true)
-  end
+  -- if client.supports_method "textDocument/inlayHint" then
+  --   vim.lsp.inlay_hint.enable(bufnr, true)
+  -- end
 end
 
-function M.common_capabilities()
+local function common_capabilities()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   capabilities.textDocument.foldingRange = {
@@ -135,10 +138,10 @@ function M.common_capabilities()
   return capabilities
 end
 
-M.toggle_inlay_hints = function()
-  local bufnr = vim.api.nvim_get_current_buf()
-  vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled(bufnr))
-end
+-- M.toggle_inlay_hints = function()
+--   local bufnr = vim.api.nvim_get_current_buf()
+--   vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled(bufnr))
+-- end
 
 function M.config()
   local wk = require "which-key"
@@ -151,7 +154,7 @@ function M.config()
     --   "<cmd>lua vim.lsp.buf.format({async = true, filter = function(client) return client.name ~= 'typescript-tools' end})<cr>",
     --   "[F]ormat",
     -- },
-    ["<leader>lh"] = { "<cmd>lua require('user.lspconfig').toggle_inlay_hints()<cr>", "[H]ints" },
+    -- ["<leader>lh"] = { "<cmd>lua require('user.lspconfig').toggle_inlay_hints()<cr>", "[H]ints" },
     ["<leader>li"] = { "<cmd>LspInfo<cr>", "[I]nfo" },
     ["<leader>lj"] = { "<cmd>lua vim.diagnostic.goto_next()<cr>", "Next Diagnostic" },
     ["<leader>lk"] = { "<cmd>lua vim.diagnostic.goto_prev()<cr>", "Prev Diagnostic" },
@@ -218,8 +221,8 @@ function M.config()
 
   for _, server in pairs(servers) do
     local opts = {
-      on_attach = M.on_attach,
-      capabilities = M.common_capabilities(),
+      on_attach = on_attach,
+      capabilities = common_capabilities(),
     }
 
     server = vim.split(server, "@")[1]

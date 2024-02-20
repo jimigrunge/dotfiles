@@ -2,7 +2,7 @@ local M = {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
   commit = "581e87ba4e509a50689fcdd538e5f9388845eb78",
-  dependancies = {
+  dependencies = {
     {
       "nvim-treesitter/nvim-treesitter-textobjects",
       after = "nvim-treesitter",
