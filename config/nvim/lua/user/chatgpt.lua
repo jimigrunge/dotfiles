@@ -50,7 +50,8 @@ function M.config()
 ]]
 
   chatgpt.setup({
-    api_key_cmd = nil,
+    -- api_key_cmd = nil,
+    api_key_cmd = "gpg --decrypt " .. vim.fn.stdpath("config") .. "/keys/chatgpt.key.gpg",
     yank_register = "+",
     edit_with_instructions = {
       diff = false,
