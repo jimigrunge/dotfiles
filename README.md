@@ -40,6 +40,7 @@ git clone git@github.com:jimigrunge/dotfiles.git
 - neovim : Vim advanced "THE Editor"
 - tmux : Terminal window manager
 - xclip : Linux clipboard helper
+- delta : Pretty git diffs. https://github.com/dandavison/delta
 
 
 ## Fonts
