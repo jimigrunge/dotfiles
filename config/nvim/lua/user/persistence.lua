@@ -13,8 +13,10 @@ function M.config()
   local wk = require "which-key"
   wk.register {
     ["<leader>rs"] = { "<cmd>lua require('persistence').load()<cr>", "[S]ession For Current Directory" },
+    ["<leader>rS"] = { "<cmd>lua require('persistence').start()<cr>", "[S]tart Persistence" },
     ["<leader>rl"] = { "<cmd>lua require('persistence').load({ last = true })<cr>", "[L]ast Session" },
     ["<leader>rq"] = { "<cmd>lua require('persistence').stop()<cr>", "[Q]uit Persistence " },
+    ["<leader>rw"] = { "<cmd>lua require('persistence').save()<cr>", "[W]rite Session For Current Directory" },
   }
 
   persistence.setup()
