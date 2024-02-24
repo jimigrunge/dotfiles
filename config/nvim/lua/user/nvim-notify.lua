@@ -41,7 +41,7 @@ function M.config()
       TRACE = icons.diagnostics.Trace,
     },
     render = 'minimal',
-    timeout = 1500
+    timeout = 1000
   })
 
   require("telescope").load_extension("notify")
