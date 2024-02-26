@@ -110,4 +110,6 @@ alias lease="git push --force-with-lease"
 alias zshconfig="$EDITOR ~/.zshrc"
 alias ohmyzsh="$EDITOR ~/.oh-my-zsh"
 
+alias p5='ps -eo comm,pcpu -r | head -5; ps -eo comm,pmem -r | head -5'
+
 alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'
