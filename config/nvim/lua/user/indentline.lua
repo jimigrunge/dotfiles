@@ -19,11 +19,12 @@ function M.config()
   config.update_config({
     enabled = true,
     indent = {
-      char = icons.ui.LineDashedMiddle,
-      tab_char = nil,
+      char = '', --icons.ui.LineDashedMiddle,
+      tab_char = icons.ui.Tab,
       highlight = "IblIndent",
       smart_indent_cap = true,
       priority = 1,
+      repeat_linebreak = true
     },
     scope = {
       char = nil,

@@ -15,6 +15,7 @@ spec "user.search-replace"              -- Search and replace with preview.
 spec "user.nvim-scrollview"             -- A modern neovim scrollbar.
 spec "user.vim-tmux-navigator"          -- Seamless navigation between tmux panes and vim splits.
 -- spec "user.bufferline"                  -- A snazzy buffer line.
+spec "user.brackets"                    -- Show matching brace for scope.
 spec "user.barbecue"                    -- VS Code like winbar that uses nvim-navic in order to get LSP context.
 spec "user.gx"                          -- Open URL under cursor in browser.
 spec "user.nvim-autopairs"              -- Insert and delete brackets, parens, quotes in pair.
