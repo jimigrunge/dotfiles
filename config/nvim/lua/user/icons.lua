@@ -63,6 +63,7 @@ return {
     ArrowCircleLeft = "",
     ArrowCircleRight = "",
     ArrowCircleUp = "",
+    Block = "■",
     BoldArrowDown = "",
     BoldArrowLeft = "",
     BoldArrowRight = "",

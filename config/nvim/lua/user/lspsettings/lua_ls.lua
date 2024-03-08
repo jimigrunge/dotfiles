@@ -22,6 +22,7 @@ return {
     diagnostics = {
       -- Get the language server to recognize the `vim` global
       globals = { "vim" },
+      disable = { "incomplete-signature-docs", "trailing-space" }
     },
     runtime = {
       -- LuaJIT in the case of Neovim

@@ -19,6 +19,9 @@ function M.config()
     ["c"] = { "<cmd>Bdelete!<cr>", "[C]lose Buffer" },
     ["C"] = { name = "[C]hatGPT" },
     ["d"] = { name = "[D]ebug" },
+    ["D"] = {
+      name = "[D]atabase",
+    },
     ["g"] = {
       name = "[G]it",
       ["d"] = { name = "[D]iffView" },
@@ -27,6 +30,7 @@ function M.config()
     ["h"] = { name = "[H]arpoon" },
     ["l"] = { name = "[L]SP" },
     ["m"] = { name = "[M]arkdown" },
+    ["n"] = { name = "[N]oice" },
     ["o"] = { name = "[O]utline" },
     ["p"] = {
       name = "[P]lugins Lazy",
@@ -62,8 +66,10 @@ function M.config()
     ["<A-j>"] = { "<Esc>:m .+1<CR>==gi", "Move Text Down" },
     ["<A-k>"] = { "<Esc>:m .-2<CR>==gi", "Move Text Up" },
     ["x"] = { '"_x', "Delete Without Copy" },
-    ["+"] = { "viwgU", "Uppercase" },
-    ["-"] = { "viwgu", "Lowercase" },
+    ["+"] = { "<C-a>", "Increment" },
+    ["-"] = { "<C-x>", "Decrement" },
+    -- ["+"] = { "viwgU", "Uppercase" },
+    -- ["-"] = { "viwgu", "Lowercase" },
     ["zf"] = { "zf%", "Fold" },
     ["g"] = {
       name = "LSP",
@@ -72,6 +78,7 @@ function M.config()
       ["v"] = { name = "Reselect" }
     },
     ["K"] = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover" },
+    ["<C-a>"] = { "gg<S-v>G", "Select [A]ll" },
     ["<C-k>"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature" }
   }
 
@@ -81,6 +88,8 @@ function M.config()
     ["<A-j>"] = { ":m .+1<CR>==", "Move text down" },
     ["<A-k>"] = { ":m .-2<CR>==", "Move text up" },
     ["p"] = { '"_dP', "Paste without copy" },
+    ["+"] = { "gU", "Uppercase" },
+    ["-"] = { "gu", "Lowercase" },
   }
 
   local i_mappings = {

@@ -1,6 +1,10 @@
 local M = {
   "anuvyklack/pretty-fold.nvim",
   commit = "a7d8b424abe0eedf50116c460fbe6dfd5783b1d5",
+  dependencies = {
+    "anuvyklack/nvim-keymap-amend",
+    commit = "b8bf9d820878d5497fdd11d6de55dea82872d98e",
+  }
 }
 
 function M.config()

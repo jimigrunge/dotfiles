@@ -40,7 +40,8 @@ function M.config()
       DEBUG = icons.diagnostics.Debug,
       TRACE = icons.diagnostics.Trace,
     },
-    render = 'minimal',
+    render = 'wrapped-compact',
+    -- render = 'minimal',
     timeout = 1000
   })
 

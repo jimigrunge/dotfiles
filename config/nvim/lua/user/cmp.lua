@@ -197,6 +197,7 @@ function M.config()
       { name = "path",     group_index = 1, priority = 500 },
       { name = "dotenv",   group_index = 1, priority = 400 },
       { name = "nvim_lua", group_index = 1, priority = 300 },
+      { name = "vim-dadbod-completion", group_index = 1, priority = 300 },
       {
         name = 'npm',
         group_index = 1,
