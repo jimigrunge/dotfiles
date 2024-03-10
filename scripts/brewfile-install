@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# From:
+# https://gist.github.com/ChristopherA/a579274536aab36ea9966f301ff14f3f
+
+if [ -x "$(command -v brew)" ]; then
+  brew bundle install
+  echo "Brewfile has been installed"
+else
+  echo "Homebrew is not installed"
+fi
