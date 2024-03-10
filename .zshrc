@@ -82,6 +82,7 @@ HIST_STAMPS="yyyy-mm-dd"
 plugins=( dircycle zsh-autosuggestions zsh-syntax-highlighting web-search )
 
 source $ZSH/oh-my-zsh.sh
+source "$HOME/.ssh/.env"
 
 # User configuration
 # /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
@@ -127,6 +128,7 @@ export PATH=$HOME/bin:$PATH
 export LDFLAGS="-L/usr/local/opt/curl/lib"
 export CPPFLAGS="-I/usr/local/opt/curl/include"
 
+export DELTA_FEATURES='+side-by-side line-numbers navigate decorations'
 export OPENAI_API_KEY=""
 
 [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
@@ -135,6 +137,11 @@ eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
 
 export N_PREFIX=$HOME/.local/bin
 export EXA_COLORS="da=1;36"
+
+# don't put duplicate lines or lines begining with space in history
+# See bash(1) for more options
+export HISTCONTROL=ignoreboth
+export HISTTIMEFORMAT="%Y-%m-%d %T "
 
 eval "$(mcfly init zsh)"
 
@@ -152,3 +159,4 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+eval "$(atuin init zsh)"

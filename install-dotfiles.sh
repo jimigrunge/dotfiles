@@ -18,8 +18,8 @@ CONST_LINUX="Linux"
 CONST_MAC="Darwin"
 
 NVIM_SRC_DIR=$PWD/config/nvim
-ALACRITY_SRC_DIR=$PWD/config/alacritty
 NVIM_INSTALL_DIR=$HOME/.config/nvim
+ALACRITY_SRC_DIR=$PWD/config/alacritty
 ALACRITTY_CONFIG_DIR=$HOME/.config/alacritty
 OHMYZSH_DIR="$HOME/.oh-my-zsh"
 OHMYZSH_CONFIG_SRC="$PWD/.oh-my-zsh/custom/themes/jimigrunge.zsh-theme"
@@ -34,11 +34,10 @@ ZSH_VERSION=$(zsh --version)
 # Get os type
 unameOut="$(uname -s)"
 
-echo "Installing NeoVim configuration..."
+echo "Installing development configuration..."
 echo "OS: $unameOut"
-echo "Installer dir: $NVIM_SRC_DIR"
-echo "NeoVim install dir: $NVIM_INSTALL_DIR"
-echo "Local bin dir: $LOCAL_BIN_DIR"
+echo "NeoVim Install dir: $NVIM_INSTALL_DIR"
+echo "Local 'bin' dir: $LOCAL_BIN_DIR"
 
 
 install_linux_deps()
@@ -281,6 +280,9 @@ install_libraries()
         npm install -g typescript
     fi
 
+    echo "Installing GetNF font installer"
+    curl -fsSL https://raw.githubusercontent.com/getnf/getnf/main/install.sh | bash
+
     echo "Insure we have PHP Linting and Formatting"
     echo "* Checking for php code sniffer"
     if ! [ -e "$LOCAL_BIN_DIR"/phpcs ]; then
@@ -350,6 +352,7 @@ install_shell_configs()
     symlink .CodeSniffer.conf
     symlink .gitconfig
     symlink .tmux.conf
+    symlink .vimrc
     # symlink .zshrc
     cp .zshrc "$HOME/.zshrc"
 }

@@ -5,6 +5,7 @@ alias cl='clear'
 alias path='echo -e ${PATH//:/\\n}'
 alias mkdir='mkdir -pv'
 alias grep='grep --color=auto'
+alias diff="delta"
 
 # Symfony
 alias sf='app/console'
@@ -92,8 +93,10 @@ alias .8='cd ../../../../../../../..'
 alias .9='cd ../../../../../../../../..'
 
 # editors
-alias vi=/usr/bin/vim
+alias vi=/usr/local/bin/vim
+alias vidiff=/usr/local/bin/vimdiff
 alias vim=nvim
+alias vimdiff="nvim -d "
 alias subl=sublime
 
 # git
