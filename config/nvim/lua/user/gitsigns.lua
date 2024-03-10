@@ -1,3 +1,4 @@
+-- A git diff and git status plugin.
 local M = {
   "lewis6991/gitsigns.nvim",
   commit = "4aaacbf5e5e2218fd05eb75703fe9e0f85335803",

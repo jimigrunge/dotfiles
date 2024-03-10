@@ -1,3 +1,4 @@
+-- A file explorer tree for neovim.
 local M = {
   "nvim-tree/nvim-tree.lua",
   dependencies = {

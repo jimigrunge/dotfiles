@@ -1,3 +1,4 @@
+-- A fast and fully programmable greeter for neovim.
 M = {
   "goolord/alpha-nvim",
   event = "VimEnter",

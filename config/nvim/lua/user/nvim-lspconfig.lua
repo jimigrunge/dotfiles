@@ -1,3 +1,4 @@
+-- A collection of common configurations for the Nvim LSP client.
 local M = {
   "neovim/nvim-lspconfig",
   commit = "d29be376e64c23d6465ef3fb71aaf4bf4e8e0e68",

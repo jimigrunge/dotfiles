@@ -1,3 +1,4 @@
+-- A neovim plugin for GPT-3 chat.
 local M = {
   "jackMort/ChatGPT.nvim",
   event = "VeryLazy",

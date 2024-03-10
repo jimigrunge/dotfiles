@@ -1,3 +1,4 @@
+-- View undo history
 local M = {
   "mbbill/undotree",
 }

@@ -1,3 +1,4 @@
+-- VS Code like winbar that uses nvim-navic in order to get LSP context.
 local M = {
   "utilyre/barbecue.nvim",
   version = "*",

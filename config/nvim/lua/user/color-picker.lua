@@ -1,3 +1,4 @@
+-- A color picker for neovim.
 local M = {
   "ziontee113/color-picker.nvim",
   commit = "06cb5f853535dea529a523e9a0e8884cdf9eba4d",

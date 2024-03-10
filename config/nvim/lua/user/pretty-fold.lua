@@ -1,3 +1,4 @@
+-- A plugin to make folds more pretty.
 local M = {
   "anuvyklack/pretty-fold.nvim",
   commit = "a7d8b424abe0eedf50116c460fbe6dfd5783b1d5",

@@ -1,3 +1,4 @@
+-- A port of the popular vscode theme.
 local M = {
   "Mofiqul/vscode.nvim",
   lazy = false,

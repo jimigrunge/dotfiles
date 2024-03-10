@@ -1,3 +1,4 @@
+-- A clean, dark neovim theme.
 M = {
   "folke/tokyonight.nvim",
   lazy = false,

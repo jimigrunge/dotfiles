@@ -1,3 +1,4 @@
+-- A neovim plugin for GitHub Copilot.
 local M = {
   "zbirenbaum/copilot.lua",
   cmd = "Copilot",

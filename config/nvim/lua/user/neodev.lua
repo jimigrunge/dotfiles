@@ -1,3 +1,4 @@
+-- A neovim plugin for development.
 local M = {
   "folke/neodev.nvim",
   opts = {},

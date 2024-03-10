@@ -1,3 +1,4 @@
+-- A plugin for creating UIs in neovim.
 local M = {
   "CosmicNvim/cosmic-ui",
   dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },

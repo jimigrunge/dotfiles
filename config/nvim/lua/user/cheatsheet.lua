@@ -1,3 +1,4 @@
+-- A plugin for creating and managing cheatsheets.
 local M = {
   "sudormrfbin/cheatsheet.nvim",
   commit = "9716f9aaa94dd1fd6ce59b5aae0e5f25e2a463ef",

@@ -1,3 +1,4 @@
+-- A plugin for showing code actions in a floating window.
 local M = {
   "weilbith/nvim-code-action-menu",
   cmd = 'CodeActionMenu',

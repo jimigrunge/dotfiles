@@ -1,3 +1,4 @@
+-- Global icon configuration
 return {
   kind = {
     Array = " ",

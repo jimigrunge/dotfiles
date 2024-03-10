@@ -1,3 +1,4 @@
+-- Highlight, list and search TODO comments.
 local M = {
   "folke/todo-comments.nvim",
   event = "BufRead",

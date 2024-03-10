@@ -1,3 +1,4 @@
+-- A markdown previewer for neovim.
 local M = {
   "ellisonleao/glow.nvim",
   branch = "main",

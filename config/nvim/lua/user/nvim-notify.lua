@@ -1,3 +1,4 @@
+-- A fancy notification manager for neovim.
 local M = {
   "rcarriga/nvim-notify",
   commit = "1576123bff3bed67bc673a3076e591abfe5d8ca9",

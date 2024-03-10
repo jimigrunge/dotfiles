@@ -1,3 +1,4 @@
+-- Find, Filter, Preview, Pick.
 local M = {
   "nvim-telescope/telescope.nvim",
   branch = '0.1.x',
@@ -24,7 +25,8 @@ function M.config()
 
   local wk = require "which-key"
   wk.register {
-    ["<leader>bb"] = { "<cmd>Telescope buffers theme=ivy<cr>", "[B]uffers" },
+    -- ["<leader>bb"] = { "<cmd>Telescope buffers theme=ivy<cr>", "[B]uffers" },
+    ["<leader>bb"] = { "<cmd>Telescope buffers<cr>", "[B]uffers Telescope" },
     ["<leader>f"] = { "<cmd>Telescope live_grep<cr>", "[F]ind Text" },
     ["<leader>gb"] = { "<cmd>Telescope git_branches<cr>", "Checkout [b]ranch" },
     ["<leader>go"] = { "<cmd>Telescope git_status<cr>", "[O]pen changed file" },

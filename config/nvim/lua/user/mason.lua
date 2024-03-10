@@ -1,3 +1,4 @@
+-- A plugin for Mason LSP manager.
 local M = {
   "williamboman/mason-lspconfig.nvim",
   commit = "fe4cce44dec93c69be17dad79b21de867dde118a",

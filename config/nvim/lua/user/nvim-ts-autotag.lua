@@ -1,3 +1,4 @@
+-- Automatically close and rename HTML tags.
 local M = {
   "windwp/nvim-ts-autotag",
   commit = "8515e48a277a2f4947d91004d9aa92c29fdc5e18",

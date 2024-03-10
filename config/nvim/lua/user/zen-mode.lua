@@ -1,3 +1,4 @@
+-- Distractions free editing
 local M = {
   "folke/zen-mode.nvim",
 }

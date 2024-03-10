@@ -1,3 +1,4 @@
+-- Launch the neovim configuration.
 -- Global variables
 JAVA_DAP_ACTIVE = false
 LAZY_PLUGIN_SPEC = {}

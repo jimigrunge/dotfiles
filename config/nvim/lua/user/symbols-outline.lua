@@ -1,3 +1,4 @@
+-- A tree like view for symbols in neovim using the Language Server Protocol.
 local M = {
   "simrat39/symbols-outline.nvim",
   commit = "564ee65dfc9024bdde73a6621820866987cbb256",

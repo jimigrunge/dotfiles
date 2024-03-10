@@ -1,3 +1,4 @@
+-- Insert and delete brackets, parens, quotes in pair.
 local M = {
   "windwp/nvim-autopairs",
   commit = "9fd41181693dd4106b3e414a822bb6569924de81",

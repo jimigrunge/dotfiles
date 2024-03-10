@@ -1,3 +1,4 @@
+-- A plugin for creating and managing snippets.
 local M = {
   "j-hui/fidget.nvim",
   commit = "3a93300c076109d86c7ce35ec67a8034ae6ba9db",

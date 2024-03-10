@@ -1,3 +1,4 @@
+-- Switch files fast
 local M = {
   "ThePrimeagen/harpoon",
   branch = "harpoon2",

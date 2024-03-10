@@ -1,3 +1,4 @@
+-- A plugin for generating LSP snippets.
 local M = {
   "danymat/neogen",
   commit = "70127baaff25611deaf1a29d801fc054ad9d2dc1",

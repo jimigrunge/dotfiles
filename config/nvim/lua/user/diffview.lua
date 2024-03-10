@@ -1,3 +1,4 @@
+-- A git diff viewer.
 local M = {
   "sindrets/diffview.nvim",
   event = "BufRead",

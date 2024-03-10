@@ -1,3 +1,4 @@
+-- Open URL under cursor in browser.
 local M = {
   "chrishrb/gx.nvim",
   event = { "BufEnter" },

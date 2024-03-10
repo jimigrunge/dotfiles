@@ -1,3 +1,4 @@
+-- A git wrapper for neovim.
 local M = {
   "tpope/vim-fugitive",
   commit = "59659093581aad2afacedc81f009ed6a4bfad275",

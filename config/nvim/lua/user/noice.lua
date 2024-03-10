@@ -1,3 +1,4 @@
+-- A plugin for playing music in neovim.
 local M = {
   "folke/noice.nvim",
   commit = "bf67d70bd7265d075191e7812d8eb42b9791f737",

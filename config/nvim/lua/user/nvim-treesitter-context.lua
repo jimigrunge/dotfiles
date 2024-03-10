@@ -1,3 +1,4 @@
+-- Treesitter context manager.
 local M = {
   "nvim-treesitter/nvim-treesitter-context",
   commit = "23b699ac40091d8c729f024b3f1400bc7e26e0c5",

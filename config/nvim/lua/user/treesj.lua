@@ -1,3 +1,4 @@
+-- splitting/joining blocks of code like arrays, hashes, etc.
 local M = {
   'Wansmer/treesj',
   commit = "14808da3cddd62fc86ede53a5ea1fd1635897e75",

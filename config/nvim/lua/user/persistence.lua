@@ -1,3 +1,4 @@
+-- Persist variables across sessions.
 local M = {
   "folke/persistence.nvim",
   commit = "ad538bfd5336f1335cdb6fd4e0b0eebfa6e12f32",

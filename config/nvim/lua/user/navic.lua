@@ -1,3 +1,4 @@
+-- A neovim window navigator.
 local M = {
   "SmiteshP/nvim-navic",
   dependencies = "neovim/nvim-lspconfig",

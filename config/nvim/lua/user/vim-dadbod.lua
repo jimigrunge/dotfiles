@@ -1,3 +1,4 @@
+-- A DB UI for VIM
 return {
   'kristijanhusak/vim-dadbod-ui',
   dependencies = {

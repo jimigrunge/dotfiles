@@ -1,3 +1,4 @@
+-- Confirm before quitting neovim.
 local M = {
   "yutkat/confirm-quit.nvim",
   event = "CmdlineEnter",

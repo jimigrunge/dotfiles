@@ -1,3 +1,4 @@
+-- A pretty list for showing diagnostics.
 local M = {
   "folke/trouble.nvim",
   cmd = "TroubleToggle",

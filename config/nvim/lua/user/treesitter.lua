@@ -1,3 +1,4 @@
+-- Treesitter configurations and abstraction layer.
 local M = {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",

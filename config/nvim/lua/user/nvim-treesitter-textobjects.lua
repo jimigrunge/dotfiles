@@ -1,3 +1,4 @@
+-- nvim-treesitter-textobjects
 local M = {
   "nvim-treesitter/nvim-treesitter-textobjects",
   dependencies = {

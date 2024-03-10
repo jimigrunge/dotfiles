@@ -1,3 +1,4 @@
+-- A plugin for debugging in neovim.
 local M = {
   "mfussenegger/nvim-dap",
   commit = "9adbfdca13afbe646d09a8d7a86d5d031fb9c5a5",

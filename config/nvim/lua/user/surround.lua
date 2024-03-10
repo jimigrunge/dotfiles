@@ -1,3 +1,4 @@
+-- Surround text with pairs.
 local M = {
   "ur4ltz/surround.nvim",
   commit = "36c253d6470910692491b13382f54c9bab2811e1",

@@ -1,3 +1,4 @@
+-- A plugin for managing whitespace.
 local M = {
   "mcauley-penney/tidy.nvim",
   -- commit = "",

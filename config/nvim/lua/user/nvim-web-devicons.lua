@@ -1,3 +1,4 @@
+-- Icons for neovim.
 local M = {
   "nvim-tree/nvim-web-devicons",
   commit = "584038666b0d8124d452a2e8ea9e38e6d6e56490",

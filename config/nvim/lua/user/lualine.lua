@@ -1,3 +1,4 @@
+-- A blazing fast and easy to configure neovim statusline.
 local M = {
   "nvim-lualine/lualine.nvim",
   dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -10,6 +11,20 @@ function M.config()
     print 'Lualine not loaded'
     return
   end
+
+  local wk = require "which-key"
+  wk.register {
+    -- ["<leader>>"] = { "<cmd>BufferLineMoveNext<cr>", "BufferMoveNext" },
+    -- ["<leader><lt>"] = { "<cmd>BufferLineMovePrev<cr>", "BufferMovePrevious" },
+    -- ["<leader>bp"] = { "<cmd>BufferLinePick<cr>", "[P]ick" },
+    -- ["<leader>bj"] = { "<cmd>BufferLineMoveNext<cr>", "BufferMoveNext" },
+    -- ["<leader>bk"] = { "<cmd>BufferLineMovePrev<cr>", "BufferMovePrevious" },
+    -- ["<Tab>"] = { ":BufferLineCycleNext<CR>", "Buff Cycle Next", nops },
+    -- ["<S-Tab>"] = { ":BufferLineCyclePrev<CR>", "Buff Cycle Prev", nops },
+    ["<Tab>"] = { ":bnext<CR>", "Buff Cycle Next", nops },
+    ["<S-Tab>"] = { ":bprev<CR>", "Buff Cycle Prev", nops },
+    -- ["gt"] = { ":BufferLinePick<CR>", "Pick Buffer", nops },
+  }
 
   local icons = require "user.icons"
 
@@ -35,7 +50,7 @@ function M.config()
     colored = true,
     diff_color = {
       -- Same color values as the general color option can be used here.
-      added    = 'DiffAdd',  -- Changes the diff's added color
+      added    = 'DiffAdd',    -- Changes the diff's added color
       modified = 'DiffChange', -- Changes the diff's modified color
       removed  = 'DiffDelete', -- Changes the diff's removed color you
     },
@@ -81,9 +96,9 @@ function M.config()
     -- 3: Absolute path, with tilde as the home directory
     shorting_target = 40,
     symbols = {
-      modified = icons.git.LineAdded, -- Text to show when the file is modified.
+      modified = icons.git.LineAdded,   -- Text to show when the file is modified.
       readonly = icons.git.FileIgnored, -- Text to show when the file is non-modifiable or readonly.
-      unnamed = '[No Name]',          -- Text to show for unnamed buffers.
+      unnamed = '[No Name]',            -- Text to show for unnamed buffers.
     }
   }
 
@@ -122,7 +137,7 @@ function M.config()
         {
           'copilot',
           show_colors = true,
-        }, spaces, "encoding", filetype,
+        }, "tabs", spaces, "encoding", filetype,
       },
       lualine_y = { location },
       lualine_z = { "filesize", "progress" },
@@ -135,11 +150,17 @@ function M.config()
       lualine_y = {},
       lualine_z = {},
     },
-    tabline = {},
+    tabline = {
+      lualine_a = { "buffers" },
+      lualine_b = {},
+      lualine_c = {},
+      lualine_x = { "tabs" },
+      lualine_y = {},
+      lualine_z = {},
+
+    },
     extensions = {},
   })
-
-
 end
 
 return M

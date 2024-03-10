@@ -1,3 +1,4 @@
+-- A npm completion source for cmp.
 local M = {
   "David-Kunz/cmp-npm",
   dependencies = { 'nvim-lua/plenary.nvim' },

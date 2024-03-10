@@ -1,3 +1,4 @@
+-- A vim plugin to display the indention levels with thin vertical lines.
 local M = {
   "lukas-reineke/indent-blankline.nvim",
   main = "ibl",

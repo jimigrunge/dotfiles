@@ -1,3 +1,4 @@
+-- A snazzy buffer line.
 local M = {
   "akinsho/bufferline.nvim",
   commit = "e48ce1805697e4bb97bc171c081e849a65859244",
@@ -27,7 +28,7 @@ function M.config()
   bufferline.setup {
     highlights = {},
     options = {
-      mode = "buffers",
+      mode = "buffers", -- "buffers" | "tabs"
       style_preset = bufferline.style_preset.default,
       themable = true,
       numbers = "none",                    -- "none" | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,

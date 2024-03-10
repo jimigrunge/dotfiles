@@ -1,3 +1,4 @@
+-- Select and configure your colorscheme.
 local M = {
   "lunarvim/colorschemes",
   commit = "e29f32990d6e2c7c3a4763326194fbd847b49dac",

@@ -1,3 +1,4 @@
+-- Set abbreviations.
 vim.cmd("iabbrev cabjim co-authored-by: james grundner <james.grundner@ryansg.com>")
 vim.cmd("iabbrev cabjf co-authored-by: joseph frazer <joseph.frazer@ryansg.com>")
 vim.cmd("iabbrev cabmg co-authored-by: mark goldsmith <mark.goldsmith@ryansg.com>")

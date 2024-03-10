@@ -1,3 +1,4 @@
+-- Search and replace with preview.
 local M = {
   "roobert/search-replace.nvim",
   commit = "d92290a02d97f4e9b8cd60d28b56b403432158d5",

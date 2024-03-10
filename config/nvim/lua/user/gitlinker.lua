@@ -1,3 +1,4 @@
+-- A plugin for opening files and line numbers on GitHub, Bitbucket, Gitlab, and Gitea from neovim.
 local M = {
   "linrongbin16/gitlinker.nvim",
   commit = "008d8d7f8218d38bf87ae4c3f61a42843c31a8f1",
