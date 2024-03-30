@@ -30,16 +30,16 @@ source "$HOME/.ssh/.env"
 source $HOME/.alias
 
 # Build path
-export PATH="/Users/jgrundner/Library/Python/2.7/bin:$PATH"
-export PATH="/usr/local/opt/curl/bin:$PATH"
-export PATH="/usr/local/sbin:$PATH"
-export PATH="/usr/local/opt/unzip/bin:$PATH"
-export PATH="$HOME/.composer/vendor/bin:$PATH"
-export PATH="$HOME/.npm-global/bin:$PATH"
-export PATH="~/.npm-global/bin:$PATH"
-export PATH="~/.local/bin:$PATH"
-export PATH="~/.local/bin/bin:$PATH"
-export PATH="$HOME/bin:$PATH"
+export PATH="/Users/jgrundner/Library/Python/2.7/bin:${PATH}"
+export PATH="/usr/local/opt/curl/bin:${PATH}"
+export PATH="/usr/local/sbin:${PATH}"
+export PATH="/usr/local/opt/unzip/bin:${PATH}"
+export PATH="${HOME}/.composer/vendor/bin:${PATH}"
+export PATH="${HOME}/.composer/tools:${PATH}"
+export PATH="${HOME}/.npm/bin:${PATH}"
+export PATH="${HOME}/.local/bin:${PATH}"
+export PATH="${HOME}/.local/bin/bin:${PATH}"
+export PATH="${HOME}/bin:${PATH}"
 
 # C flags
 export LDFLAGS="-L/usr/local/opt/curl/lib"

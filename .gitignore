@@ -4,6 +4,14 @@ luac.out
 # luarocks build files
 *.src.rock
 
+# OS specific dir setting
 .DS_Store
-config/nvim/pack/**/*
-config/nvim/plugin/packer_compiled.lua
+Thumbs.db
+
+# Log files
+log/
+*.log
+
+# IDE settings
+.idea
+.vscode

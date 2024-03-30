@@ -12,4 +12,4 @@ fi
 # ------------
 source "/usr/local/opt/fzf/shell/key-bindings.zsh"
 
-eval "$(fzf --zsh)"
+eval "$(fzf --bash)"

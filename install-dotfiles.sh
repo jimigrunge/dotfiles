@@ -12,7 +12,7 @@
 # TODO: Move Intelephense key file into place
 # ############################################################
 
-PWD=$(pwd)
+PWD=$(pwd) # $PWD
 TIMESTAMP=$(date +"%Y%m%d-%H%M%S")
 CONST_LINUX="Linux"
 CONST_MAC="Darwin"
@@ -30,6 +30,7 @@ CONFIG_DIR=$HOME/.config
 DBG_ADAPTER_DIR=$HOME/.local/share/debug-adapters
 GLOBAL_NPM_DIR=$HOME/.npm
 ZSH_VERSION=$(zsh --version)
+COMPOSER_DIR=$HOME/.composer
 
 # Get os type
 unameOut="$(uname -s)"
@@ -87,7 +88,7 @@ install_linux_deps()
         if (( $(echo "$OS_VER < 20.10" | bc -l) )); then
           EXA_TAG=$(curl -I https://github.com/ogham/exa/releases/latest | awk -F '/' '/^location/ {print  substr($NF, 1, length($NF)-1)}' )
           curl -Lo exa.zip "https://github.com/ogham/exa/releases/download/v0.10.1/exa-linux-x86_64-${EXA_TAG}.zip"
-          unzip -q exa.zip bin/exa -d "${HOME}"
+          unzip -q exa.zip bin/exa -d "$HOME"
           rm -rf exa.zip
         else
           sudo apt install exa
@@ -115,7 +116,7 @@ install_linux_deps()
     fi
     if ! [ -x "$(command -v mcfly)" ]; then
         echo 'Error: mcfly not found, attampting to install.' >&2
-        curl -LSfs https://raw.githubusercontent.com/cantino/mcfly/master/ci/install.sh | sh -s -- --git cantino/mcfly --to "${LOCAL_BIN_DIR}"
+        curl -LSfs https://raw.githubusercontent.com/cantino/mcfly/master/ci/install.sh | sh -s -- --git cantino/mcfly --to "$LOCAL_BIN_DIR"
     fi
     if ! [ -x "$(command -v php)" ]; then
         echo 'Error: php not found, attampting to install.' >&2
@@ -154,15 +155,36 @@ install_mac_deps()
 {
     echo "OS setup begin"
 
+    echo "Checking Command Line Tools for Xcode"
+    # Only run if the tools are not installed yet
+    # To check that try to print the SDK path
+    echo "Checking for Xcode Command Line Tools"
+    xcode-select -p &> /dev/null
+    if [ $? -ne 0 ]; then
+      echo "Command Line Tools for Xcode not found. Installing from softwareupdate..."
+    # This temporary file prompts the 'softwareupdate' utility to list the Command Line Tools
+      touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress;
+      PROD=$(softwareupdate -l |
+        grep "\*.*Command Line" |
+        head -n 1 | awk -F"*" '{print $2}' |
+        sed -e 's/^ *//' |
+        tr -d '\n')
+      softwareupdate -i "$PROD" -v;
+    else
+      echo "Command Line Tools for Xcode are installed."
+    fi
+
     if ! [ -x "$(command -v brew)" ]; then
-        echo 'Error: MacOS requires homebrew package manager' >&2
+        echo 'MacOS requires homebrew package manager' >&2
         echo '  Attempting to install homebrew...' >&2
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     fi
+
     if [ -x "$(command -v brew)" ]; then
       echo 'Updating Homebrew.' >&2
       brew update
     fi
+
     if ! [ -x "$(command -v git)" ]; then
         echo 'Error: git is not installed, attempting to install.' >&2
         brew install git
@@ -194,6 +216,7 @@ install_mac_deps()
         echo 'Error: lsd not found, attampting to install.' >&2
         brew install lsd
     fi
+
     if ! [[ -d "$OHMYZSH_DIR" ]]; then
         echo 'Error: oh-my-zsh not found, attampting to install.' >&2
         sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -250,6 +273,24 @@ create_dirs()
     mkdir -pv "$DBG_ADAPTER_DIR"
     # Create alacritty config directory
     mkdir -pv "$ALACRITTY_CONFIG_DIR"
+}
+
+install_shell_configs()
+{
+    if [[ -d "$ALACRITTY_CONFIG_DIR" ]]; then
+        mv -f "$ALACRITTY_CONFIG_DIR" "$ALACRITTY_CONFIG_DIR.$TIMESTAMP"
+    fi
+    cp -r "$ALACRITY_SRC_DIR" "$ALACRITTY_CONFIG_DIR"
+
+    cp "$OHMYZSH_CONFIG_SRC" "$OHMYZSH_CONFIG_DEST"
+
+    symlink .alias
+    symlink .CodeSniffer.conf
+    symlink .gitconfig
+    symlink .tmux.conf
+    symlink .vimrc
+    # symlink .zshrc
+    cp .zshrc "$HOME/.zshrc"
 }
 
 # Fix for npm's global permissions issue
@@ -319,6 +360,19 @@ install_nvim_files()
     cp -r "$NVIM_SRC_DIR" "$NVIM_INSTALL_DIR"
 }
 
+intitialize_zsh()
+{
+    echo "Changing shell to ZSH"
+    SHELL=$(which zsh)
+    [ "$ZSH_VERSION" = "" ] && exec "$SHELL" -l
+
+    echo "Zsh version: $ZSH_VERSION"
+    if [[ -f $HOME/.zshrc ]]; then
+        echo "Sourcing zsh profile"
+        source "$HOME/.zshrc"
+    fi
+}
+
 install_composer()
 {
     php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
@@ -337,37 +391,6 @@ symlink()
       mv "$HOME/$1" "$HOME/$1.bak"
     fi
     ln -sf "$PWD/$1" "$HOME/$1";
-}
-
-install_shell_configs()
-{
-    if [[ -d "$ALACRITTY_CONFIG_DIR" ]]; then
-        mv -f "$ALACRITTY_CONFIG_DIR" "$ALACRITTY_CONFIG_DIR.$TIMESTAMP"
-    fi
-    cp -r "$ALACRITY_SRC_DIR" "$ALACRITTY_CONFIG_DIR"
-
-    cp "$OHMYZSH_CONFIG_SRC" "$OHMYZSH_CONFIG_DEST"
-
-    symlink .alias
-    symlink .CodeSniffer.conf
-    symlink .gitconfig
-    symlink .tmux.conf
-    symlink .vimrc
-    # symlink .zshrc
-    cp .zshrc "$HOME/.zshrc"
-}
-
-intitialize_zsh()
-{
-   echo "Changing shell to ZSH"
-    SHELL=$(which zsh)
-    [ -z "$ZSH_VERSION" ] && exec "$SHELL" -l
-
-    echo "Zsh version: $ZSH_VERSION"
-    if [[ -f $HOME/.zshrc ]]; then
-        echo "Sourcing zsh profile"
-        source "$HOME/.zshrc"
-    fi
 }
 
 # Begin installation process
