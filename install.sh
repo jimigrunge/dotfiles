@@ -38,6 +38,7 @@ NPM_DIR=$HOME/.npm
 ALACRITTY_CONFIG=".config/alacritty"
 NVIM_CONFIG=".config/nvim"
 OHMYZSH_DIR="$HOME/.oh-my-zsh"
+OHMYZSH_THEME_DIR="$OHMYZSH_DIR/custom/themes"
 OHMYZSH_THEME=".oh-my-zsh/custom/themes/jimigrunge.zsh-theme"
 
 RED='\033[0;31m'
@@ -82,7 +83,7 @@ echo "--------------------------------"
 echo ""
 case "${OS}" in
   ${LINUX}*)
-    if [ "${LSBNAME}" != "Ubuntu" ]; then
+    if [ "${LSBNAME}" != '"Ubuntu"' ]; then
       echo -e "${RED}"
       echo "Linux distribution ${LSBNAME} not yet supported"
       echo -e "${NOCOLOR}"
@@ -90,13 +91,13 @@ case "${OS}" in
     fi
 
     echo "Instaling applications for ${LSBNAME}"
-    . ./install-scripts/ohmyzsh.sh
+    # . ./install-scripts/ohmyzsh.sh
     . ./install-scripts/ubuntu.sh
     . ./install-scripts/composer.sh
     ;;
   ${MAC}*)
     echo "Instaling applications for macOS"
-    . ./install-scripts/ohmyzsh.sh
+    # . ./install-scripts/ohmyzsh.sh
     . ./install-scripts/macos.sh
     . ./install-scripts/composer.sh
     ;;
@@ -176,6 +177,7 @@ curl -fsSL https://raw.githubusercontent.com/getnf/getnf/main/install.sh | bash
 echo "--------------------------------"
 echo "- Insure ZSH is default shell --"
 echo "--------------------------------"
+. ./install-scripts/ohmyzsh.sh
 if [ "${SHELL}" != "$(which zsh)" ]; then
   chsh -s "$(which zsh)"
   if [ "${SHELL}" != "$(which zsh)" ]; then
@@ -189,11 +191,23 @@ fi
 if [ "${SHELL}" = "$(which zsh)" ]; then
   # source the ZSH configuration
   echo "Zsh version: $(zsh --version)"
-  if [[ -f ${HOME}/.zshrc ]]; then
-    echo "Sourcing zsh profile"
-    source "${HOME}/.zshrc"
-  fi
+  # if [[ -f ${HOME}/.zshrc ]]; then
+  #   echo "Sourcing zsh profile"
+  #   source "${HOME}/.zshrc"
+  # fi
 fi
+if [ -e "${HOME}/.zshrc" ]; then
+  echo -e "${YELLOW}"
+  echo "Backing up existing '.zshrc' to ${HOME}/.zshrc.${TIMESTAMP}"
+  echo -e "${NOCOLOR}"
+  mv "${HOME}/.zshrc" "${HOME}/.zshrc.${TIMESTAMP}"
+fi
+echo "Copying .zshrc to home directory."
+cp "${DOTFILEDIR}/.zshrc" "${HOME}/.zshrc"
+echo "--------------------------------"
+echo "- ZSH is your default shell    -"
+echo "--------------------------------"
+echo "You may nee to log out and back int to load zsh"
 
 echo ""
 echo "--------------------------------"

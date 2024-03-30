@@ -9,9 +9,21 @@ echo -e "${NOCOLOR}"
 echo "Updating apt-get"
 sudo apt-get update
 
+if ! [ -x "$(command -v curl)" ]; then
+  echo 'Attempting to Install curl.'
+  sudo apt install curl -y
+fi
 if ! [ -x "$(command -v git)" ]; then
   echo 'Attempting to Install git.'
   sudo apt install git tig -y
+fi
+if ! [ -x "$(command -v wget)" ]; then
+  echo 'Attempting to Install wget.'
+  sudo apt install wget -y
+fi
+if ! [ -x "$(command -v bc)" ]; then
+  echo 'Attempting to Install bc.'
+  sudo apt install bc -y
 fi
 if ! [ -x "$(command -v zsh)" ]; then
   echo 'Attempting to Install zsh.'
@@ -25,9 +37,15 @@ if ! [ -x "$(command -v pip)" ]; then
 fi
 if ! [ -x "$(command -v node)" ]; then
   echo 'Attempting to Install nodejs.'
-  curl -fsSL https://rpm.nodesource.com/setup_lts.x | sudo bash -
+  # curl -fsSL https://rpm.nodesource.com/setup_lts.x | sudo bash -
   sudo apt install curl build-essential -y
-  sudo apt-get install nodejs -y
+  sudo apt-get install nodejs npm -y
+fi
+if ! [ -x "$(command -v npm)" ]; then
+  echo 'Attempting to Install npm.'
+  # curl -fsSL https://rpm.nodesource.com/setup_lts.x | sudo bash -
+  sudo apt install curl build-essential -y
+  sudo apt-get install npm -y
 fi
 if ! [ -x "$(command -v go)" ]; then
   echo 'Attempting to Install go.'
@@ -62,7 +80,7 @@ if ! [ -x "$(command -v cargo)" ]; then
   if (( $(echo "${OS_VER} < 20.04" | bc -l) )); then
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
   else
-    sudo apt install -y rustc
+    sudo apt install rustc -y
   fi
 fi
 if ! [ -x "$(command -v exa)" ]; then
@@ -75,7 +93,7 @@ if ! [ -x "$(command -v exa)" ]; then
     echo '  attempting to install with cargo.'
     cargo install exa
   else
-    sudo apt install exa
+    sudo apt install exa -y
   fi
 fi
 if ! [ -x "$(command -v lsd)" ]; then
@@ -86,9 +104,9 @@ if ! [ -x "$(command -v lsd)" ]; then
     echo "ERROR: 'apt-get lsd' requires Ubuntu >= 23.04, you have version ${OS_VER}." >&2
     echo -e "${NOCOLOR}"
     echo '  attempting to install with cargo.'
-    cargo install lsd
+    "$HOME/.cargo/bin/cargo" install lsd
   else
-    sudo apt install lsd
+    sudo apt install lsd -y
   fi
 fi
 if ! [ -x "$(command -v jq)" ]; then

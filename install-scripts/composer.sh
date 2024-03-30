@@ -22,10 +22,11 @@ if ! [ -x "$(command -v composer)" ]; then
     echo -e "${NOCOLOR}"
     rm composer-setup.php
   else
-    php composer-setup.php --quiet
+    php composer-setup.php #--quiet
     RESULT=$?
     rm composer-setup.php
-    echo $RESULT
+    mv composer.phar "$HOME/bin/composer"
+    echo "composer setup result: ${RESULT}"
 
     export PATH=${COMPOSER_DIR}/vendor/bin:${CONFIG_HOME}/composer/vendor/bin:${PATH}
     echo -e "${GREEN}"
@@ -40,16 +41,16 @@ if [ -x "$(command -v composer)" ]; then
   echo "--------------------------------"
 
   echo " installing phpcs and phpcbf"
-  composer global require "squizlabs/php_codesniffer=*"
+  composer global require --no-interaction "squizlabs/php_codesniffer=*"
 
   echo " installing php-cs-fixer"
-  composer global require "friendsofphp/php-cs-fixer"
+  composer global require --no-interaction "friendsofphp/php-cs-fixer"
 
   echo " installing phpmd"
-  composer global require "phpmd/phpmd"
+  composer global require --no-interaction "phpmd/phpmd"
 
   echo " installing phpunit"
-  composer global require "phpunit/phpunit"
+  composer global require --no-interaction "phpunit/phpunit"
 
   if ! [ -x "$(command -v phive)" ]; then
     cd "${COMPOSER_DIR}"

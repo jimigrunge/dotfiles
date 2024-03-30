@@ -24,7 +24,7 @@ plugins=( dircycle zsh-autosuggestions zsh-syntax-highlighting web-search )
 source $ZSH/oh-my-zsh.sh
 
 export OPENAI_API_KEY=""
-source "$HOME/.ssh/.env"
+[ -f "$HOME/.ssh/.env" ] && source "$HOME/.ssh/.env"
 
 # Load aliases
 source $HOME/.alias
@@ -52,7 +52,8 @@ export DELTA_FEATURES='+side-by-side line-numbers navigate decorations'
 [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
 
 # Perl
-eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
+# eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
+eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"
 
 # EXA configuration
 export N_PREFIX=$HOME/.local/bin
