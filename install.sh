@@ -22,7 +22,8 @@ LINUX="Linux"
 MAC="Darwin"
 OS="$(uname -s)"
 if [ -x "$(command -v lsb_release)" ]; then
-  LSBNAME=$(lsb_release -i)
+  # LSBNAME=$(lsb_release -i)
+  LSBNAME=$(awk -F= '/^NAME/{print $2}' /etc/os-release)
   OS_VER="$(lsb_release -sr)"
 else
   LSBNAME="Unknown"
@@ -81,7 +82,7 @@ echo "--------------------------------"
 echo ""
 case "${OS}" in
   ${LINUX}*)
-    if [ "${LSBNAME}" != "Distributor ID: Ubuntu" ]; then
+    if [ "${LSBNAME}" != "Ubuntu" ]; then
       echo -e "${RED}"
       echo "Linux distribution ${LSBNAME} not yet supported"
       echo -e "${NOCOLOR}"
