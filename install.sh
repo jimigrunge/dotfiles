@@ -81,7 +81,7 @@ echo "--------------------------------"
 echo ""
 case "${OS}" in
   ${LINUX}*)
-    if [ "${LSBNAME}" != "Ubuntu" ]; then
+    if [ "${LSBNAME}" != "Distributor ID: Ubuntu" ]; then
       echo -e "${RED}"
       echo "Linux distribution ${LSBNAME} not yet supported"
       echo -e "${NOCOLOR}"
