@@ -22,7 +22,7 @@ LINUX="Linux"
 MAC="Darwin"
 OS="$(uname -s)"
 if [ -x "$(command -v lsb_release)" ]; then
-  LSBNAME=$(lsb_release -d)
+  LSBNAME=$(lsb_release -i)
   OS_VER="$(lsb_release -sr)"
 else
   LSBNAME="Unknown"
