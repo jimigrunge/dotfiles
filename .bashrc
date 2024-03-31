@@ -2,7 +2,7 @@ source "${HOME}/.alias"
 
 export EDITOR='nvim'
 
-source "$HOME/.ssh/.env"
+[ -f "$HOME/.ssh/.env" ] && source "$HOME/.ssh/.env"
 
 export PATH="/Users/jgrundner/Library/Python/2.7/bin:${PATH}"
 export PATH="/usr/local/opt/curl/bin:${PATH}"
@@ -13,6 +13,7 @@ export PATH="${HOME}/.composer/tools:${PATH}"
 export PATH="${HOME}/.npm/bin:${PATH}"
 export PATH="${HOME}/.local/bin:${PATH}"
 export PATH="${HOME}/.local/bin/bin:${PATH}"
+export PATH="${HOME}/.cargo/bin:${PATH}"
 export PATH="${HOME}/bin:${PATH}"
 
 export LDFLAGS="-L/usr/local/opt/curl/lib"

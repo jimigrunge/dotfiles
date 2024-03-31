@@ -21,10 +21,10 @@ DOTFILEDIR="${HOME}/.dotfiles"
 LINUX="Linux"
 MAC="Darwin"
 OS="$(uname -s)"
-if [ -x "$(command -v lsb_release)" ]; then
-  # LSBNAME=$(lsb_release -i)
+# if [ -x "$(command -v lsb_release)" ]; then
+if [ "$OS" = "Linux" ]; then
   LSBNAME=$(awk -F= '/^NAME/{print $2}' /etc/os-release)
-  OS_VER="$(lsb_release -sr)"
+  OS_VER="$(grep -oP 'VERSION_ID="\K[\d.]+' /etc/os-release)"
 else
   LSBNAME="Unknown"
   OS_VER="Unknown"
@@ -39,6 +39,7 @@ ALACRITTY_CONFIG=".config/alacritty"
 NVIM_CONFIG=".config/nvim"
 OHMYZSH_DIR="$HOME/.oh-my-zsh"
 OHMYZSH_THEME_DIR="$OHMYZSH_DIR/custom/themes"
+OHMYZSH_PLUGIN_DIR="$OHMYZSH_DIR/custom/plugins"
 OHMYZSH_THEME=".oh-my-zsh/custom/themes/jimigrunge.zsh-theme"
 
 RED='\033[0;31m'
@@ -49,8 +50,10 @@ NOCOLOR='\033[0m'
 # ############################################################
 
 echo -e "${BLUE}"
-echo "Begin installing dotfiles"
-echo -e "${NOCOLOR}"
+echo "--------------------------------"
+echo "-- Begin installing dotfiles ---"
+echo "--------------------------------"
+echo ""
 echo "--------------------------------"
 echo "---- System Configurations  ----"
 echo "--------------------------------"
@@ -61,12 +64,12 @@ echo "Alacrity config dir: ${HOME}/${ALACRITTY_CONFIG}"
 echo "NeoVim config dir: ${HOME}/${NVIM_CONFIG}"
 echo "Zsh theme: ${HOME}/${OHMYZSH_THEME}"
 echo -e "${NOCOLOR}"
-echo "--------------------------------"
-echo ""
+echo -e "${BLUE}"
+# echo ""
 echo "--------------------------------"
 echo "-- Ensure needed  directories --"
 echo "--------------------------------"
-echo ""
+echo -e "${YELLOW}"
 echo "${LOCAL_BIN}"
 mkdir -pv "${LOCAL_BIN}"
 echo "${CONFIG_HOME}"
@@ -75,12 +78,11 @@ echo "${VIM_LOG}"
 mkdir -pv "${VIM_LOG}"
 echo "${COMPOSER_DIR}"
 mkdir -pv "${COMPOSER_DIR}"
-
-echo ""
+echo -e "${BLUE}"
 echo "--------------------------------"
 echo "-- Installing OS applications --"
 echo "--------------------------------"
-echo ""
+echo -e "${NOCOLOR}"
 case "${OS}" in
   ${LINUX}*)
     if [ "${LSBNAME}" != '"Ubuntu"' ]; then
@@ -89,15 +91,10 @@ case "${OS}" in
       echo -e "${NOCOLOR}"
       exit 1
     fi
-
-    echo "Instaling applications for ${LSBNAME}"
-    # . ./install-scripts/ohmyzsh.sh
     . ./install-scripts/ubuntu.sh
     . ./install-scripts/composer.sh
     ;;
   ${MAC}*)
-    echo "Instaling applications for macOS"
-    # . ./install-scripts/ohmyzsh.sh
     . ./install-scripts/macos.sh
     . ./install-scripts/composer.sh
     ;;
@@ -107,11 +104,15 @@ case "${OS}" in
     echo -e "${NOCOLOR}"
     exit 1
 ;; esac
-echo ""
+echo -e "${GREEN}"
+echo "OS install done"
+echo -e "${NOCOLOR}"
+
+echo -e "${BLUE}"
 echo "--------------------------------"
 echo "Begin linking configuration files"
 echo "--------------------------------"
-echo ""
+echo -e "${NOCOLOR}"
 
 # -------------------------------
 # Alacritty terminal
@@ -122,7 +123,9 @@ if [[ -d "${HOME}/${ALACRITTY_CONFIG}" ]]; then
   echo -e "${NOCOLOR}"
   mv -f "${HOME}/${ALACRITTY_CONFIG}" "${HOME}/${ALACRITTY_CONFIG}.${TIMESTAMP}"
 fi
+echo -e "${YELLOW}"
 echo "Creating symlink to Alacritty config"
+echo -e "${NOCOLOR}"
 ln -sf "${DOTFILEDIR}/${ALACRITTY_CONFIG}" "${HOME}/${ALACRITTY_CONFIG}"
 
 # -------------------------------
@@ -134,20 +137,10 @@ if [[ -d "${HOME}/${NVIM_CONFIG}" ]]; then
   echo -e "${NOCOLOR}"
   mv -f "${HOME}/${NVIM_CONFIG}" "${HOME}/${NVIM_CONFIG}.${TIMESTAMP}"
 fi
+echo -e "${YELLOW}"
 echo "Creating symlink to NeoVim config"
+echo -e "${NOCOLOR}"
 ln -sf "${DOTFILEDIR}/${NVIM_CONFIG}" "${HOME}/${NVIM_CONFIG}"
-
-# -------------------------------
-# ZSH theme
-# -------------------------------
-if [ -e "${HOME}/${OHMYZSH_THEME}" ]; then
-  echo -e "${YELLOW}"
-  echo "Backing up existing OhMyZsh theme to ${HOME}/${OHMYZSH_THEME}.${TIMESTAMP}"
-  echo -e "${NOCOLOR}"
-  mv "${HOME}/${OHMYZSH_THEME}" "${HOME}/${OHMYZSH_THEME}.${TIMESTAMP}"
-fi
-echo "Creating symlink to ZSH theme"
-ln -sf "${DOTFILEDIR}/${OHMYZSH_THEME}" "${HOME}/${OHMYZSH_THEME}"
 
 # -------------------------------
 # Symlink files/folders to ${HOME}
@@ -160,56 +153,45 @@ for file in "${files[@]}"; do
     echo -e "${NOCOLOR}"
     mv "${HOME}/${file}" "${HOME}/${file}.${TIMESTAMP}"
   fi
+  echo -e "${YELLOW}"
   echo "Copying ${file} to home directory."
+  echo -e "${NOCOLOR}"
   cp "${DOTFILEDIR}/${file}" "${HOME}/${file}"
 done
 
 # -------------------------------
-# Node specific configurations
+# NODE
 # -------------------------------
+echo -e "${BLUE}"
+echo "--------------------------------"
+echo "- Installing node configuration "
+echo "--------------------------------"
+echo -e "${NOCOLOR}"
 . ./install-scripts/node.sh
 
+echo -e "${BLUE}"
 echo "--------------------------------"
 echo "- Installing GetNF font control "
 echo "--------------------------------"
-curl -fsSL https://raw.githubusercontent.com/getnf/getnf/main/install.sh | bash
+if ! [ -x "$(command -v getnf)" ]; then
+  curl -fsSL https://raw.githubusercontent.com/getnf/getnf/main/install.sh | bash
+  echo -e "${GREEN}"
+  echo "GetNF installed"
+else
+  echo -e "${GREEN}"
+  echo "GetNF already installed"
+fi
+echo -e "${NOCOLOR}"
 
+echo -e "${BLUE}"
 echo "--------------------------------"
-echo "- Insure ZSH is default shell --"
+echo "-------- Setting up ZSH --------"
 echo "--------------------------------"
+echo -e "${NOCOLOR}"
 . ./install-scripts/ohmyzsh.sh
-if [ "${SHELL}" != "$(which zsh)" ]; then
-  chsh -s "$(which zsh)"
-  if [ "${SHELL}" != "$(which zsh)" ]; then
-    # reverting back to the previous shell if there are any issues during the process
-    echo -e "${RED}"
-    echo "Error: issue switching default shell to ZSH"
-    echo -e "${NOCOLOR}"
-    exec "$SHELL" -l
-  fi
-fi
-if [ "${SHELL}" = "$(which zsh)" ]; then
-  # source the ZSH configuration
-  echo "Zsh version: $(zsh --version)"
-  # if [[ -f ${HOME}/.zshrc ]]; then
-  #   echo "Sourcing zsh profile"
-  #   source "${HOME}/.zshrc"
-  # fi
-fi
-if [ -e "${HOME}/.zshrc" ]; then
-  echo -e "${YELLOW}"
-  echo "Backing up existing '.zshrc' to ${HOME}/.zshrc.${TIMESTAMP}"
-  echo -e "${NOCOLOR}"
-  mv "${HOME}/.zshrc" "${HOME}/.zshrc.${TIMESTAMP}"
-fi
-echo "Copying .zshrc to home directory."
-cp "${DOTFILEDIR}/.zshrc" "${HOME}/.zshrc"
-echo "--------------------------------"
-echo "- ZSH is your default shell    -"
-echo "--------------------------------"
-echo "You may nee to log out and back int to load zsh"
 
-echo ""
-echo "--------------------------------"
-echo "---- Installation Completed ----"
-echo "--------------------------------"
+echo -e "${BLUE}"
+echo "----------------------------------"
+echo "- Dotfile Installation Completed -"
+echo "----------------------------------"
+echo -e "${NOCOLOR}"

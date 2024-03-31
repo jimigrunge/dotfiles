@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo -e "${YELLOW}"
+echo -e "${BLUE}"
 echo "--------------------------------"
 echo "--------- MacOS Setup ----------"
 echo "--------------------------------"
@@ -11,7 +11,7 @@ echo -e "${NOCOLOR}"
 # @param application name
 # ----------------------------------------
 function install_or_upgrade_brew {
-  echo "Attempting to Install/Update ${app}."
+  echo "Attempting to Install/Update ${1}."
   if brew ls --versions "${1}" >/dev/null; then
     HOMEBREW_NO_AUTO_UPDATE=1 brew upgrade "${1}"
   else
@@ -19,9 +19,11 @@ function install_or_upgrade_brew {
   fi
 }
 
+echo -e "${BLUE}"
 echo "--------------------------------"
 echo "--- Checking for Xcode Tools ---"
 echo "--------------------------------"
+echo -e "${NOCOLOR}"
 # ----------------------------------------
 # Only run if the tools are not installed yet
 # To check that try to print the SDK path
@@ -46,9 +48,11 @@ else
   echo -e "${NOCOLOR}"
 fi
 
+echo -e "${BLUE}"
 echo "--------------------------------"
 echo "---- Checking for Homebrew -----"
 echo "--------------------------------"
+echo -e "${NOCOLOR}"
 if ! [ -x "$(command -v brew)" ]; then
   echo -e "${RED}"
   echo 'MacOS requires homebrew package manager'
@@ -59,15 +63,16 @@ else
   echo -e "${GREEN}"
   echo "Homebrew found"
   echo -e "${NOCOLOR}"
-  echo ""
 fi
 
 if [ -x "$(command -v brew)" ]; then
   brew update
 
+  echo -e "${BLUE}"
   echo "--------------------------------"
   echo "- Installing command line tools-"
   echo "--------------------------------"
+  echo -e "${NOCOLOR}"
   apps=(git node go lsd mcfly php jq nvim tmux composer phive)
   for app in "${apps[@]}"; do
     install_or_upgrade_brew "${app}"
@@ -102,6 +107,8 @@ else
   echo -e "${NOCOLOR}"
 fi
 
+echo -e "$GREEN"
 echo "--------------------------------"
-echo -e "${GREEN} OS setup complete ${NOCOLOR}"
+echo "------ OS setup complete -------"
 echo "--------------------------------"
+echo -e "$NOCOLOR"

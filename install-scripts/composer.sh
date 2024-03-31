@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo -e "${YELLOW}"
+echo -e "${BLUE}"
 echo "--------------------------------"
 echo "------- Composer Setup ---------"
 echo "--------------------------------"
@@ -26,6 +26,7 @@ if ! [ -x "$(command -v composer)" ]; then
     RESULT=$?
     rm composer-setup.php
     mv composer.phar "$HOME/bin/composer"
+    export PATH=${HOME}/bin:${PATH}
     echo "composer setup result: ${RESULT}"
 
     export PATH=${COMPOSER_DIR}/vendor/bin:${CONFIG_HOME}/composer/vendor/bin:${PATH}
@@ -36,21 +37,31 @@ if ! [ -x "$(command -v composer)" ]; then
 fi
 
 if [ -x "$(command -v composer)" ]; then
+  echo -e "${BLUE}"
   echo "--------------------------------"
   echo "- Installing PHP tool libraries "
   echo "--------------------------------"
+  echo -e "${NOCOLOR}"
 
-  echo " installing phpcs and phpcbf"
-  composer global require --no-interaction "squizlabs/php_codesniffer=*"
+  if ! [ -x "$(command -v phpcs)" ]; then
+    echo " installing phpcs and phpcbf"
+    composer global require --no-interaction "squizlabs/php_codesniffer=*"
+  fi
 
-  echo " installing php-cs-fixer"
-  composer global require --no-interaction "friendsofphp/php-cs-fixer"
+  if ! [ -x "$(command -v php-cs-fixer)" ]; then
+    echo " installing php-cs-fixer"
+    composer global require --no-interaction "friendsofphp/php-cs-fixer"
+  fi
 
-  echo " installing phpmd"
-  composer global require --no-interaction "phpmd/phpmd"
+  if ! [ -x "$(command -v phpmd)" ]; then
+    echo " installing phpmd"
+    composer global require --no-interaction "phpmd/phpmd"
+  fi
 
-  echo " installing phpunit"
-  composer global require --no-interaction "phpunit/phpunit"
+  if ! [ -x "$(command -v phpunit)" ]; then
+    echo " installing phpunit"
+    composer global require --no-interaction "phpunit/phpunit"
+  fi
 
   if ! [ -x "$(command -v phive)" ]; then
     cd "${COMPOSER_DIR}"
@@ -63,7 +74,9 @@ if [ -x "$(command -v composer)" ]; then
     cd "${DOTFILEDIR}"
   fi
 
+  echo -e "${GREEN}"
   echo "--------------------------------"
-  echo -e "${GREEN} PHP tools installed ${NOCOLOR}"
+  echo "----- PHP tools installed ------"
   echo "--------------------------------"
+  echo -e "${NOCOLOR}"
 fi

@@ -1,23 +1,20 @@
 #!/usr/bin/env bash
 
 echo -e "${YELLOW}"
-echo "--------------------------------"
-echo "--------- Node Setup -----------"
-echo "--------------------------------"
+echo "Fix NPM directory permissions"
 echo -e "${NOCOLOR}"
 
-echo ""
-echo "--------------------------------"
-echo "- Fix NPM directory permissions "
-echo "--------------------------------"
-echo ""
 mkdir -pv "${NPM_DIR}"
 npm config set prefix "${NPM_DIR}"
 export PATH=${NPM_DIR}/bin:${PATH}
-echo ""
-echo "--------------------------------"
-echo "-- Installing Node Libraries ---"
-echo "--------------------------------"
+
+echo -e "${GREEN}"
+echo "Permissions set"
+echo -e "${NOCOLOR}"
+
+echo -e "${YELLOW}"
+echo "Installing Node Libraries"
+echo -e "${NOCOLOR}"
 
 echo "Checking for n npm version manager"
 if ! [ -x "$(command -v n)" ]; then
@@ -37,6 +34,8 @@ if ! [ -x "$(command -v tsc)" ]; then
   npm install -g typescript
 fi
 
+echo -e "${GREEN}"
 echo "--------------------------------"
-echo -e "${GREEN} Node libraries installed ${NOCOLOR}"
+echo "--- Node libraries installed ---"
 echo "--------------------------------"
+echo -e "${NOCOLOR}"

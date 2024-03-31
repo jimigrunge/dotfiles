@@ -1,6 +1,11 @@
+# Load aliases
+source $HOME/.alias
+
 ZSH_DISABLE_COMPFIX='true'
 
 export EDITOR='nvim'
+
+[ -f "$HOME/.ssh/.env" ] && source "$HOME/.ssh/.env"
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -23,12 +28,6 @@ plugins=( dircycle zsh-autosuggestions zsh-syntax-highlighting web-search )
 # Initialize Oh-My-Zsh
 source $ZSH/oh-my-zsh.sh
 
-export OPENAI_API_KEY=""
-[ -f "$HOME/.ssh/.env" ] && source "$HOME/.ssh/.env"
-
-# Load aliases
-source $HOME/.alias
-
 # Build path
 export PATH="/Users/jgrundner/Library/Python/2.7/bin:${PATH}"
 export PATH="/usr/local/opt/curl/bin:${PATH}"
@@ -39,6 +38,7 @@ export PATH="${HOME}/.composer/tools:${PATH}"
 export PATH="${HOME}/.npm/bin:${PATH}"
 export PATH="${HOME}/.local/bin:${PATH}"
 export PATH="${HOME}/.local/bin/bin:${PATH}"
+export PATH="${HOME}/.cargo/bin:${PATH}"
 export PATH="${HOME}/bin:${PATH}"
 
 # C flags
@@ -47,13 +47,13 @@ export CPPFLAGS="-I/usr/local/opt/curl/include"
 
 # Delta diff options
 export DELTA_FEATURES='+side-by-side line-numbers navigate decorations'
+export OPENAI_API_KEY=""
 
 # Fuzzy finder
 [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
 
 # Perl
-# eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
-eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"
+[ -d $HOME/perl5 ] && eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
 
 # EXA configuration
 export N_PREFIX=$HOME/.local/bin
@@ -67,19 +67,21 @@ export HISTTIMEFORMAT="%Y-%m-%d %T "
 # McFly Ctrl+r history search
 eval "$(mcfly init zsh)"
 # Atuin Ctrl+r hstory search
-eval "$(atuin init zsh)"
+# eval "$(atuin init zsh)"
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/jgrundner/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/jgrundner/opt/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/jgrundner/opt/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/jgrundner/opt/anaconda3/bin:$PATH"
-    fi
+if [[ -f '/Users/jgrundner/opt/anaconda3/bin/conda' ]];then
+  # >>> conda initialize >>>
+  # !! Contents within this block are managed by 'conda init' !!
+  __conda_setup="$('/Users/jgrundner/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+  if [ $? -eq 0 ]; then
+      eval "$__conda_setup"
+  else
+      if [ -f "/Users/jgrundner/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+          . "/Users/jgrundner/opt/anaconda3/etc/profile.d/conda.sh"
+      else
+          export PATH="/Users/jgrundner/opt/anaconda3/bin:$PATH"
+      fi
+  fi
+  unset __conda_setup
+  # <<< conda initialize <<<
 fi
-unset __conda_setup
-# <<< conda initialize <<<
