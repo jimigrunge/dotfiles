@@ -1,20 +1,10 @@
-source "${HOME}/.alias"
+# Load aliases
+[ -f "${HOME}/.shell_conf/.alias" ] && source "{$HOME}/.shell_conf/.alias"
+[ -f "${HOME}/.shell_conf/.paths" ] && source "${HOME}/.shell_conf/.paths"
 
 export EDITOR='nvim'
 
-[ -f "$HOME/.ssh/.env" ] && source "$HOME/.ssh/.env"
-
-export PATH="/Users/jgrundner/Library/Python/2.7/bin:${PATH}"
-export PATH="/usr/local/opt/curl/bin:${PATH}"
-export PATH="/usr/local/sbin:${PATH}"
-export PATH="/usr/local/opt/unzip/bin:${PATH}"
-export PATH="${HOME}/.composer/vendor/bin:${PATH}"
-export PATH="${HOME}/.composer/tools:${PATH}"
-export PATH="${HOME}/.npm/bin:${PATH}"
-export PATH="${HOME}/.local/bin:${PATH}"
-export PATH="${HOME}/.local/bin/bin:${PATH}"
-export PATH="${HOME}/.cargo/bin:${PATH}"
-export PATH="${HOME}/bin:${PATH}"
+[ -f "${HOME}/.ssh/.env" ] && source "${HOME}/.ssh/.env"
 
 export LDFLAGS="-L/usr/local/opt/curl/lib"
 export CPPFLAGS="-I/usr/local/opt/curl/include"
@@ -35,4 +25,4 @@ export HISTCONTROL=ignoreboth
 export HISTTIMEFORMAT="%Y-%m-%d %T "
 
 eval "$(mcfly init bash)"
-eval "$(atuin init bash)"
+# eval "$(atuin init bash)"

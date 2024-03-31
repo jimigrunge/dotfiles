@@ -37,6 +37,7 @@ VIM_LOG=$HOME/.log/vim
 NPM_DIR=$HOME/.npm
 ALACRITTY_CONFIG=".config/alacritty"
 NVIM_CONFIG=".config/nvim"
+SHELL_CONFIG_DIR=".shell_conf"
 OHMYZSH_DIR="$HOME/.oh-my-zsh"
 OHMYZSH_THEME_DIR="$OHMYZSH_DIR/custom/themes"
 OHMYZSH_PLUGIN_DIR="$OHMYZSH_DIR/custom/plugins"
@@ -143,9 +144,34 @@ echo -e "${NOCOLOR}"
 ln -sf "${DOTFILEDIR}/${NVIM_CONFIG}" "${HOME}/${NVIM_CONFIG}"
 
 # -------------------------------
+# Shell config
+# -------------------------------
+if [[ -d "${HOME}/${SHELL_CONFIG_DIR}" ]]; then
+  echo -e "${YELLOW}"
+  echo "Backing up existing shell_configs to ${HOME}/${SHELL_CONFIG_DIR}.${TIMESTAMP}"
+  echo -e "${NOCOLOR}"
+  mv -f "${HOME}/${SHELL_CONFIG_DIR}" "${HOME}/${SHELL_CONFIG_DIR}.${TIMESTAMP}"
+fi
+
+echo -e "${YELLOW}"
+echo "Installing shell_configs"
+echo -e "${NOCOLOR}"
+
+mkdir -p "${HOME}/${SHELL_CONFIG_DIR}"
+cp "${DOTFILEDIR}/${SHELL_CONFIG_DIR}/.alias" "${HOME}/${SHELL_CONFIG_DIR}/.alias"
+cp "${DOTFILEDIR}/${SHELL_CONFIG_DIR}/.paths" "${HOME}/${SHELL_CONFIG_DIR}/.paths"
+
+if [[ -f "${HOME}/.bashrc" ]];then
+  cp "${DOTFILEDIR}/.bashrc" "${HOME}/${SHELL_CONFIG_DIR}/.bashrc_local"
+  echo "[ -f \"${HOME}/.shell_conf/.bashrc_local\" ] && source ${HOME}/.shell_conf/.bashrc_local" >> "${HOME}/.bashrc"
+else
+  cp "${DOTFILEDIR}/.bashrc" "${HOME}/.bashrc"
+fi
+
+# -------------------------------
 # Symlink files/folders to ${HOME}
 # -------------------------------
-files=(".alias" ".CodeSniffer.conf" ".gitconfig" ".tmux.conf" ".vimrc" ".zshrc")
+files=(".CodeSniffer.conf" ".gitconfig" ".tmux.conf" ".vimrc" ".zshrc")
 for file in "${files[@]}"; do
   if [ -e "${HOME}/${file}" ]; then
     echo -e "${YELLOW}"

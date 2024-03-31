@@ -98,19 +98,6 @@ if ! [ -x "$(command -v cargo)" ]; then
     install_app cargo
   fi
 fi
-if ! [ -x "$(command -v exa)" ]; then
-  # Pre Ubuntu 20.10 exa needs to be compiled manually
-  if (( $(echo "${OS_VER} < 20.10" | bc -l) )); then
-    echo 'Attempting to Install exa.' >&2
-    echo -e "$RED"
-    echo "ERROR: 'apt-get exa' requires Ubuntu >= 20.10, you have version ${OS_VER}." >&2
-    echo -e "$NOCOLOR"
-    echo '  attempting to install with cargo.'
-    cargo install exa
-  else
-    install_app "exa"
-  fi
-fi
 if ! [ -x "$(command -v lsd)" ]; then
   # Pre Ubuntu 23.04 lsd needs to be compiled manually
   if (( $(echo "${OS_VER} < 23.04" | bc -l) )); then
