@@ -1,5 +1,5 @@
 # Load aliases
-[ -f "${HOME}/.shell_conf/.alias" ] && source "{$HOME}/.shell_conf/.alias"
+[ -f "${HOME}/.shell_conf/.alias" ] && source "${HOME}/.shell_conf/.alias"
 [ -f "${HOME}/.shell_conf/.paths" ] && source "${HOME}/.shell_conf/.paths"
 
 ZSH_DISABLE_COMPFIX='true'
@@ -55,7 +55,7 @@ export HISTTIMEFORMAT="%Y-%m-%d %T "
 # McFly Ctrl+r history search
 eval "$(mcfly init zsh)"
 # Atuin Ctrl+r hstory search
-# eval "$(atuin init zsh)"
+eval "$(atuin init zsh)"
 
 if [[ -f '/Users/jgrundner/opt/anaconda3/bin/conda' ]];then
   # >>> conda initialize >>>

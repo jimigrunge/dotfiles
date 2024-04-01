@@ -73,7 +73,7 @@ if [ -x "$(command -v brew)" ]; then
   echo "- Installing command line tools-"
   echo "--------------------------------"
   echo -e "${NOCOLOR}"
-  apps=(git node go lsd mcfly php jq nvim tmux composer phive)
+  apps=(git node go lsd mcfly php jq nvim tmux composer phive bat tldr lazygit fd atuin "git-delta")
   for app in "${apps[@]}"; do
     install_or_upgrade_brew "${app}"
   done

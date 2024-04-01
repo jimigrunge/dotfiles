@@ -16,7 +16,7 @@ function install_app {
   fi
 }
 
-apps=("software-properties-common" "curl" "git" "wget" "bc" "zsh" "xclip" "jq" "tmux" "zip" "unzip" "perl")
+apps=("software-properties-common" "curl" "git" "wget" "bc" "zsh" "xclip" "jq" "tmux" "zip" "unzip" "perl" "tldr" "lazygit")
 for app in "${apps[@]}"; do
   install_app "$app"
 done
@@ -98,6 +98,22 @@ if ! [ -x "$(command -v cargo)" ]; then
     install_app cargo
   fi
 fi
+
+if ! [ -x "$(command -v bat)" ]; then
+  # Pre Ubuntu 20.04 bat needs to be installed manually
+  if (( $(echo "${OS_VER} < 20.04" | bc -l) )); then
+    echo 'Attempting to Install bat.'
+    curl -LO https://github.com/sharkdp/bat/releases/download/v0.18.3/bat_0.18.3_amd64.deb
+    sudo dpkg -i bat_0.18.3_amd64.deb
+    rm -f bat_0.18.3_amd64.deb
+  else
+    if ! [ -x "$(command -v batcat)" ]; then
+      install_app bat
+    fi
+    ln -s /usr/bin/batcat "${LOCAL_BIN}/bat"
+  fi
+fi
+
 if ! [ -x "$(command -v lsd)" ]; then
   # Pre Ubuntu 23.04 lsd needs to be compiled manually
   if (( $(echo "${OS_VER} < 23.04" | bc -l) )); then
@@ -117,6 +133,35 @@ if ! [ -x "$(command -v phive)" ]; then
   wget -O phive.phar "https://phar.io/releases/phive.phar"
   chmod +x phive.phar
   mv phive.phar "${LOCAL_BIN}/phive"
+fi
+
+if ! [ -x "$(command -v lazygit)" ]; then
+  echo 'Attempting to Install lazygit.'
+  LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+  curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+  tar xf lazygit.tar.gz lazygit
+  sudo install lazygit /usr/local/bin
+fi
+
+if ! [ -x "$(command -v fdfind)" ]; then
+  # Pre Ubuntu 20.04 fd-find needs to be installed manually
+  if (( $(echo "${OS_VER} < 20.04" | bc -l) )); then
+    echo 'Attempting to Install fd-find.'
+    curl -LO https://github.com/sharkdp/fd/releases/download/v9.0.0/fd_9.0.0_amd64.deb
+    sudo dpkg -i fd_9.0.0_amd64.deb
+    rm -f fd_9.0.0_amd64.deb
+  else
+    install_app fd-find
+    ln -s $(which fdfind) "${LOCAL_BIN}/fd"
+  fi
+fi
+
+if ! [ -x "$(command -v atuin)" ]; then
+  cargo install atuin
+fi
+
+if ! [ -x "$(command -v delta)" ]; then
+  cargo install git-delta
 fi
 
 echo -e "$GREEN"

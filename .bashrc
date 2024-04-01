@@ -1,5 +1,5 @@
 # Load aliases
-[ -f "${HOME}/.shell_conf/.alias" ] && source "{$HOME}/.shell_conf/.alias"
+[ -f "${HOME}/.shell_conf/.alias" ] && source "${HOME}/.shell_conf/.alias"
 [ -f "${HOME}/.shell_conf/.paths" ] && source "${HOME}/.shell_conf/.paths"
 
 export EDITOR='nvim'
@@ -25,4 +25,4 @@ export HISTCONTROL=ignoreboth
 export HISTTIMEFORMAT="%Y-%m-%d %T "
 
 eval "$(mcfly init bash)"
-# eval "$(atuin init bash)"
+eval "$(atuin init bash)"
