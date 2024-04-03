@@ -16,7 +16,7 @@ alias sfprod='app/console --env=prod'
 alias weather='curl wttr.in/Lockport'
 
 # list commands
-if [ -x "$(which lsd)" ]; then
+# if [ -f "$(which lsd)" ]; then
     alias l='lsd -A1'
     alias ls='lsd'
     alias la='lsd -Ah'
@@ -26,14 +26,14 @@ if [ -x "$(which lsd)" ]; then
     alias lstree='lsd -l --icon auto --tree --header --date +"%b %d, %Y %R"'
     alias lstree.='lsd -lg --icon auto --tree --header --date +"%b %d, %Y %R" .'
     alias l.='lsd -dl  --icon auto --header . --color=auto'
-else
-    alias l='ls -ahl'
-    alias la='ls -ah'
-    alias lsa='ls -al'
-    alias ll='ls -l'
-    alias lla='ls -ahl'
-    alias l.=' ls -dl .* --color=auto'
-fi
+# else
+#     alias l='ls -ahl'
+#     alias la='ls -ah'
+#     alias lsa='ls -al'
+#     alias ll='ls -l'
+#     alias lla='ls -ahl'
+#     alias l.=' ls -dl .* --color=auto'
+# fi
 alias vf='vim $(fzf --height 40% --reverse)'
 
 if [[ "$CONSOLE_COLORLS" = true && -f $(which lsd) ]]; then

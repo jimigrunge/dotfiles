@@ -1,6 +1,6 @@
 # Load aliases
-[ -f "${HOME}/.shell_conf/.alias" ] && source "${HOME}/.shell_conf/.alias"
-[ -f "${HOME}/.shell_conf/.paths" ] && source "${HOME}/.shell_conf/.paths"
+[ -f "${HOME}/.config/shell/.alias" ] && source "${HOME}/.config/shell/.alias"
+[ -f "${HOME}/.config/shell/.paths" ] && source "${HOME}/.config/shell/.paths"
 
 ZSH_DISABLE_COMPFIX='true'
 
