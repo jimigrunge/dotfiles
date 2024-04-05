@@ -41,6 +41,7 @@ spec "user.nvim-tree"                   -- A file explorer tree for neovim.
 spec "user.vim-undotree"                -- View undo history
 spec "user.vim-bbye"                    -- Delete buffers and close windows.
 spec "user.lualine"                     -- A blazing fast and easy to configure neovim statusline.
+spec "user.incline"                     -- File labels
 spec "user.navic"                       -- A neovim window navigator.
 spec "user.symbols-outline"             -- A tree like view for symbols in neovim using the Language Server Protocol.
 spec "user.toggleterm"                  -- A neovim terminal in a floating window.
