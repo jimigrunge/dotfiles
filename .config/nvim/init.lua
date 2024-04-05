@@ -74,6 +74,7 @@ spec "user.gitsigns"                    -- A git diff and git status plugin.
 spec "user.diffview"                    -- A git diff viewer.
 spec "user.gitlinker"                   -- A plugin for opening files and line numbers on GitHub, Bitbucket, Gitlab, and Gitea from neovim.
 spec "user.vim-fugitive"                -- A git wrapper for neovim.
+spec "user.lazygit"                     -- LazyGit window
 spec "user.colorizer"                   -- A plugin for colorizing hex codes in neovim.
 spec "user.color-picker"                -- A color picker for neovim.
 spec "user.fidget"                      -- A plugin for creating and managing snippets.

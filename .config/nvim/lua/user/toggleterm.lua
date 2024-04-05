@@ -14,7 +14,7 @@ function M.config()
   local term_opts = { silent = true }
   local wk = require "which-key"
   wk.register {
-    ["<leader>gg"] = { "<cmd>lua _LAZYGIT_TOGGLE()<cr>", "Lazy[G]it" },
+    -- ["<leader>gg"] = { "<cmd>lua _LAZYGIT_TOGGLE()<cr>", "Lazy[G]it" },
     ["<leader>tg"] = { "<cmd>lua _LAZYGIT_TOGGLE()<cr>", "Lazy[G]it" },
     ["<leader>tn"] = { "<cmd>lua _NODE_TOGGLE()<cr>", "[N]ode" },
     ["<leader>tu"] = { "<cmd>lua _NCDU_TOGGLE()<cr>", "NCD[U]" },
