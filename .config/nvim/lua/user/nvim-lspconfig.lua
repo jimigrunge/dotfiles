@@ -44,7 +44,7 @@ local function lsp_keymaps(bufnr)
     silent = true,
     desc = "Go to [i]mplementation",
   })
-  keymap(bufnr, "n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", {
+  keymap(bufnr, "n", "<C-S>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", {
     noremap = true,
     silent = true,
     desc = "Signature [k]elp",

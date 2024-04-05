@@ -80,7 +80,7 @@ function M.config()
     },
     ["K"] = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover" },
     ["<C-a>"] = { "gg<S-v>G", "Select [A]ll" },
-    ["<C-k>"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature" }
+    ["<C-S>"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature" }
   }
 
   local v_mappings = {
