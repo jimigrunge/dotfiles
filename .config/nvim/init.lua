@@ -60,6 +60,7 @@ spec "user.trouble"                     -- A pretty list for showing diagnostics
 spec "user.schemastore"                 -- A collection of JSON schemas for various languages.
 spec "user.lsp-signature"               -- Show function signature when you type.
 spec "user.lsp-lines"                   -- Highlight the current line and column for LSP clients.
+spec "user.goto-preview"                -- Goto previews in popup windows
 spec "user.nvim-lightbulb"              -- A plugin that shows a lightbulb in the sign column for actions.
 spec "user.nvim-code-action-menu"       -- A plugin for showing code actions in a floating window.
 spec "user.illuminate"                  -- A plugin for highlighting other uses of the word under the cursor.
