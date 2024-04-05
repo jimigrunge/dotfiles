@@ -35,10 +35,12 @@ function M.config()
   local diagnostics = {
     "diagnostics",
     sources = { "nvim_diagnostic" },
-    sections = { "error", "warn" },
+    sections = { "error", "warn", "info", "hint" },
     symbols = {
       error = icons.diagnostics.BoldError,
       warn = icons.diagnostics.BoldWarning,
+      info = icons.diagnostics.BoldInformation .. '',
+      hint = icons.diagnostics.BoldHint .. ' ',
     },
     colored = false,
     update_in_insert = false,

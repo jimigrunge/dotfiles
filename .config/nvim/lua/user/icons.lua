@@ -40,6 +40,7 @@ return {
     Unit = " ",
     Value = " ",
     Variable = " ",
+    Window = "  "
   },
   git = {
     LineAdded = "",
