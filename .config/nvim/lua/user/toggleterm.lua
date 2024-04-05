@@ -99,7 +99,7 @@ function M.config()
 
   local btop = Terminal:new({ cmd = "btop", hidden = true, size = 80, direction = "horizontal" })
   function _BTOP_TOGGLE()
-    bpytop:toggle()
+    btop:toggle()
   end
 
   local python = Terminal:new({ cmd = "python", hidden = true, size = 80, direction = "horizontal" })
