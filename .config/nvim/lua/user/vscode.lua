@@ -12,8 +12,8 @@ function M.config()
 
   local wk = require "which-key"
   wk.register {
-      ["<leader>vd"] = { "<cmd>lua require('vscode').change_style('dark')<cr>", "VS Code [D]ark" },
-      ["<leader>vl"] = { "<cmd>lua require('vscode').change_style('light')<cr>", "VS Code [L]ight" },
+      ["<leader>vd"] = { "<cmd>lua require('vscode').load('dark')<cr>", "VS Code [D]ark" },
+      ["<leader>vl"] = { "<cmd>lua require('vscode').load('light')<cr>", "VS Code [L]ight" },
   }
 end
 
