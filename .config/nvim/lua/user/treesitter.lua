@@ -72,6 +72,15 @@ function M.config()
     },
     indent = { enable = true, disable = { "yaml" } },
     modules = {},
+    incremental_selection = {
+      enable = true,
+      keymaps = {
+        init_selection = "<C-space>",
+        node_incremental = "<C-space>",
+        scope_incremental = false,
+        node_decremental = "<bs>",
+      },
+    },
     -- Tresitter-Textobjects plugin
     textobjects = {
       swap = {
@@ -133,7 +142,7 @@ function M.config()
     playground = {
       enable = true,
       disable = {},
-      updatetime = 25,       -- Debounced time for highlighting nodes in the playground from source code
+      updatetime = 25,         -- Debounced time for highlighting nodes in the playground from source code
       persist_queries = false, -- Whether the query persists across vim sessions
       keybindings = {
         toggle_query_editor = "o",
