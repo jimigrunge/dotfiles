@@ -86,4 +86,5 @@ spec "user.glow"                        -- A markdown previewer for neovim.
 spec "user.neogen"                      -- A plugin for generating LSP snippets.
 spec "user.whichkey"                    -- A plugin for displaying keybindings in neovim.
 spec "user.zen-mode"                    -- Distractions free editing
+spec "user.vim-maximizer"               -- Maximize/minimize a split
 require "user.lazy"                     -- Lazy load plugins.
