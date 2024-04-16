@@ -1,3 +1,4 @@
+-- Open lazygit in a floating window
 local M = {
   "kdheepak/lazygit.nvim",
   cmd = {
@@ -11,22 +12,19 @@ local M = {
   dependencies = {
     "nvim-lua/plenary.nvim",
   },
+  keys = {
+    { "<leader>gg", "<cmd>LazyGit<cr>", desc = "Open Lazy[G]it" }
+  }
 }
 
 function M.config()
   local status_ok, lazygit = pcall(require, "lazygit")
   if not status_ok then
-    print "LazyGit not loaded"
+    print 'Lazygit not loaded'
     return
   end
 
-  local wk = require "which-key"
-  wk.register {
-    ["<leader>gg"] = { "<cmd>LazyGit<cr>", "Lazy [G]it" },
-  }
-
-  -- your config here
-  lazygit.setup()
+  lazygit.setup{}
 end
 
 return M
