@@ -137,6 +137,15 @@ function M.config()
 
       lualine_x = {
         {
+          require("noice").api.status.message.get,
+          cond = require("noice").api.status.message.has,
+        },
+        {
+          require("noice").api.status.mode.get,
+          cond = require("noice").api.status.mode.has,
+          color = { fg = "#ffff00" },
+        },
+        {
           'copilot',
           show_colors = true,
         }, "tabs", spaces, "encoding", filetype,
