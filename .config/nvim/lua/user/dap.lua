@@ -1,11 +1,13 @@
 -- A plugin for debugging in neovim.
 local M = {
   "mfussenegger/nvim-dap",
-  commit = "9adbfdca13afbe646d09a8d7a86d5d031fb9c5a5",
+  commit = "99807078c5089ed30e0547aa4b52c5867933f426",
+  -- commit = "9adbfdca13afbe646d09a8d7a86d5d031fb9c5a5",
   dependencies = {
     {
       "rcarriga/nvim-dap-ui",
-      commit = "d845ebd798ad1cf30aa4abd4c4eff795cdcfdd4f",
+      commit = "727c032a8f63899baccb42a1c26f27687e62fc5e",
+      -- commit = "d845ebd798ad1cf30aa4abd4c4eff795cdcfdd4f",
       dependencies = {
         "mfussenegger/nvim-dap"
       }
@@ -40,19 +42,19 @@ function M.config()
   local mason_path = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/")
 
   local wk = require "which-key"
-  wk.register {
-    ["<leader>db"] = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle [B]reakpoint" },
-    ["<leader>dB"] = { "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>", "Conditional [B]reakpoint" },
-    ["<leader>dc"] = { "<cmd>lua require'dap'.continue()<cr>", "[C]ontinue" },
-    -- ["<leader>de"] = { "<cmd>lua require'dapui'.eval(<expression>)<cr>", "[E]val Expression" },
-    ["<leader>di"] = { "<cmd>lua require'dap'.step_into()<cr>", "Step [I]nto" },
-    -- ["<leader>dl"] = { "<cmd>lua require'dap'.run_last()<cr>", "Run [L]ast" },
-    ["<leader>do"] = { "<cmd>lua require'dap'.step_over()<cr>", "Step [O]ver" },
-    ["<leader>dO"] = { "<cmd>lua require'dap'.step_out()<cr>", "Step [O]ut" },
-    -- ["<leader>dr"] = { "<cmd>lua require'dap'.repl.open()<cr>", "[R]EPL" },
-    -- ["<leader>dt"] = { "<cmd>lua require'dap'.terminate()<cr>", "[T]erminate" },
-    ["<leader>du"] = { "<cmd>lua require'dapui'.toggle()<cr>", "Dap[U]i Toggle" },
-  }
+  wk.add({
+    {"<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", desc="Toggle [B]reakpoint" },
+    {"<leader>dB", "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>", desc="Conditional [B]reakpoint" },
+    {"<leader>dc", "<cmd>lua require'dap'.continue()<cr>", desc="[C]ontinue" },
+    -- {"<leader>de", "<cmd>lua require'dapui'.eval(<expression>)<cr>", desc="[E]val Expression" },
+    {"<leader>di", "<cmd>lua require'dap'.step_into()<cr>", desc="Step [I]nto" },
+    -- {"<leader>dl", "<cmd>lua require'dap'.run_last()<cr>", desc="Run [L]ast" },
+    {"<leader>do", "<cmd>lua require'dap'.step_over()<cr>", desc="Step [O]ver" },
+    {"<leader>dO", "<cmd>lua require'dap'.step_out()<cr>", desc="Step [O]ut" },
+    -- {"<leader>dr", "<cmd>lua require'dap'.repl.open()<cr>", desc="[R]EPL" },
+    -- {"<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", desc="[T]erminate" },
+    {"<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", desc="Dap[U]i Toggle" },
+  }, opts)
 
   vim.fn.sign_define("DapBreakpoint",
     {

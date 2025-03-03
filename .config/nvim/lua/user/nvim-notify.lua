@@ -1,7 +1,8 @@
 -- A fancy notification manager for neovim.
 local M = {
   "rcarriga/nvim-notify",
-  commit = "1576123bff3bed67bc673a3076e591abfe5d8ca9",
+  commit = "a3020c2cf4dfc4c4f390c4a21e84e35e46cf5d17",
+  -- commit = "d333b6f167900f6d9d42a59005d82919830626bf",
 }
 
 function M.config()
@@ -14,9 +15,9 @@ function M.config()
   local icons = require "user.icons"
 
   local wk = require "which-key"
-  wk.register {
-    ["<leader>sm"] = { "<cmd>Telescope notify<cr>", "[M]essages" },
-  }
+  wk.add({
+    {"<leader>sm", "<cmd>Telescope notify<cr>", desc="[M]essages" },
+  }, opts)
 
   ---@diagnostic disable-next-line: missing-fields
   notify.setup({
@@ -24,7 +25,8 @@ function M.config()
     -- max_width = function() return nil end,
     -- max_height = function() return nil end,
     stages = "fade_in_slide_out",
-    background_colour = "NotifyBackground",
+    background_colour = "#000000",
+    -- background_colour = "NotifyBackground",
     -- on_open = function() return nil end,
     -- on_close = function() return nil end,
     minimum_width = 50,

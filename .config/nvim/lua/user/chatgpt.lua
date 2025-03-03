@@ -2,7 +2,8 @@
 local M = {
   "jackMort/ChatGPT.nvim",
   event = "VeryLazy",
-  commit = "16eddf50d92fd089726f78d039982f8561bf90e6",
+  commit = "5b6d296eefc75331e2ff9f0adcffbd7d27862dd6",
+  -- commit = "16eddf50d92fd089726f78d039982f8561bf90e6",
   dependencies = {
     "MunifTanjim/nui.nvim",
     "nvim-lua/plenary.nvim",
@@ -21,22 +22,37 @@ function M.config()
   local icons = require "user.icons"
 
   local wk = require "which-key"
-  wk.register {
-    ["<leader>Ca"] = { "<cmd>ChatGPTRun add_tests<CR>", "Add Tests", mode = { "n", "v" } },
-    ["<leader>Cc"] = { "<cmd>ChatGPT<CR>", "ChatGPT" },
-    ["<leader>Cd"] = { "<cmd>ChatGPTRun docstring<CR>", "Docstring", mode = { "n", "v" } },
-    ["<leader>Ce"] = { "<cmd>ChatGPTEditWithInstruction<CR>", "Edit with instruction", mode = { "n", "v" } },
-    ["<leader>Cf"] = { "<cmd>ChatGPTRun fix_bugs<CR>", "Fix Bugs", mode = { "n", "v" } },
-    ["<leader>Cg"] = { "<cmd>ChatGPTRun grammar_correction<CR>", "Grammar Correction", mode = { "n", "v" } },
-    ["<leader>Ci"] = { "<cmd>ChatGPTCompleteCode<CR>", "Complete Code", mode = { "n", "v" } },
-    ["<leader>Ck"] = { "<cmd>ChatGPTRun keywords<CR>", "Keywords", mode = { "n", "v" } },
-    ["<leader>Cl"] = { "<cmd>ChatGPTRun code_readability_analysis<CR>", "Code Readability Analysis", mode = { "n", "v" } },
-    ["<leader>Co"] = { "<cmd>ChatGPTRun optimize_code<CR>", "Optimize Code", mode = { "n", "v" } },
-    ["<leader>Cr"] = { "<cmd>ChatGPTRun roxygen_edit<CR>", "Roxygen Edit", mode = { "n", "v" } },
-    ["<leader>Cs"] = { "<cmd>ChatGPTRun summarize<CR>", "Summarize", mode = { "n", "v" } },
-    ["<leader>Ct"] = { "<cmd>ChatGPTRun translate<CR>", "Translate", mode = { "n", "v" } },
-    ["<leader>Cx"] = { "<cmd>ChatGPTRun explain_code<CR>", "Explain Code", mode = { "n", "v" } },
-  }
+  wk.add({
+    {"<leader>Ca", "<cmd>ChatGPTRun add_tests<CR>", desc="Add Tests" },
+    {"<leader>Cc", "<cmd>ChatGPT<CR>", desc="ChatGPT" },
+    {"<leader>Cd", "<cmd>ChatGPTRun docstring<CR>", desc="Docstring" },
+    {"<leader>Ce", "<cmd>ChatGPTEditWithInstruction<CR>", desc="Edit with instruction" },
+    {"<leader>Cf", "<cmd>ChatGPTRun fix_bugs<CR>", desc="Fix Bugs" },
+    {"<leader>Cg", "<cmd>ChatGPTRun grammar_correction<CR>", desc="Grammar Correction" },
+    {"<leader>Ci", "<cmd>ChatGPTCompleteCode<CR>", desc="Complete Code" },
+    {"<leader>Ck", "<cmd>ChatGPTRun keywords<CR>", desc="Keywords" },
+    {"<leader>Cl", "<cmd>ChatGPTRun code_readability_analysis<CR>", desc="Code Readability Analysis" },
+    {"<leader>Co", "<cmd>ChatGPTRun optimize_code<CR>", desc="Optimize Code" },
+    {"<leader>Cr", "<cmd>ChatGPTRun roxygen_edit<CR>", desc="Roxygen Edit" },
+    {"<leader>Cs", "<cmd>ChatGPTRun summarize<CR>", desc="Summarize" },
+    {"<leader>Ct", "<cmd>ChatGPTRun translate<CR>", desc="Translate" },
+    {"<leader>Cx", "<cmd>ChatGPTRun explain_code<CR>", desc="Explain Code" },
+  }, opts)
+  wk.add({
+    {"<leader>Ca", "<cmd>ChatGPTRun add_tests<CR>", desc="Add Tests" },
+    {"<leader>Cd", "<cmd>ChatGPTRun docstring<CR>", desc="Docstring" },
+    {"<leader>Ce", "<cmd>ChatGPTEditWithInstruction<CR>", desc="Edit with instruction" },
+    {"<leader>Cf", "<cmd>ChatGPTRun fix_bugs<CR>", desc="Fix Bugs" },
+    {"<leader>Cg", "<cmd>ChatGPTRun grammar_correction<CR>", desc="Grammar Correction" },
+    {"<leader>Ci", "<cmd>ChatGPTCompleteCode<CR>", desc="Complete Code" },
+    {"<leader>Ck", "<cmd>ChatGPTRun keywords<CR>", desc="Keywords" },
+    {"<leader>Cl", "<cmd>ChatGPTRun code_readability_analysis<CR>", desc="Code Readability Analysis" },
+    {"<leader>Co", "<cmd>ChatGPTRun optimize_code<CR>", desc="Optimize Code" },
+    {"<leader>Cr", "<cmd>ChatGPTRun roxygen_edit<CR>", desc="Roxygen Edit" },
+    {"<leader>Cs", "<cmd>ChatGPTRun summarize<CR>", desc="Summarize" },
+    {"<leader>Ct", "<cmd>ChatGPTRun translate<CR>", desc="Translate" },
+    {"<leader>Cx", "<cmd>ChatGPTRun explain_code<CR>", desc="Explain Code" },
+  }, vopts)
 
   local status_ok, chatgpt = pcall(require, "chatgpt")
   if not status_ok then

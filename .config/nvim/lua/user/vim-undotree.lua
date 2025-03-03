@@ -9,9 +9,9 @@ function M.config()
   vim.g.undotree_DiffpanelHeight = 20
 
   local wk = require "which-key"
-  wk.register {
-    ["<leader>u"] = { "<cmd>UndotreeToggle<cr>", "[U]ndo Tree" },
-  }
+  wk.add({
+    {"<leader>u", "<cmd>UndotreeToggle<cr>", desc="[U]ndo Tree" },
+  }, opts)
 
 end
 

@@ -1,7 +1,8 @@
 -- A plugin for opening files and line numbers on GitHub, Bitbucket, Gitlab, and Gitea from neovim.
 local M = {
   "linrongbin16/gitlinker.nvim",
-  commit = "008d8d7f8218d38bf87ae4c3f61a42843c31a8f1",
+  commit = "296ad98061ca31706a7d890a0f13baed6e137c79",
+  -- commit = "008d8d7f8218d38bf87ae4c3f61a42843c31a8f1",
 }
 
 function M.config()
@@ -12,9 +13,9 @@ function M.config()
   end
 
   local wk = require "which-key"
-  wk.register {
-    ["<leader>gn"] = { "<cmd>GitLink!<cr>", "GitLi[n]k! in browser" },
-  }
+  wk.add({
+    {"<leader>gn", "<cmd>GitLink!<cr>", desc="GitLi[n]k! in browser" },
+  }, opts)
 
   gitlinker.setup({
     message = false,

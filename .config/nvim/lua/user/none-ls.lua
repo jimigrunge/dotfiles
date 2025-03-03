@@ -1,12 +1,20 @@
 -- A fast, asynchronous, cross language LSP client.
 local M = {
   "nvimtools/none-ls.nvim",
-  commit = "7e146f3a188853843bb4ca1bff24c912bb9b7177",
+  commit = "af318216b744f2fe2d5afa6febb01f455ae61d6c",
+  -- commit = "7e146f3a188853843bb4ca1bff24c912bb9b7177",
   dependencies = {
     { "mason.nvim" },
     {
       "jayp0521/mason-null-ls.nvim",
-      commit = "558de4372d23bd432cc3594666c4d812cd071bbf",
+      commit = "de19726de7260c68d94691afb057fa73d3cc53e7",
+      -- commit = "558de4372d23bd432cc3594666c4d812cd071bbf",
+    },
+    {
+      "nvimtools/none-ls-extras.nvim"
+    },
+    {
+      "gbprod/none-ls-shellcheck.nvim"
     }
   },
 }
@@ -59,23 +67,27 @@ function M.config()
       formatting.google_java_format,
       --- markdown
       formatting.textlint,
+      --- SQL
+      -- formatting.pg_format,
       -- -----------------
       -- Linting
       -- -----------------
       --- js/jsx/ts/tsx/json
-      diagnostics.eslint_d.with({
-        condition = function(utils)
-          return utils.root_has_file(".eslintrc.js")
-        end,
-      }),
+      -- diagnostics.eslint_d.with({
+      --   condition = function(utils)
+      --     return utils.root_has_file(".eslintrc.js")
+      --   end,
+      -- }),
+      require("none-ls.diagnostics.eslint_d"),
       --- python
       --[[ diagnostics.flake8, ]]
       --- cpp
-      diagnostics.cpplint,
+      -- diagnostics.cpplint,
       --- css
       diagnostics.stylelint,
       --- bash
-      diagnostics.shellcheck,
+      -- diagnostics.shellcheck,
+      require("none-ls-shellcheck.diagnostics"),
       --- markdown
       diagnostics.markdownlint_cli2,
       -- -----------------

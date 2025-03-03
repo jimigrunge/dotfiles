@@ -1,7 +1,8 @@
 -- Smooth scrolling for neovim.
 local M = {
   "karb94/neoscroll.nvim",
-  commit = "be4ebf855a52f71ca4338694a5696675d807eff9",
+  commit = "f957373912e88579e26fdaea4735450ff2ef5c9c",
+  -- commit = "be4ebf855a52f71ca4338694a5696675d807eff9",
 }
 
 function M.config()

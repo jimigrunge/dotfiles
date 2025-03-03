@@ -1,7 +1,8 @@
 -- A plugin for generating LSP snippets.
 local M = {
   "danymat/neogen",
-  commit = "70127baaff25611deaf1a29d801fc054ad9d2dc1",
+  commit = "dd0301bfba1f83a3bc009b5430fce7aa3cee6941",
+  -- commit = "70127baaff25611deaf1a29d801fc054ad9d2dc1",
 }
 
 function M.config()
@@ -12,10 +13,10 @@ function M.config()
   end
 
   local wk = require "which-key"
-  wk.register {
-    ["<leader>lc"] = { "<cmd>lua require('neogen').generate()<cr>", "[C]reate DocBlock" },
-    ["<leader>lD"] = { "<cmd>lua require('neogen').generate()<cr>", "[D]ocBloc Annotations" },
-  }
+  wk.add({
+    {"<leader>lc", "<cmd>lua require('neogen').generate()<cr>", desc="[C]reate DocBlock" },
+    {"<leader>lD", "<cmd>lua require('neogen').generate()<cr>", desc="[D]ocBloc Annotations" },
+  }, opts)
 
   -- your config here
   neogen.setup {

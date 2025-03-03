@@ -2,7 +2,8 @@
 M = {
   "goolord/alpha-nvim",
   event = "VimEnter",
-  commit = "29074eeb869a6cbac9ce1fbbd04f5f5940311b32",
+  commit = "de72250e054e5e691b9736ee30db72c65d560771",
+  -- commit = "29074eeb869a6cbac9ce1fbbd04f5f5940311b32",
 }
 
 function M.config()
@@ -13,10 +14,10 @@ function M.config()
   end
 
   local wk = require "which-key"
-  wk.register {
-    ["<leader>;"] = { "<cmd>Alpha<cr>", "[A]lpha Dashboard" },
-    ["<leader>a"] = { "<cmd>Alpha<cr>", "[A]lpha" },
-  }
+  wk.add ({
+    { "<leader>;", "<cmd>Alpha<cr>", desc = "[A]lpha Dashboard" },
+    { "<leader>a", "<cmd>Alpha<cr>", desc = "[A]lpha" },
+  }, opts)
 
   local icons = require "user.icons"
 

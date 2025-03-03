@@ -27,9 +27,9 @@ require("lazy").setup {
 }
 
 local wk = require "which-key"
-wk.register {
-  ["<leader>ph"] = { "<cmd>Lazy home<cr>", "[H]ome" },
-  ["<leader>pi"] = { "<cmd>Lazy install<cr>", "[I]nstall" },
-  ["<leader>ps"] = { "<cmd>Lazy sync<cr>", "[S]ync" },
-  ["<leader>pu"] = { "<cmd>Lazy update<cr>", "[U]pdate" },
-}
+wk.add({
+  { "<leader>ph", "<cmd>Lazy home<cr>", desc = "[H]ome" },
+  { "<leader>pi", "<cmd>Lazy install<cr>", desc = "[I]nstall" },
+  { "<leader>ps", "<cmd>Lazy sync<cr>", desc = "[S]ync" },
+  { "<leader>pu", "<cmd>Lazy update<cr>", desc = "[U]pdate" },
+}, opts)

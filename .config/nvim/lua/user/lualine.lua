@@ -2,7 +2,8 @@
 local M = {
   "nvim-lualine/lualine.nvim",
   dependencies = { "nvim-tree/nvim-web-devicons" },
-  commit = "566b7036f717f3d676362742630518a47f132fff",
+  commit = "2a5bae925481f999263d6f5ed8361baef8df4f83",
+  -- commit = "566b7036f717f3d676362742630518a47f132fff",
 }
 
 function M.config()
@@ -13,18 +14,10 @@ function M.config()
   end
 
   local wk = require "which-key"
-  wk.register {
-    -- ["<leader>>"] = { "<cmd>BufferLineMoveNext<cr>", "BufferMoveNext" },
-    -- ["<leader><lt>"] = { "<cmd>BufferLineMovePrev<cr>", "BufferMovePrevious" },
-    -- ["<leader>bp"] = { "<cmd>BufferLinePick<cr>", "[P]ick" },
-    -- ["<leader>bj"] = { "<cmd>BufferLineMoveNext<cr>", "BufferMoveNext" },
-    -- ["<leader>bk"] = { "<cmd>BufferLineMovePrev<cr>", "BufferMovePrevious" },
-    -- ["<Tab>"] = { ":BufferLineCycleNext<CR>", "Buff Cycle Next", nops },
-    -- ["<S-Tab>"] = { ":BufferLineCyclePrev<CR>", "Buff Cycle Prev", nops },
-    ["<Tab>"] = { ":bnext<CR>", "Buff Cycle Next", nops },
-    ["<S-Tab>"] = { ":bprev<CR>", "Buff Cycle Prev", nops },
-    -- ["gt"] = { ":BufferLinePick<CR>", "Pick Buffer", nops },
-  }
+  wk.add({
+    {"<Tab>", ":bnext<CR>", desc="Buff Cycle Next" },
+    {"<S-Tab>", ":bprev<CR>", desc="Buff Cycle Prev" },
+  }, nopts)
 
   local icons = require "user.icons"
 
@@ -42,7 +35,14 @@ function M.config()
       info = icons.diagnostics.BoldInformation .. '',
       hint = icons.diagnostics.BoldHint .. ' ',
     },
-    colored = false,
+    diagnostics_color = {
+      -- Same values as the general color option can be used here.
+      error = 'DiagnosticError', -- Changes diagnostics' error color.
+      warn  = 'DiagnosticWarn',  -- Changes diagnostics' warn color.
+      info  = 'DiagnosticInfo',  -- Changes diagnostics' info color.
+      hint  = 'DiagnosticHint',  -- Changes diagnostics' hint color.
+    },
+    colored = true,
     update_in_insert = false,
     always_visible = true,
   }
@@ -52,9 +52,9 @@ function M.config()
     colored = true,
     diff_color = {
       -- Same color values as the general color option can be used here.
-      added    = 'DiffAdd',    -- Changes the diff's added color
-      modified = 'DiffChange', -- Changes the diff's modified color
-      removed  = 'DiffDelete', -- Changes the diff's removed color you
+      added    = 'LuaLineDiffAdd',    -- Changes the diff's added color
+      modified = 'LuaLineDiffChange', -- Changes the diff's modified color
+      removed  = 'LuaLineDiffDelete', -- Changes the diff's removed color you
     },
     symbols = {
       added = icons.git.LineAdded .. " ",
@@ -74,6 +74,7 @@ function M.config()
 
   local filetype = {
     "filetype",
+    coloered = true,
     icons_enabled = true,
     icon = { align = 'right' },
   }
@@ -128,7 +129,11 @@ function M.config()
     },
     sections = {
       lualine_a = { mode },
-      lualine_b = { branch, diff, diagnostics },
+      lualine_b = {
+        branch,
+        diff,
+        diagnostics,
+      },
       lualine_c = {
         filename,
         { navic.get_location, cond = navic.is_available },
@@ -136,10 +141,6 @@ function M.config()
       },
 
       lualine_x = {
-        {
-          require("noice").api.status.message.get,
-          cond = require("noice").api.status.message.has,
-        },
         {
           require("noice").api.status.mode.get,
           cond = require("noice").api.status.mode.has,

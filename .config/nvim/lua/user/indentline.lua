@@ -2,7 +2,8 @@
 local M = {
   "lukas-reineke/indent-blankline.nvim",
   main = "ibl",
-  commit = "12e92044d313c54c438bd786d11684c88f6f78cd",
+  commit = "7a698a1d7ed755af9f5a88733b23ca246ce2df28",
+  -- commit = "12e92044d313c54c438bd786d11684c88f6f78cd",
 }
 
 function M.config()

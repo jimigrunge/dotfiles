@@ -1,7 +1,8 @@
 -- Show function signature when you type.
 local M = {
   "ray-x/lsp_signature.nvim",
-  commit = "fed2c8389c148ff1dfdcdca63c2b48d08a50dea0",
+  commit = "5b64964ed02098c85613ee3d20f96bed1dfb64cc",
+  -- commit = "fed2c8389c148ff1dfdcdca63c2b48d08a50dea0",
 }
 
 function M.config()

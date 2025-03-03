@@ -1,7 +1,8 @@
 -- A neovim terminal in a floating window.
 local M = {
   "akinsho/toggleterm.nvim",
-  commit = "e3805fed94d487b81e9c21548535cc820f62f840",
+  commit = "e76134e682c1a866e3dfcdaeb691eb7b01068668",
+  -- commit = "e3805fed94d487b81e9c21548535cc820f62f840",
 }
 
 function M.config()
@@ -11,20 +12,21 @@ function M.config()
     return
   end
 
-  local term_opts = { silent = true }
   local wk = require "which-key"
-  wk.register {
-    -- ["<leader>gg"] = { "<cmd>lua _LAZYGIT_TOGGLE()<cr>", "Lazy[G]it" },
-    ["<leader>tg"] = { "<cmd>lua _LAZYGIT_TOGGLE()<cr>", "Lazy[G]it" },
-    ["<leader>tn"] = { "<cmd>lua _NODE_TOGGLE()<cr>", "[N]ode" },
-    ["<leader>tu"] = { "<cmd>lua _NCDU_TOGGLE()<cr>", "NCD[U]" },
-    ["<leader>tb"] = { "<cmd>lua _BTOP_TOGGLE()<cr>", "[B]Top" },
-    ["<leader>th"] = { "<cmd>lua _HTOP_TOGGLE()<cr>", "[H]top" },
-    ["<leader>tp"] = { "<cmd>lua _PYTHON_TOGGLE()<cr>", "[P]ython" },
-    ["<leader>tt"] = { "<cmd>ToggleTerm size=30<cr>", "[T]oggle Term" },
-    ["<leader>tf"] = { "<cmd>ToggleTerm direction=float<cr>", "[F]loat" },
-    ["<C-t>"] = { ":ToggleTerm<cr>", "Toggle Term", term_opts },
-  }
+  wk.add({
+    {"<leader>tg", "<cmd>LazyGit<cr>", desc="Lazy[G]it" },
+    -- {"<leader>tg", "<cmd>lua _LAZYGIT_TOGGLE()<cr>", desc="Lazy[G]it" },
+    {"<leader>tn", "<cmd>lua _NODE_TOGGLE()<cr>", desc="[N]ode" },
+    {"<leader>tu", "<cmd>lua _NCDU_TOGGLE()<cr>", desc="NCD[U]" },
+    {"<leader>tb", "<cmd>lua _BTOP_TOGGLE()<cr>", desc="[B]Top" },
+    {"<leader>th", "<cmd>lua _HTOP_TOGGLE()<cr>", desc="[H]top" },
+    {"<leader>tp", "<cmd>lua _PYTHON_TOGGLE()<cr>", desc="[P]ython" },
+    {"<leader>tt", "<cmd>ToggleTerm size=30<cr>", desc="[T]oggle Term" },
+    {"<leader>tf", "<cmd>ToggleTerm direction=float<cr>", desc="[F]loat" },
+  }, opts)
+  wk.add({
+    {"<C-t>", ":ToggleTerm<cr>", desc="Toggle Term" },
+  }, topts)
 
   toggleterm.setup({
     size = 60,
@@ -72,10 +74,10 @@ function M.config()
 
   local Terminal = require("toggleterm.terminal").Terminal
 
-  local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, size = 250, direction = "horizontal" })
-  function _LAZYGIT_TOGGLE()
-    lazygit:toggle()
-  end
+  -- local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, size = 250, direction = "horizontal" })
+  -- function _LAZYGIT_TOGGLE()
+  --   lazygit:toggle()
+  -- end
 
   local node = Terminal:new({ cmd = "node", hidden = true, size = 80, direction = "horizontal" })
   function _NODE_TOGGLE()

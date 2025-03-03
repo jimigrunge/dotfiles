@@ -1,7 +1,8 @@
 -- A plugin for playing music in neovim.
 local M = {
   "folke/noice.nvim",
-  commit = "bf67d70bd7265d075191e7812d8eb42b9791f737",
+  commit = "eaed6cc9c06aa2013b5255349e4f26a6b17ab70f",
+  -- commit = "bf67d70bd7265d075191e7812d8eb42b9791f737",
   -- event = "VeryLazy",
   dependencies = {
     "MunifTanjim/nui.nvim",
@@ -18,13 +19,13 @@ function M.config()
 
   local icons = require "user.icons"
   local wk = require "which-key"
-  wk.register {
-    ["<leader>ne"] = { "<cmd>Noice errors<cr>", "Noice Errors" },
-    ["<leader>nh"] = { "<cmd>Noice history<cr>", "Noice History" },
-    ["<leader>nl"] = { "<cmd>Noice last<cr>", "Noice Message Last" },
-    ["<leader>nn"] = { "<cmd>Noice<cr>", "Noice Messages" },
-    ["<leader>nt"] = { "<cmd>Noice telescope<cr>", "Noice Telescope" },
-  }
+  wk.add({
+    {"<leader>ne", "<cmd>Noice errors<cr>", desc="Noice Errors" },
+    {"<leader>nh", "<cmd>Noice history<cr>", desc="Noice History" },
+    {"<leader>nl", "<cmd>Noice last<cr>", desc="Noice Message Last" },
+    {"<leader>nn", "<cmd>Noice<cr>", desc="Noice Messages" },
+    {"<leader>nt", "<cmd>Noice telescope<cr>", desc="Noice Telescope" },
+  }, opts)
 
   noice.setup({
     cmdline = {
@@ -131,11 +132,11 @@ function M.config()
       },
       override = {
         -- override the default lsp markdown formatter with Noice
-        ["vim.lsp.util.convert_input_to_markdown_lines"] = false,
+        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
         -- override the lsp markdown formatter with Noice
-        ["vim.lsp.util.stylize_markdown"] = false,
+        ["vim.lsp.util.stylize_markdown"] = true,
         -- override cmp documentation with Noice (needs the other options to work)
-        ["cmp.entry.get_documentation"] = false,
+        ["cmp.entry.get_documentation"] = true,
       },
       hover = {
         enabled = true,
@@ -144,7 +145,7 @@ function M.config()
         opts = {},      -- merged with defaults from documentation
       },
       signature = {
-        enabled = false,
+        enabled = true,
         auto_open = {
           enabled = true,
           trigger = true, -- Automatically show signature help when typing a trigger character from the LSP

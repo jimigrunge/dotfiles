@@ -2,6 +2,8 @@
 -- Global variables
 JAVA_DAP_ACTIVE = false
 LAZY_PLUGIN_SPEC = {}
+vim.g.python3_host_prog='/usr/bin/python3'
+-- vim.g.python3_host_prog='/opt/homebrew/bin/python3'
 
 -- -----------------------------------
 -- LSP servers
@@ -23,7 +25,8 @@ LSP_SERVERS = {
   "stimulus_ls",  -- blade
   -- "sumneko_lua",   -- Lua
   "taplo",        -- TOML
-  "tsserver",     -- typescript
+  "ts_ls",        -- typescript
+  -- "tsserver",     -- typescript
   "vimls",        -- vim
   -- "vtsls",        -- typescript
   "yamlls",       -- yaml
@@ -47,12 +50,52 @@ LSP_LINTER_FORMATTERS = {
   "textlint",           -- maekdown linting
 }
 
-nops = {
-  mode = "n", -- NORMAL mode
+opts = {
+  mode = "n",     -- NORMAL with leader mode
+  prefix = "<leader>",
+  buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
+  silent = true,  -- use `silent` when creating keymaps
+  noremap = true, -- use `noremap` when creating keymaps
+  nowait = true,  -- use `nowait` when creating keymaps
+}
+
+nopts = {
+  mode = "n",     -- NORMAL mode NO leader
   prefix = "",
   preset = true,
-  silent = true,   -- use `silent` when creating keymaps
+  silent = true,  -- use `silent` when creating keymaps
   noremap = true, -- use `noremap` when creating keymaps
+}
+
+vopts = {
+  mode = "v",     -- VISUAL mode
+  prefix = "",
+  buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
+  silent = true,  -- use `silent` when creating keymaps
+  noremap = true, -- use `noremap` when creating keymaps
+  nowait = true,  -- use `nowait` when creating keymaps
+}
+
+xopts = {
+  mode = "x",     -- VISUAL BLOCK mode
+  prefix = "",
+  buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
+  silent = true,  -- use `silent` when creating keymaps
+  noremap = true, -- use `noremap` when creating keymaps
+  nowait = true,  -- use `nowait` when creating keymaps
+}
+
+iopts = {
+  mode = "i",     -- INSERT mode
+  prefix = "",
+  buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
+  silent = true,  -- use `silent` when creating keymaps
+  noremap = true, -- use `noremap` when creating keymaps
+  nowait = true,  -- use `nowait` when creating keymaps
+}
+
+topts = {
+  silent = true,
 }
 
 -- Lazy plugin table builder

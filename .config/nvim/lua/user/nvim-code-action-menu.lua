@@ -13,9 +13,9 @@ function M.config()
   end
 
   local wk = require "which-key"
-  wk.register {
-    ["<leader>la"] = { "<cmd>CodeActionMenu<cr>", "Code [A]ction" },
-  }
+  wk.add({
+    {"<leader>la", "<cmd>CodeActionMenu<cr>", desc="Code [A]ction" },
+  }, opts)
 
   actionspreview.setup()
 end

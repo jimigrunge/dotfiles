@@ -2,16 +2,19 @@
 local M = {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
-  commit = "581e87ba4e509a50689fcdd538e5f9388845eb78",
+  commit = "5da195ac3dfafd08d8b10756d975f0e01e1d563a",
+  -- commit = "979beffc1a86e7ba19bd6535c0370d8e1aaaad3c",
   dependencies = {
     {
       "nvim-treesitter/nvim-treesitter-textobjects",
       after = "nvim-treesitter",
-      commit = "dd0b2036c3a27cb6e6486f8bd24188c6ca43af0b"
+      commit = "ad8f0a472148c3e0ae9851e26a722ee4e29b1595"
+      -- commit = "fd41b7ccc5490a3a99c734d1ee418b68d06c48a9"
     },
     {
       "nvim-treesitter/playground",
       commit = "ba48c6a62a280eefb7c85725b0915e021a1a0749"
+      -- commit = "ba48c6a62a280eefb7c85725b0915e021a1a0749"
     }
   }
 }
@@ -24,12 +27,12 @@ function M.config()
   end
 
   local wk = require "which-key"
-  wk.register {
-    ["<leader>lm"] = { "<cmd>lua require'nvim-treesitter.textobjects.swap'.swap_previous('@parameter.inner')<cr>", "Swap next param" },
-    ["<leader>ln"] = { "<cmd>lua require'nvim-treesitter.textobjects.swap'.swap_next('@parameter.inner')<cr>", "Swap prev param" },
-    ["<leader>lt"] = { "<cmd>lua require'nvim-treesitter.textobjects.lsp_interop'.peek_definition_code('@function.outer')<cr>", "Peek DefCode Func" },
-    ["<leader>lT"] = { "<cmd>lua require'nvim-treesitter.textobjects.lsp_interop'.peek_definition_code('@class.outer')<cr>", "Peek DefCode Class" },
-  }
+  wk.add({
+    {"<leader>lm", "<cmd>lua require'nvim-treesitter.textobjects.swap'.swap_previous('@parameter.inner')<cr>", desc="Swap next param" },
+    {"<leader>ln", "<cmd>lua require'nvim-treesitter.textobjects.swap'.swap_next('@parameter.inner')<cr>", desc="Swap prev param" },
+    {"<leader>lt", "<cmd>lua require'nvim-treesitter.textobjects.lsp_interop'.peek_definition_code('@function.outer')<cr>", desc="Peek DefCode Func" },
+    {"<leader>lT", "<cmd>lua require'nvim-treesitter.textobjects.lsp_interop'.peek_definition_code('@class.outer')<cr>", desc="Peek DefCode Class" },
+  }, opts)
 
   local bladeGrp
   vim.api.nvim_create_augroup("BladeFiltypeRelated", { clear = true })

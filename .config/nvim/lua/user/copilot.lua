@@ -3,18 +3,21 @@ local M = {
   "zbirenbaum/copilot.lua",
   cmd = "Copilot",
   event = "InsertEnter",
-  commit = "03f825956ec49e550d07875d867ea6e7c4dc8c00",
+  commit = "886ee73b6d464b2b3e3e6a7ff55ce87feac423a9",
+  -- commit = "03f825956ec49e550d07875d867ea6e7c4dc8c00",
   dependencies = {
     {
       "zbirenbaum/copilot-cmp",
-      commit = "72fbaa03695779f8349be3ac54fa8bd77eed3ee3",
+      commit = "15fc12af3d0109fa76b60b5cffa1373697e261d1",
+      -- commit = "72fbaa03695779f8349be3ac54fa8bd77eed3ee3",
       config = function()
         require("copilot_cmp").setup()
       end
     },
     {
       'AndreM222/copilot-lualine',
-      commit = "f7f0b3b3e7b0183d65fb5416c1d3e210e8a67ba6",
+      commit = "f40450c3e138766026327e7807877ea860618258",
+      -- commit = "f7f0b3b3e7b0183d65fb5416c1d3e210e8a67ba6",
     },
   },
 }

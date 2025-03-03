@@ -1,8 +1,7 @@
 -- A plugin for colorizing hex codes in neovim.
 local M = {
   "norcalli/nvim-colorizer.lua",
-  commit = "36c610a9717cc9ec426a07c8e6bf3b3abcb139d6",
-  -- "NvChad/nvim-colorizer.lua",
+  commit = "a065833f35a3a7cc3ef137ac88b5381da2ba302e",
   -- commit = "36c610a9717cc9ec426a07c8e6bf3b3abcb139d6",
 }
 

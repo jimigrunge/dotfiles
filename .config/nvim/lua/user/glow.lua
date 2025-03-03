@@ -13,13 +13,13 @@ function M.config()
   end
 
   local wk = require "which-key"
-  wk.register {
-    ["<leader>mp"] = { "<cmd>Glow<cr>", "Markdown [P]review" }
-  }
+  wk.add({
+    {"<leader>mp", "<cmd>Glow<cr>", desc="Markdown [P]review" }
+  }, opts)
 
   glow.setup({
-    install_path = vim.env.HOME .. "/.local/bin", -- default path for installing glow binary
-    glow_path = vim.env.HOME .. "/.local/bin/glow",
+    -- install_path = vim.env.HOME .. "/.local/bin", -- default path for installing glow binary
+    -- glow_path = vim.env.HOME .. "/.local/bin/glow",
     border = "rounded",
     style = 'dark',
     pager = false,

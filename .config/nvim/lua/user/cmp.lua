@@ -1,7 +1,8 @@
 -- A completion plugin for neovim coded in Lua.
 local M = {
   "hrsh7th/nvim-cmp",
-  commit = "538e37ba87284942c1d76ed38dd497e54e65b891",
+  commit = "8c82d0bd31299dbff7f8e780f5e06d2283de9678",
+  -- commit = "538e37ba87284942c1d76ed38dd497e54e65b891",
   dependencies = {
     {
       "hrsh7th/cmp-buffer",
@@ -13,15 +14,18 @@ local M = {
     },
     {
       "hrsh7th/cmp-cmdline",
-      commit = "8ee981b4a91f536f52add291594e89fb6645e451",
+      commit = "d250c63aa13ead745e3a40f61fdd3470efde3923",
+      -- commit = "8ee981b4a91f536f52add291594e89fb6645e451",
     },
     {
       "saadparwaiz1/cmp_luasnip",
-      commit = "05a9ab28b53f71d1aece421ef32fee2cb857a843",
+      commit = "98d9cb5c2c38532bd9bdb481067b20fea8f32e90",
+      -- commit = "05a9ab28b53f71d1aece421ef32fee2cb857a843",
     },
     {
       "hrsh7th/cmp-nvim-lsp",
-      commit = "5af77f54de1b16c34b23cba810150689a3a90312",
+      commit = "99290b3ec1322070bcfb9e846450a46f6efa50f0",
+      -- commit = "5af77f54de1b16c34b23cba810150689a3a90312",
     },
     {
       "hrsh7th/cmp-nvim-lua",
@@ -29,17 +33,19 @@ local M = {
     },
     {
       "SergioRibera/cmp-dotenv",
-      commit = "fd78929551010bc20602e7e663e42a5e14d76c96",
+      commit = "4dd53aab60982f1f75848aec5e6214986263325e",
+      -- commit = "fd78929551010bc20602e7e663e42a5e14d76c96",
     },
     -- Snippets
     {
       "L3MON4D3/LuaSnip",
       build = "make install_jsregexp",
-      version = "v2.2.*",
+      version = "v2.3.*",
       dependencies = {
         {
           "rafamadriz/friendly-snippets",
-          commit = "69a2c1675b66e002799f5eef803b87a12f593049",
+          commit = "efff286dd74c22f731cdec26a70b46e5b203c619",
+          -- commit = "69a2c1675b66e002799f5eef803b87a12f593049",
         }
       }
     }
@@ -198,6 +204,7 @@ function M.config()
       { name = "path",     group_index = 1, priority = 500 },
       { name = "dotenv",   group_index = 1, priority = 400 },
       { name = "nvim_lua", group_index = 1, priority = 300 },
+      { name = "lazydev",  group_index = 1, priority = 300 },
       { name = "vim-dadbod-completion", group_index = 1, priority = 300 },
       {
         name = 'npm',

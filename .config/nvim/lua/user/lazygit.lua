@@ -24,7 +24,7 @@ function M.config()
     return
   end
 
-  lazygit.setup{}
+  -- lazygit.setup{}
 end
 
 return M

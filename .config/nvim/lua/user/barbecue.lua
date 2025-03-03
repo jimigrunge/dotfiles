@@ -2,7 +2,8 @@
 local M = {
   "utilyre/barbecue.nvim",
   version = "*",
-  commit = "d38a2a023dfb1073dd0e8fee0c9be08855d3688f",
+  commit = "3e31404f0b93a2c30d151abf0648650ac811c664",
+  -- commit = "d38a2a023dfb1073dd0e8fee0c9be08855d3688f",
   dependencies = {
     "SmiteshP/nvim-navic",
     "nvim-tree/nvim-web-devicons",

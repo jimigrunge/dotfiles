@@ -12,10 +12,10 @@ function M.config()
   end
 
   local wk = require "which-key"
-  wk.register {
-    ["<leader>ss"] = { "<cmd>SearchReplaceSingleBufferSelections<cr>", "[S]earch Replace" },
-    ["<leader>sS"] = { "<cmd>SearchReplaceMultiBufferSelections<cr>", "[S]earch Replace Buffers" },
-  }
+  wk.add({
+    {"<leader>ss", "<cmd>SearchReplaceSingleBufferSelections<cr>", desc= "[S]earch Replace" },
+    {"<leader>sS", "<cmd>SearchReplaceMultiBufferSelections<cr>", desc="[S]earch Replace Buffers" },
+  }, opts)
 
   plugin.setup()
 end

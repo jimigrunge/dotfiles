@@ -12,9 +12,9 @@ function M.config()
   end
 
   local wk = require "which-key"
-  wk.register {
-    ["<leader>?"] = { "<cmd>Cheatsheet<cr>", "Cheatsheet" },
-  }
+  wk.add({
+    {"<leader>?", "<cmd>Cheatsheet<cr>", desc="Cheatsheet" },
+  }, opts)
 
   cheatsheet.setup()
 end

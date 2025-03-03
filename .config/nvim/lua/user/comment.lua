@@ -1,7 +1,8 @@
 -- Comment stuff out.
 local M = {
   "numToStr/Comment.nvim",
-  commit = "0236521ea582747b58869cb72f70ccfa967d2e89",
+  commit = "e30b7f2008e52442154b66f7c519bfd2f1e32acb",
+  -- commit = "0236521ea582747b58869cb72f70ccfa967d2e89",
   dependencies = {
     {
       "JoosepAlviste/nvim-ts-context-commentstring",
@@ -23,12 +24,14 @@ function M.config()
   end
 
   local wk = require "which-key"
-  wk.register {
-    ["<leader>/"] = { "<Plug>(comment_toggle_linewise_current)", "Comment" },
-  }
-  wk.register {
-    ["<leader>/"] = { "<Plug>(comment_toggle_linewise_visual)", "Comment", mode = "v" },
-  }
+  wk.add({
+    mode = { "n" },
+    {"<leader>/", "<Plug>(comment_toggle_linewise_current)", desc="Comment" },
+  }, opts)
+  wk.add({
+    mode = { "v" },
+    {"<leader>/", "<Plug>(comment_toggle_linewise_visual)", desc="Comment" },
+  }, vopts)
 
   ---@diagnostic disable-next-line: missing-fields
   ts_plugin.setup {

@@ -1,7 +1,8 @@
 -- A plugin for creating and managing snippets.
 local M = {
   "j-hui/fidget.nvim",
-  commit = "3a93300c076109d86c7ce35ec67a8034ae6ba9db",
+  commit = "a0abbf18084b77d28bc70e24752e4f4fd54aea17",
+  -- commit = "3a93300c076109d86c7ce35ec67a8034ae6ba9db",
 }
 
 function M.config()

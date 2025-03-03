@@ -3,7 +3,8 @@ local M = {
   "yutkat/confirm-quit.nvim",
   event = "CmdlineEnter",
   -- opts = {},
-  commit = "78a1ba1c5e307c85f102d1dba398bcc13464a820",
+  commit = "f15f6d728d385a3d2efa22098e9a45b8a2b20144",
+  -- commit = "78a1ba1c5e307c85f102d1dba398bcc13464a820",
 }
 
 function M.config()

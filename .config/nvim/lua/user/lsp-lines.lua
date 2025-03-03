@@ -12,9 +12,9 @@ function M.config()
   end
 
   local wk = require "which-key"
-  wk.register {
-    ["<leader>lE"] = { "<cmd>lua require('lsp_lines').toggle()<cr>", "Line diagnostic [E]rror" },
-  }
+  wk.add({
+    {"<leader>lE", "<cmd>lua require('lsp_lines').toggle()<cr>", desc="Line diagnostic [E]rror" },
+  }, opts)
 
   lsp_lines.setup()
 end

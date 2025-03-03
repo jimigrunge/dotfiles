@@ -4,7 +4,8 @@ local M = {
   dependencies = {
     "nvim-tree/nvim-web-devicons",
   },
-  commit = "b8c3a23e76f861d5f0ff3f6714b9b56388984d0b",
+  commit = "fca0b67c0b5a31727fb33addc4d9c100736a2894",
+  -- commit = "b8c3a23e76f861d5f0ff3f6714b9b56388984d0b",
 }
 
 function M.config()
@@ -17,9 +18,9 @@ function M.config()
   local icons = require "user.icons"
 
   local wk = require "which-key"
-  wk.register {
-    ["<leader>e"] = { "<cmd>NvimTreeToggle<cr>", "[E]xplorer" },
-  }
+  wk.add({
+    {"<leader>e", "<cmd>NvimTreeToggle<cr>", desc="[E]xplorer" },
+  }, opts)
 
   -- following options are the default
   -- each of these are documented in `:help nvim-tree.OPTION_NAME`

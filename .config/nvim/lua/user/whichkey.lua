@@ -1,7 +1,12 @@
 -- A plugin for displaying keybindings in neovim.
 local M = {
   "folke/which-key.nvim",
-  commit = "4433e5ec9a507e5097571ed55c02ea9658fb268a",
+  event = "VeryLazy",
+  commit = "1f8d414f61e0b05958c342df9b6a4c89ce268766",
+  -- commit = "4433e5ec9a507e5097571ed55c02ea9658fb268a",
+  dependencies = {
+    { 'echasnovski/mini.nvim', version = '*' },
+  }
 }
 
 function M.config()
@@ -11,146 +16,137 @@ function M.config()
     return
   end
 
-  local mappings = {
-    ["b"] = {
-      name = "[B]uffers",
-      ["c"] = { "<cmd>Bdelete!<cr>", "[C]lose Buffer" },
-      ["r"] = { "<cmd>set relativenumber!<cr>", "[R]elative Numbers" },
-    },
-    ["c"] = { "<cmd>Bdelete!<cr>", "[C]lose Buffer" },
-    ["C"] = { name = "[C]hatGPT" },
-    ["d"] = { name = "[D]ebug" },
-    ["D"] = {
-      name = "[D]atabase",
-    },
-    ["g"] = {
-      name = "[G]it",
-      ["d"] = { name = "[D]iffView" },
-      ["y"] = { name = "[Y]ank Git Remote Link" },
-    },
-    ["h"] = { name = "[H]arpoon" },
-    ["l"] = { name = "[L]SP" },
-    ["m"] = { name = "[M]arkdown" },
-    ["n"] = { name = "[N]oice" },
-    ["o"] = { name = "[O]utline" },
-    ["p"] = {
-      name = "[P]lugins Lazy",
-    },
-    ["q"] = { "<cmd>ConfirmQuit!<cr>", "[Q]uit" },
-    ["r"] = { name = "[R]esume" },
-    ["s"] = {
-      name = "[S]earch",
-      ["p"] = { name = "[P]icker" }
-    },
-    ["t"] = { name = "[T]erminal" },
-    ["v"] = { name = "[V]S Code Colors" },
-    ["w"] = { "<cmd>w!<CR>", "Save" },
-    ["x"] = {
-      name = "Diagnostic[x]",
-      ["t"] = { name = "[T]odo" },
-    },
-    ["zf"] = { "zf%", "Fold" },
+  -- local mappings = {
+  -- local keys = {
+  local keys = {
+    { "<leader>C", group = "[C]hatGPT" },
+    { "<leader>D", group = "[D]atabase" },
+    { "<leader>b", group = "[B]uffers" },
+    { "<leader>bc", "<cmd>Bdelete!<cr>", desc = "[C]lose Buffer" },
+    { "<leader>br", "<cmd>set relativenumber!<cr>", desc = "[R]elative Numbers" },
+    { "<leader>c", "<cmd>Bdelete!<cr>", desc = "[C]lose Buffer" },
+    { "<leader>d", group = "[D]ebug" },
+    { "<leader>g", group = "[G]it" },
+    { "<leader>gd", group = "[D]iffView" },
+    { "<leader>gy", group = "[Y]ank Git Remote Link" },
+    { "<leader>h", group = "[H]arpoon" },
+    { "<leader>l", group = "[L]SP" },
+    { "<leader>m", group = "[M]arkdown" },
+    { "<leader>n", group = "[N]oice" },
+    -- { "<leader>o", group = "[O]utline" },
+    { "<leader>p", group = "[P]lugins Lazy" },
+    { "<leader>q", "<cmd>ConfirmQuit!<cr>", desc = "[Q]uit" },
+    { "<leader>r", group = "[R]esume" },
+    { "<leader>s", group = "[S]earch" },
+    { "<leader>sp", group = "[P]icker" },
+    { "<leader>t", group = "[T]erminal" },
+    { "<leader>v", group = "[V]S Code Colors" },
+    { "<leader>w", "<cmd>w!<CR>", desc = "Save" },
+    { "<leader>x", group = "Diagnostic[x]" },
+    { "<leader>xt", group = "[T]odo" },
+    { "<leader>z", group = "Fold" },
+    { "<leader>zf", "zf%", desc = "Fold" },
   }
 
-  local n_mappings = {
-    ["<leader><leader>"] = { "<cmd>nohlsearch<cr>", "Highlight Off" },
-    ["n"] = { "nzz", "Center Next Result" },
-    ["N"] = { "Nzz", "Center Prev Result" },
-    ["*"] = { "*zz", "Next Under Cursor & Center" },
-    ["#"] = { "#zz", "Prev Under Cursor & Center" },
-    ["g*"] = { "g*zz", "Next Under Cursor & Center" },
-    ["g#"] = { "g#zz", "Prev Under Cursor & Center" },
-    ["<C-Up>"] = { ":resize -2<CR>", "Resize Up" },
-    ["<C-Down>"] = { ":resize +2<CR>", "Resize Down" },
-    ["<C-Left>"] = { ":vertical resize -2<CR>", "Resize Left" },
-    ["<C-Right>"] = { ":vertical resize +2<CR>", "Resize Right" },
-    ["<A-j>"] = { "<Esc>:m .+1<CR>==gi", "Move Text Down" },
-    ["<A-k>"] = { "<Esc>:m .-2<CR>==gi", "Move Text Up" },
-    ["x"] = { '"_x', "Delete Without Copy" },
-    ["+"] = { "<C-a>", "Increment" },
-    ["-"] = { "<C-x>", "Decrement" },
-    -- ["+"] = { "viwgU", "Uppercase" },
-    -- ["-"] = { "viwgu", "Lowercase" },
-    ["zf"] = { "zf%", "Fold" },
-    ["g"] = {
-      name = "LSP",
-      ["b"] = { name = "+Comment blockwise" },
-      ["c"] = { name = "+Comment linewise" },
-      ["v"] = { name = "Reselect" }
-    },
-    ["K"] = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover" },
-    ["<C-a>"] = { "gg<S-v>G", "Select [A]ll" },
-    ["<C-S>"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature" }
+  -- n_mappings
+  local nkeys = {
+    mode = { "n" },
+    { "[", group = "Next" },
+    { "]", group = "Previous" },
+    { "#", "#zz", desc = "prev under cursor & center" },
+    { "*", "*zz", desc = "next under cursor & center" },
+    { "+", "<c-a>", desc = "increment" },
+    { "-", "<c-x>", desc = "decrement" },
+    { "<a-j>", "<esc>:m .+1<cr>==gi", desc = "move text down" },
+    { "<a-k>", "<esc>:m .-2<cr>==gi", desc = "move text up" },
+    { "<c-down>", ":resize +2<cr>", desc = "resize down" },
+    { "<c-left>", ":vertical resize -2<cr>", desc = "resize left" },
+    { "<c-right>", ":vertical resize +2<cr>", desc = "resize right" },
+    { "<c-s>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", desc = "signature" },
+    { "<c-up>", ":resize -2<cr>", desc = "resize up" },
+    { "<c-a>", "gg<s-v>g", desc = "select [a]ll" },
+    { "<leader><leader>", "<cmd>nohlsearch<cr>", desc = "highlight off" },
+    { "K", "<cmd>lua vim.lsp.buf.hover()<cr>", desc = "hover" },
+    { "N", "Nzz", desc = "center prev result" },
+    { "f", group = "[Find]" },
+    { "g", group = "LSP" },
+    { "gp", group = "Preview" },
+    { "g#", "g#zz", desc = "prev under cursor & center" },
+    { "g*", "g*zz", desc = "next under cursor & center" },
+    { "gb", group = "comment blockwise" },
+    { "gc", group = "comment linewise" },
+    { "gv", group = "reselect" },
+    { "n", "nzz", desc = "center next result" },
+    { "x", '"_x', desc = "delete without copy" },
+    { "z", group = "Fold" },
+    { "zf", "zf%", desc = "fold" },
   }
 
-  local v_mappings = {
-    ["<"] = { "<gv", "Indent & Reselect" },
-    [">"] = { ">gv", "Outdent & Reselect" },
-    ["<A-j>"] = { ":m .+1<CR>==", "Move text down" },
-    ["<A-k>"] = { ":m .-2<CR>==", "Move text up" },
-    ["p"] = { '"_dP', "Paste without copy" },
-    ["+"] = { "gU", "Uppercase" },
-    ["-"] = { "gu", "Lowercase" },
+  -- v_mappings
+  local vkeys = {
+    mode = { "v" },
+    { "+", "gU", desc = "Uppercase" },
+    { "-", "gu", desc = "Lowercase" },
+    { "<", "<gv", desc = "Indent & Reselect" },
+    { "<A-j>", ":m .+1<CR>==", desc = "Move text down" },
+    { "<A-k>", ":m .-2<CR>==", desc = "Move text up" },
+    { ">", ">gv", desc = "Outdent & Reselect" },
+    { "p", '"_dP', desc = "Paste without copy" },
   }
 
-  local i_mappings = {
-    ["jj"] = { "<ESC>", "Quick Escape" },
+  -- i_mappings
+  local ikeys = {
+    mode= { "i" },
+    { "jj", "<ESC>", desc = "Quick Escape" }
   }
 
-  local x_mappings = {
-    ["J"] = { ":move '>+1<CR>gv-gv", "Move text down" },
-    ["K"] = { ":move '<-2<CR>gv-gv", "Move text up" },
-    ["<A-j>"] = { ":move '>+1<CR>gv-gv", "Move text down" },
-    ["<A-k>"] = { ":move '<-2<CR>gv-gv", "Move text up" },
-    ["p"] = { '"_dP', "Paste without copy" },
-  }
-
-  local opts = {
-    mode = "n",     -- NORMAL with leader mode
-    prefix = "<leader>",
-    buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
-    silent = true,  -- use `silent` when creating keymaps
-    noremap = true, -- use `noremap` when creating keymaps
-    nowait = true,  -- use `nowait` when creating keymaps
-  }
-
-  local nops = {
-    mode = "n", -- NORMAL mode
-    prefix = "",
-    preset = true,
-  }
-
-  local vopts = {
-    mode = "v",     -- VISUAL mode
-    prefix = "",
-    buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
-    silent = true,  -- use `silent` when creating keymaps
-    noremap = true, -- use `noremap` when creating keymaps
-    nowait = true,  -- use `nowait` when creating keymaps
-  }
-
-  local xopts = {
-    mode = "x",     -- VISUAL BLOCK mode
-    prefix = "",
-    buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
-    silent = true,  -- use `silent` when creating keymaps
-    noremap = true, -- use `noremap` when creating keymaps
-    nowait = true,  -- use `nowait` when creating keymaps
-  }
-
-  local iopts = {
-    mode = "i",     -- INSERT mode
-    prefix = "",
-    buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
-    silent = true,  -- use `silent` when creating keymaps
-    noremap = true, -- use `noremap` when creating keymaps
-    nowait = true,  -- use `nowait` when creating keymaps
+  -- x_mappings
+  local xkeys = {
+    mode = { "x" },
+    { "<A-j>", ":move '>+1<CR>gv-gv", desc = "Move text down" },
+    { "<A-k>", ":move '<-2<CR>gv-gv", desc = "Move text up" },
+    { "J", ":move '>+1<CR>gv-gv", desc = "Move text down" },
+    { "K", ":move '<-2<CR>gv-gv", desc = "Move text up" },
+    { "p", '"_dP', desc = "Paste without copy" },
   }
 
   local config = {
+    ---@type false | "classic" | "modern" | "helix"
+    preset = "classic",
+    -- Delay before showing the popup. Can be a number or a function that returns a number.
+    ---@type number | fun(ctx: { keys: string, mode: string, plugin?: string }):number
+    delay = function(ctx)
+      return ctx.plugin and 0 or 200
+    end,
+    ---@param mapping wk.Mapping
+    filter = function(mapping)
+      -- example to exclude mappings without a description
+      -- return mapping.desc and mapping.desc ~= ""
+      return true
+    end,
+    --- You can add any mappings here, or use `require('which-key').add()` later
+    ---@type wk.Spec
+    spec = {},
+    -- show a warning when issues were detected with your mappings
+    notify = true,
+    -- Which-key automatically sets up triggers for your mappings.
+    -- But you can disable this and setup the triggers manually.
+    -- Check the docs for more info.
+    ---@type wk.Spec
+    triggers = {
+      { "<auto>", mode = "nxso" },
+    },
+    -- Start hidden and wait for a key to be pressed before showing the popup
+    -- Only used by enabled xo mapping modes.
+    ---@param ctx { mode: string, operator: string }
+    defer = function(ctx)
+      return ctx.mode == "V" or ctx.mode == "<C-V>"
+    end,
     plugins = {
       marks = true,       -- shows a list of your marks on ' and `
       registers = true,   -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+      -- the presets plugin, adds help for a bunch of default keybindings in Neovim
+      -- No actual key bindings are created
       spelling = {
         enabled = true,   -- enabling this will show WhichKey when pressing z= to select spelling suggestions
         suggestions = 20, -- how many suggestions should be shown in the list?
@@ -167,32 +163,12 @@ function M.config()
         g = true,             -- bindings for prefixed with g
       },
     },
-    -- add operators that will trigger motion and text object completion
-    -- to enable all native operators, set the preset / operators plugin above
-    operators = { gc = "Comments" },
-    key_labels = {
-      -- override the label used to display some keys. It doesn't effect WK in any other way.
-      -- For example:
-      ["<space>"] = "SPC",
-      ["<cr>"] = "RET",
-      ["<tab>"] = "TAB",
-      ["<leader>"] = "LDR",
-    },
-    icons = {
-      breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
-      separator = "➜", -- symbol used between a key and it's label
-      group = "+", -- symbol prepended to a group
-    },
-    popup_mappings = {
-      scroll_down = "<c-d>", -- binding to scroll down inside the popup
-      scroll_up = "<c-u>",   -- binding to scroll up inside the popup
-    },
-    window = {
+    win = {
       border = "rounded",       -- none, single, double, shadow
-      position = "bottom",      -- bottom, top
-      margin = { 1, 0, 1, 0 },  -- extra window margin [top, right, bottom, left]
       padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
-      winblend = 0,
+      wo = {
+        winblend = 0,
+      }
     },
     layout = {
       height = { min = 4, max = 25 },                                             -- min and max height of the columns
@@ -200,33 +176,110 @@ function M.config()
       spacing = 3,                                                                -- spacing between columns
       align = "left",                                                             -- align columns left, center or right
     },
-    ignore_missing = false,                                                       -- enable this to hide mappings for which you didn't specify a label
-    hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
-    show_help = true,                                                             -- show help message on the command line when the popup is visible
-    show_keys = true,                                                             -- show the currently pressed key and its label as a message in the command line
-    triggers = "auto",                                                            -- automatically setup triggers
-    -- triggers = {"<leader>"} -- or specify a list manually
-    triggers_blacklist = {
-      -- list of mode / prefixes that should never be hooked by WhichKey
-      -- this is mostly relevant for key maps that start with a native binding
-      -- most people should not need to change this
-      i = { "j", "k" },
-      v = { "j", "k" },
+    keys = {
+      scroll_down = "<c-d>", -- binding to scroll down inside the popup
+      scroll_up = "<c-u>",   -- binding to scroll up inside the popup
     },
-    -- disable the WhichKey popup for certain buf types and file types.
-    -- Disabled by deafult for Telescope
-    --[[ disable = { ]]
-    --[[   buftypes = {}, ]]
-    --[[   filetypes = { "TelescopePrompt" }, ]]
-    --[[ }, ]]
+    ---@type (string|wk.Sorter)[]
+    --- Mappings are sorted using configured sorters and natural sort of the keys
+    --- Available sorters:
+    --- * local: buffer-local mappings first
+    --- * order: order of the items (Used by plugins like marks / registers)
+    --- * group: groups last
+    --- * alphanum: alpha-numerical first
+    --- * mod: special modifier keys last
+    --- * manual: the order the mappings were added
+    --- * case: lower-case first
+    sort = { "local", "order"--[[ , "group", "alphanum" ]], "mod" },
+    ---@type number|fun(node: wk.Node):boolean?
+    expand = 0, -- expand groups when <= n mappings
+    -- expand = function(node)
+    --   return not node.desc -- expand all nodes without a description
+    -- end,
+    -- Functions/Lua Patterns for formatting the labels
+    ---@type table<string, ({[1]:string, [2]:string}|fun(str:string):string)[]>
+    replace = {
+      key = {
+        function(key)
+          return require("which-key.view").format(key)
+        end,
+        -- { "<Space>", "SPC" },
+      },
+      desc = {
+        { "<Plug>%(?(.*)%)?", "%1" },
+        { "^%+", "" },
+        { "<[cC]md>", "" },
+        { "<[cC][rR]>", "" },
+        { "<[sS]ilent>", "" },
+        { "^lua%s+", "" },
+        { "^call%s+", "" },
+        { "^:%s*", "" },
+      },
+    },
+    icons = {
+      breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
+      separator = "➜", -- symbol used between a key and it's label
+      group = "+", -- symbol prepended to a group
+      ellipsis = "…",
+      -- set to false to disable all mapping icons,
+      -- both those explicitly added in a mapping
+      -- and those from rules
+      mappings = true,
+      --- See `lua/which-key/icons.lua` for more details
+      --- Set to `false` to disable keymap icons from rules
+      ---@type wk.IconRule[]|false
+      rules = {},
+      -- use the highlights from mini.icons
+      -- When `false`, it will use `WhichKeyIcon` instead
+      colors = true,
+      -- used by key format
+      keys = {
+        Up = " ",
+        Down = " ",
+        Left = " ",
+        Right = " ",
+        C = "󰘴 ",
+        M = "󰘵 ",
+        D = "󰘳 ",
+        S = "󰘶 ",
+        CR = "󰌑 ",
+        Esc = "󱊷 ",
+        ScrollWheelDown = "󱕐 ",
+        ScrollWheelUp = "󱕑 ",
+        NL = "󰌑 ",
+        BS = "󰁮",
+        Space = "󱁐 ",
+        Tab = "󰌒 ",
+        F1 = "󱊫",
+        F2 = "󱊬",
+        F3 = "󱊭",
+        F4 = "󱊮",
+        F5 = "󱊯",
+        F6 = "󱊰",
+        F7 = "󱊱",
+        F8 = "󱊲",
+        F9 = "󱊳",
+        F10 = "󱊴",
+        F11 = "󱊵",
+        F12 = "󱊶",
+      },
+    },
+    show_help = true, -- show a help message in the command line for using WhichKey
+    show_keys = true, -- show the currently pressed key and its label as a message in the command line
+    -- disable WhichKey for certain buf types and file types.
+    disable = {
+      ft = {},
+      bt = {},
+    },
+    debug = false, -- enable wk.log in the current directory
   }
 
   which_key.setup(config)
-  which_key.register(mappings, opts)
-  which_key.register(n_mappings, nops)
-  which_key.register(v_mappings, vopts)
-  which_key.register(i_mappings, iopts)
-  which_key.register(x_mappings, xopts)
+  which_key.add(keys,  opts)
+  which_key.add(nkeys, nopts)
+  which_key.add(vkeys, vopts)
+  which_key.add(ikeys, iopts)
+  which_key.add(xkeys, xopts)
 end
 
 return M

@@ -1,15 +1,16 @@
 -- A collection of common configurations for the Nvim LSP client.
 local M = {
   "neovim/nvim-lspconfig",
-  commit = "d29be376e64c23d6465ef3fb71aaf4bf4e8e0e68",
+  commit = "14b5a806c928390fac9ff4a5630d20eb902afad8",
+  -- commit = "d29be376e64c23d6465ef3fb71aaf4bf4e8e0e68",
   event = { "BufReadPre", "BufNewFile" },
   opts = {
     inlay_hints = { enabled = true }
   },
   dependencies = {
-    {
-      "folke/neodev.nvim",
-    },
+    -- {
+    --   "folke/lazydev.nvim",
+    -- },
     {
       "RishabhRD/nvim-lsputils",
       commit = "ae1a4a62449863ad82c70713d5b6108f3a07917c",
@@ -146,23 +147,24 @@ end
 
 function M.config()
   local wk = require "which-key"
-  wk.register {
-    -- ["<leader>la"] = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code [A]ction" },
-    ["<leader>la"] = { "<cmd>CodeActionMenu<cr>", "Code [A]ction" },
-    ["<leader>le"] = { "<cmd>lua vim.diagnostic.open_float()<cr>", "Line diagnostic [e]rror hover" },
-    ["<leader>lf"] = { "<cmd>lua vim.lsp.buf.format()<cr>", "[F]ormat" },
-    -- ["<leader>lf"] = {
+  wk.add({
+    -- {"<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc="Code [A]ction" },
+    {"<leader>la", "<cmd>CodeActionMenu<cr>", desc="Code [A]ction" },
+    {"<leader>le", "<cmd>lua vim.diagnostic.open_float()<cr>", desc="Line diagnostic [e]rror hover" },
+    {"<leader>lf", "<cmd>lua vim.lsp.buf.format()<cr>", desc="[F]ormat" },
+    -- {
+    --   "<leader>lf",
     --   "<cmd>lua vim.lsp.buf.format({async = true, filter = function(client) return client.name ~= 'typescript-tools' end})<cr>",
-    --   "[F]ormat",
+    --   desc="[F]ormat",
     -- },
-    -- ["<leader>lh"] = { "<cmd>lua require('user.lspconfig').toggle_inlay_hints()<cr>", "[H]ints" },
-    ["<leader>li"] = { "<cmd>LspInfo<cr>", "[I]nfo" },
-    ["<leader>lj"] = { "<cmd>lua vim.diagnostic.goto_next()<cr>", "Next Diagnostic" },
-    ["<leader>lk"] = { "<cmd>lua vim.diagnostic.goto_prev()<cr>", "Prev Diagnostic" },
-    ["<leader>ll"] = { "<cmd>lua vim.lsp.codelens.run()<cr>", "Code [L]ens Action" },
-    ["<leader>lq"] = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "[Q]uickfix" },
-    -- ["<leader>lr"] = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-  }
+    -- {"<leader>lh", "<cmd>lua require('user.lspconfig').toggle_inlay_hints()<cr>", desc="[H]ints" },
+    {"<leader>li", "<cmd>LspInfo<cr>", desc="[I]nfo" },
+    {"<leader>lj", "<cmd>lua vim.diagnostic.goto_next()<cr>", desc="Next Diagnostic" },
+    {"<leader>lk", "<cmd>lua vim.diagnostic.goto_prev()<cr>", desc="Prev Diagnostic" },
+    {"<leader>ll", "<cmd>lua vim.lsp.codelens.run()<cr>", desc="Code [L]ens Action" },
+    {"<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<cr>", desc="[Q]uickfix" },
+    -- {"<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", desc="Rename" },
+  }, opts)
 
   local lspconfig = require "lspconfig"
   local icons = require "user.icons"
@@ -236,7 +238,7 @@ function M.config()
     end
 
     if server == "lua_ls" then
-      require("neodev").setup {}
+      require("lazydev").setup {}
     end
 
     lspconfig[server].setup(opts)

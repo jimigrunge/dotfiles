@@ -12,10 +12,12 @@ function M.config()
   end
 
   local wk = require "which-key"
-  wk.register {
-    ["<leader>spc"] = { "<cmd>PickColor<cr>", "[C]olor Picker" },
-    ["<C-c><C-p>"] = { "<cmd>PickColor<cr>", "Pick Color", nops },
-  }
+  wk.add({
+    {"<leader>spc", "<cmd>PickColor<cr>", desc="[C]olor Picker" },
+  }, opts)
+  wk.add({
+    {"<C-c><C-p>", "<cmd>PickColor<cr>", desc="Pick Color" },
+  }, nopts)
 
   colorpicker.setup({})
 end

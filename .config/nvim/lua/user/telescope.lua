@@ -7,7 +7,8 @@ local M = {
       "nvim-telescope/telescope-fzf-native.nvim",
       build = 'make',
       lazy = true,
-      commit = "6c921ca12321edaa773e324ef64ea301a1d0da62",
+      commit = "dae2eac9d91464448b584c7949a31df8faefec56",
+      -- commit = "6c921ca12321edaa773e324ef64ea301a1d0da62",
     },
     {
       "nvim-telescope/telescope-media-files.nvim",
@@ -24,35 +25,40 @@ function M.config()
   end
 
   local wk = require "which-key"
-  wk.register {
-    -- ["<leader>bb"] = { "<cmd>Telescope buffers theme=ivy<cr>", "[B]uffers" },
-    ["<leader>bb"] = { "<cmd>Telescope buffers<cr>", "[B]uffers Telescope" },
-    ["<leader>f"] = { "<cmd>Telescope live_grep<cr>", "[F]ind Text" },
-    ["<leader>gb"] = { "<cmd>Telescope git_branches<cr>", "Checkout [b]ranch" },
-    ["<leader>go"] = { "<cmd>Telescope git_status<cr>", "[O]pen changed file" },
-    ["<leader>ld"] = { "<cmd>Telescope diagnostics bufnr=0<cr>", "[D]ocument Diagnostics" },
-    ["<leader>ls"] = { "<cmd>Telescope lsp_document_symbols<cr>", "Document [S]ymbols" },
-    ["<leader>lS"] = { "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace [S]ymbols" },
-    ["<leader>lw"] = { "<cmd>Telescope diagnostics<cr>", "[W]orkspace Diagnostics" },
-    ["<leader>P"] = { "<cmd>Telescope projects<cr>", "[P]rojects" },
-    ["<leader>s/"] = { "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", "Current Buffer" },
-    ["<leader>sa"] = { "<cmd>lua require('telescope.builtin').resume()<cr>", "Search [A]gain" },
-    ["<leader>sb"] = { "<cmd>Telescope git_branches<cr>", "Checkout [b]ranch" },
-    ["<leader>sc"] = { "<cmd>lua require('telescope.builtin').colorscheme()<cr>", "[C]olorscheme" },
-    ["<leader>sf"] = { "<cmd>lua require('telescope.builtin').fd()<cr>", "[F]D find file" },
-    ["<leader>sg"] = { "<cmd>lua require 'telescope.builtin'.live_grep()<cr>", "Live [G]rep" },
-    ["<leader>sh"] = { "<cmd>lua require('telescope.builtin').help_tags()<cr>", "Find [H]elp" },
-    ["<leader>sM"] = { "<cmd>lua require('telescope.builtin').man_pages()<cr>", "[M]an Pages" },
-    ["<leader>sr"] = { "<cmd>lua require('telescope.builtin').oldfiles()<cr>", "Open [R]ecent File" },
-    ["<leader>sR"] = { "<cmd>lua require('telescope.builtin').registers()<cr>", "Registers" },
-    ["<leader>sk"] = { "<cmd>lua require('telescope.builtin').keymaps()<cr>", "[K]eymaps" },
-    ["<leader>sw"] = { "<cmd>lua require 'telescope.builtin'.grep_string({find_command = { 'rg', vim.fn.expand('<cword>'), '--ignore', '--hidden', '--smart-case' }})<cr>", "Live Grep [W]ord" },
-    ["<leader>sC"] = { "<cmd>lua require('telescope.builtin').commands()<cr>", "[C]ommands" },
-    ["ff"] = { "<cmd>lua require('telescope.builtin').find_files()<cr>", "[F]ind [F]iles", nops },
-    ["gd"] = { "<cmd>Telescope lsp_definitions<cr>", "Definition", nops },
-    ["gi"] = { "<cmd>Telescope lsp_implementations<cr>", "Implementation", nops },
-    ["gr"] = { "<cmd>Telescope lsp_references<cr>", "References", nops },
-  }
+  wk.add ({
+    {"<leader>bb", "<cmd>Telescope buffers<cr>", desc="[B]uffers Telescope" },
+    {"<leader>f" , "<cmd>Telescope live_grep<cr>", desc="[F]ind Text" },
+    {"<leader>gb", "<cmd>Telescope git_branches<cr>", desc="Checkout [b]ranch" },
+    {"<leader>go", "<cmd>Telescope git_status<cr>", desc="[O]pen changed file" },
+    {"<leader>ld", "<cmd>Telescope diagnostics bufnr=0<cr>", desc="[D]ocument Diagnostics" },
+    {"<leader>ls", "<cmd>Telescope lsp_document_symbols<cr>", desc="Document [S]ymbols" },
+    {"<leader>lS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", desc="Workspace [S]ymbols" },
+    {"<leader>lw", "<cmd>Telescope diagnostics<cr>", desc="[W]orkspace Diagnostics" },
+    {"<leader>P" , "<cmd>Telescope projects<cr>", desc="[P]rojects" },
+    {"<leader>s/", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", desc="Current Buffer" },
+    {"<leader>sa", "<cmd>lua require('telescope.builtin').resume()<cr>", desc="Search [A]gain" },
+    {"<leader>sb", "<cmd>Telescope git_branches<cr>", desc="Checkout [b]ranch" },
+    {"<leader>sc", "<cmd>lua require('telescope.builtin').colorscheme()<cr>", desc="[C]olorscheme" },
+    {"<leader>sf", "<cmd>lua require('telescope.builtin').fd()<cr>", desc="[F]D find file" },
+    {"<leader>sg", "<cmd>lua require 'telescope.builtin'.live_grep()<cr>", desc="Live [G]rep" },
+    {"<leader>sh", "<cmd>lua require('telescope.builtin').help_tags()<cr>", desc="Find [H]elp" },
+    {"<leader>sM", "<cmd>lua require('telescope.builtin').man_pages()<cr>", desc="[M]an Pages" },
+    {"<leader>sr", "<cmd>lua require('telescope.builtin').oldfiles()<cr>", desc="Open [R]ecent File" },
+    {"<leader>sR", "<cmd>lua require('telescope.builtin').registers()<cr>", desc="Registers" },
+    {"<leader>sk", "<cmd>lua require('telescope.builtin').keymaps()<cr>", desc="[K]eymaps" },
+    {
+      "<leader>sw", "<cmd>lua require 'telescope.builtin'.grep_string({find_command = { 'rg', vim.fn.expand('<cword>'), '--ignore', '--hidden', '--smart-case' }})<cr>",
+      desc="Live Grep [W]ord"
+    },
+    {"<leader>sC", "<cmd>lua require('telescope.builtin').commands()<cr>", desc="[C]ommands" },
+  }, opts)
+  wk.add({
+    {"ff", "<cmd>lua require('telescope.builtin').find_files()<cr>", desc="[F]iles" },
+    {"gd", "<cmd>Telescope lsp_definitions<cr>", desc="Definition" },
+    {"gi", "<cmd>Telescope lsp_implementations<cr>", desc="Implementation" },
+    {"gr", "<cmd>Telescope lsp_references<cr>", desc="References" },
+
+  }, nopts)
 
   -- -----------------------------------------------------------
   -- Reformat serch result to show filenames first

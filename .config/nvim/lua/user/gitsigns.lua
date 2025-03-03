@@ -1,7 +1,8 @@
 -- A git diff and git status plugin.
 local M = {
   "lewis6991/gitsigns.nvim",
-  commit = "4aaacbf5e5e2218fd05eb75703fe9e0f85335803",
+  commit = "817bd848fffe82e697b4da656e3f2834cd0665c5",
+  -- commit = "4aaacbf5e5e2218fd05eb75703fe9e0f85335803",
 }
 
 function M.config()
@@ -14,15 +15,15 @@ function M.config()
   local icons = require "user.icons"
 
   local wk = require "which-key"
-  wk.register {
-    ["<leader>gB"] = { "<cmd>lua require'gitsigns'.blame_line{full=true}<cr>", "[B]lame Line" },
-    ["<leader>gdd"] = { "<cmd>Gitsigns diffthis HEAD<cr>", "Diff" },
-    ["<leader>ge"] = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "Toggle Blam[e]" },
-    ["<leader>gj"] = { "<cmd>Gitsigns next_hunk<cr>", "Next Hunk" },
-    ["<leader>gk"] = { "<cmd>Gitsigns prev_hunk<cr>", "Prev Hunk" },
-    ["<leader>gp"] = { "<cmd>Gitsigns preview_hunk<cr>", "[P]review Hunk" },
-    ["<leader>gu"] = { "<cmd>Gitsigns undo_stage_hunk<cr>", "[U]ndo Stage Hunk" },
-  }
+  wk.add({
+    {"<leader>gB", "<cmd>lua require'gitsigns'.blame_line{full=true}<cr>", desc="[B]lame Line" },
+    {"<leader>gdd", "<cmd>Gitsigns diffthis HEAD<cr>", desc="Diff" },
+    {"<leader>ge", "<cmd>Gitsigns toggle_current_line_blame<cr>", desc="Toggle Blam[e]" },
+    {"<leader>gj", "<cmd>Gitsigns next_hunk<cr>", desc="Next Hunk" },
+    {"<leader>gk", "<cmd>Gitsigns prev_hunk<cr>", desc="Prev Hunk" },
+    {"<leader>gp", "<cmd>Gitsigns preview_hunk<cr>", desc="[P]review Hunk" },
+    {"<leader>gu", "<cmd>Gitsigns undo_stage_hunk<cr>", desc="[U]ndo Stage Hunk" },
+  }, opts)
 
   gitsigns.setup {
     signs = {

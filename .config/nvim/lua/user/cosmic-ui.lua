@@ -13,9 +13,9 @@ function M.config()
   end
 
   local wk = require "which-key"
-  wk.register {
-    ["<leader>lr"] = { "<cmd>lua require('cosmic-ui').rename()<cr>", "[R]ename" },
-  }
+  wk.add({
+    {"<leader>lr", "<cmd>lua require('cosmic-ui').rename()<cr>", desc="[R]ename" },
+  }, opts)
 
   cosmic_ui.setup {
     -- 'single', 'double', 'rounded', 'solid', 'shadow'

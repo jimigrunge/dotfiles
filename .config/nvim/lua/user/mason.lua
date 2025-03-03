@@ -1,11 +1,13 @@
 -- A plugin for Mason LSP manager.
 local M = {
   "williamboman/mason-lspconfig.nvim",
-  commit = "fe4cce44dec93c69be17dad79b21de867dde118a",
+  commit = "e942edf5c85b6a2ab74059ea566cac5b3e1514a4",
+  -- commit = "a4caa0d083aab56f6cd5acf2d42331b74614a585",
   dependencies = {
     {
       "williamboman/mason.nvim",
-      commit = "c43eeb5614a09dc17c03a7fb49de2e05de203924",
+      commit = "e2f7f9044ec30067bc11800a9e266664b88cda22",
+      -- commit = "3b5068f0fc565f337d67a2d315d935f574848ee7",
     },
   }
 }
@@ -23,10 +25,10 @@ function M.config()
   end
 
   local wk = require "which-key"
-  wk.register {
-    ["<leader>lI"] = { "<cmd>Mason<cr>", "Mason [I]nstaller" },
-    ["<leader>lM"] = { "<cmd>Mason<cr>", "[M]ason Installer" },
-  }
+  wk.add({
+    {"<leader>lI", "<cmd>Mason<cr>", desc="Mason [I]nstaller" },
+    {"<leader>lM", "<cmd>Mason<cr>", desc="[M]ason Installer" },
+  }, opts)
 
   -- -----------------------------------
   -- LSP servers

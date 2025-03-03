@@ -2,8 +2,14 @@
 local M = {
   "chrishrb/gx.nvim",
   event = { "BufEnter" },
+  cmd = { "Browse" },
+  init = function ()
+    vim.g.netrw_nogx = 1 -- disable netrw gx
+  end,
+  -- keys = { { "gx", "<cmd>Browse<cr>", mode = { "n", "x" } } },
   dependencies = { "nvim-lua/plenary.nvim" },
-  commit = "38d776a0b35b9daee5020bf3336564571dc785af",
+  commit = "c7e6a0ace694a098a5248d92a866c290bd2da1cc",
+  -- commit = "38d776a0b35b9daee5020bf3336564571dc785af",
 }
 
 function M.config()
@@ -12,6 +18,10 @@ function M.config()
     print 'GX not loaded'
     return
   end
+  local wk = require "which-key"
+  wk.add({
+    {"gx", "<cmd>Browse<cr>", desc="Open in browser" },
+  }, nopts)
 
   plugin.setup {
     open_browser_app = "open",                -- specify your browser app; default for macOS is "open" and for Linux "xdg-open"

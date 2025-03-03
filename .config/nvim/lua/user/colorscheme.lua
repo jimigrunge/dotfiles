@@ -24,6 +24,23 @@ function M.config()
   vim.api.nvim_set_hl(0, 'Comment', { fg = c.vscGray, bg = 'NONE', italic = italic_comments })
   vim.api.nvim_set_hl(0, 'SpecialComment', { fg = c.vscGreen, bg = 'NONE' })
   vim.api.nvim_set_hl(0, '@comment', { fg = c.vscGray, bg = 'NONE', italic = italic_comments })
+
+
+  vim.api.nvim_set_hl(0, 'LspDiagnosticsDefaultHint', { fg = c.vscGreen, bg = 'NONE' })
+  vim.api.nvim_set_hl(0, 'LspDiagnosticsDefaultInfo', { fg = c.vscAccentBlue, bg = 'NONE' })
+  vim.api.nvim_set_hl(0, 'LspDiagnosticsDefaultWarn', { fg = c.vscDarkYellow, bg = 'NONE' })
+  vim.api.nvim_set_hl(0, 'LspDiagnosticsDefaultError', { fg = c.vscRed, bg = 'NONE' })
+
+  vim.api.nvim_set_hl(0, 'DiagnosticHint', { fg = c.vscGreen, bg = 'NONE' })
+  vim.api.nvim_set_hl(0, 'DiagnosticInfo', { fg = c.vscAccentBlue, bg = 'NONE' })
+  vim.api.nvim_set_hl(0, 'DiagnosticWarn', { fg = c.vscDarkYellow, bg = 'NONE' })
+  vim.api.nvim_set_hl(0, 'DiagnosticError', { fg = c.vscRed, bg = 'NONE' })
+
+  vim.api.nvim_set_hl(0, 'LuaLineDiffAdd', { fg = c.vscGreen, bg = 'NONE' })
+  vim.api.nvim_set_hl(0, 'LuaLineDiffChange', { fg = c.vscDarkYellow, bg = 'NONE' })
+  vim.api.nvim_set_hl(0, 'LuaLineDiffDelete', { fg = c.vscRed, bg = 'NONE' })
+
+
 end
 
 return M

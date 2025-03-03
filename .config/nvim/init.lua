@@ -14,14 +14,12 @@ spec "user.confirm-quit"                -- Confirm before quitting neovim.
 spec "user.search-replace"              -- Search and replace with preview.
 spec "user.nvim-scrollview"             -- A modern neovim scrollbar.
 spec "user.vim-tmux-navigator"          -- Seamless navigation between tmux panes and vim splits.
--- spec "user.bufferline"                  -- A snazzy buffer line.
 spec "user.twilight"                    -- Dims inactive portions of the code you're editing.
 spec "user.brackets"                    -- Show matching brace for scope.
 spec "user.barbecue"                    -- VS Code like winbar that uses nvim-navic in order to get LSP context.
 spec "user.gx"                          -- Open URL under cursor in browser.
 spec "user.nvim-autopairs"              -- Insert and delete brackets, parens, quotes in pair.
 spec "user.nvim-ts-autotag"             -- Automatically close and rename HTML tags.
--- spec "user.nvim-keymap-amend"           -- A plugin to help you amend keymaps.
 spec "user.fold-preview"                -- A neovim plugin for previewing folds.
 spec "user.pretty-fold"                 -- A plugin to make folds more pretty.
 spec "user.treesj"                      -- splitting/joining blocks of code like arrays, hashes, etc.
@@ -53,7 +51,7 @@ spec "user.chatgpt"                     -- A neovim plugin for GPT-3 chat.
 spec "user.copilot"                     -- A neovim plugin for GitHub Copilot.
 spec "user.cmp-npm"                     -- A npm completion source for cmp.
 spec "user.vim-dadbod"                  -- A DB UI for VIM
-spec "user.neodev"                      -- A neovim plugin for development.
+spec "user.lazydev"                     -- A neovim plugin for development.
 spec "user.nvim-lspconfig"              -- A collection of common configurations for the Nvim LSP client.
 spec "user.mason"                       -- A plugin for Mason LSP manager.
 spec "user.none-ls"                     -- A fast, asynchronous, cross language LSP client.

@@ -11,9 +11,9 @@ function M.config()
   end
 
   local wk = require "which-key"
-  wk.register {
-    ["<leader>Z"] = { "<cmd>ZenMode<cr>", "Zen Mode" },
-  }
+  wk.add({
+    {"<leader>Z", "<cmd>ZenMode<cr>", desc="Zen Mode" },
+  }, opts)
 
   -- your config here
   zen.setup({

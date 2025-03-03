@@ -1,8 +1,8 @@
 -- Treesitter context manager.
 local M = {
   "nvim-treesitter/nvim-treesitter-context",
-  commit = "23b699ac40091d8c729f024b3f1400bc7e26e0c5",
-  -- commit = "e75357fa49ddcdeaf9ba1e60f4582398fed3266b",
+  commit = "bece284c5322ddf6946fa4bdc383a2bc033269d7",
+  -- commit = "f62bfe19e0fbc13ae95649dfb3cf22f4ff85b683",
 }
 
 function M.config()

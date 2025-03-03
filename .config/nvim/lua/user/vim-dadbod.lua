@@ -27,12 +27,12 @@ return {
     }
 
     local wk = require "which-key"
-    wk.register {
-      ["<leader>Du"] = { "<cmd>DBUIToggle<cr>", "Toggle UI" },
-      ["<leader>Df"] = { "<cmd>DBUIFindBuffer<cr>", "Find buffer" },
-      ["<leader>Dr"] = { "<cmd>DBUIRenameBuffer<cr>", "Rename buffer" },
-      ["<leader>Dq"] = { "<cmd>DBUILastQueryInfo<cr>", "Last query info" },
-    }
+    wk.add({
+      {"<leader>Du", "<cmd>DBUIToggle<cr>", desc="Toggle UI" },
+      {"<leader>Df", "<cmd>DBUIFindBuffer<cr>", desc="Find buffer" },
+      {"<leader>Dr", "<cmd>DBUIRenameBuffer<cr>", desc="Rename buffer" },
+      {"<leader>Dq", "<cmd>DBUILastQueryInfo<cr>", desc="Last query info" },
+    }, opts)
   end,
 }
 -- local M = {

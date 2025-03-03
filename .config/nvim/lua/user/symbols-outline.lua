@@ -14,12 +14,9 @@ function M.config()
   local icons = require "user.icons"
 
   local wk = require "which-key"
-  wk.register {
-    -- ["<leader>lo"] = { "<cmd>SymbolsOutline<cr>", "Toggle [O]utline" },
-    ["<leader>o"] = { "<cmd>SymbolsOutline<cr>", "[T]oggle Outline" },
-    -- ["<leader>oo"] = { "<cmd>SymbolsOutlineOpen<cr>", "[O]pen Outline" },
-    -- ["<leader>oc"] = { "<cmd>SymbolsOutlineClose<cr>", "[C]lose Outline" }
-  }
+  wk.add({
+    {"<leader>o", "<cmd>SymbolsOutline<cr>", desc="[T]oggle Outline" },
+  }, opts)
 
   outline.setup({
     highlight_hovered_item = true,

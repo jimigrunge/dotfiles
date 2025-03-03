@@ -1,8 +1,5 @@
 local M = {
   'rmagatti/goto-preview',
-  -- config = function()
-  --   require('goto-preview').setup {}
-  -- end
 }
 
 function M.config()
@@ -12,21 +9,15 @@ function M.config()
     return
   end
 
-  local nops = {
-    mode = "n", -- NORMAL mode
-    prefix = "",
-    preset = true,
-  }
-
   local wk = require "which-key"
-  wk.register({
-    ["gpd"] = { "<cmd>lua require('goto-preview').goto_preview_definition()<cr>", "Preview Definition" },
-    ["gpt"] = { "<cmd>lua require('goto-preview').goto_preview_type_definition()<cr>", "Preview Type Definition" },
-    ["gpi"] = { "<cmd>lua require('goto-preview').goto_preview_implementation()<cr>", "Preview Implementation" },
-    ["gpD"] = { "<cmd>lua require('goto-preview').goto_preview_declaration()<cr>", "Preview Declaration" },
-    ["gpc"] = { "<cmd>lua require('goto-preview').close_all_win()<cr>", "Preview Close All" },
-    ["gpr"] = { "<cmd>lua require('goto-preview').goto_preview_references()<cr>", "Preview References" },
-  }, nops)
+  wk.add({
+    {"gpd", "<cmd>lua require('goto-preview').goto_preview_definition()<cr>", desc="Preview Definition" },
+    {"gpt", "<cmd>lua require('goto-preview').goto_preview_type_definition()<cr>", desc="Preview Type Definition" },
+    {"gpi", "<cmd>lua require('goto-preview').goto_preview_implementation()<cr>", desc="Preview Implementation" },
+    {"gpD", "<cmd>lua require('goto-preview').goto_preview_declaration()<cr>", desc="Preview Declaration" },
+    {"gpc", "<cmd>lua require('goto-preview').close_all_win()<cr>", desc="Preview Close All" },
+    {"gpr", "<cmd>lua require('goto-preview').goto_preview_references()<cr>", desc="Preview References" },
+  }, nopts)
 
   local config = {
     width = 120, -- Width of the floating window
